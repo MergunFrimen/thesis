@@ -125,30 +125,37 @@ Atoms are the basic building blocks of matter. Atoms are composed of protons, ne
 Bonds are the connections between atoms that hold molecules together. There are different types of bonds, e.g. covalent bonds, ionic bonds, and hydrogen bonds. [citations]
 
 \subsection{Residues}
-Residues are the repeating units in a polymer chain. In proteins residues refer to amino acids, which are connected through peptide bonds to form polypeptide chains. [citation]
+A residue refers to a specific building block that remains after a chemical modification or enzymatic reaction.
+In proteins, residues refer to amino acids, which are connected through peptide bonds to form polypeptide chains.
+Residues are crucial in biochemistry because they determine the structure and function of biological molecules.
+The sequence of residues in a protein or nucleic acid, for instance, determines its three-dimensional structure and ultimately its biological activity.
 
 \subsection{Chains}
-Polymer chains (chains) are sequences of residues that are linked together. In the context of biomolecules, chains can be either polypeptide chains in proteins or polynucleotide chains in nucleic acids. The sequence and structure of these chains are crucial for understanding the function and properties of the biomolecules. [citation]
+Polymer chains (chains) are sequences of residues that are linked together. In the context of biomolecules, chains can be either polypeptide chains in proteins or polynucleotide chains in nucleic acids. The sequence and structure of these chains are crucial for understanding the function and properties of the biomolecules.
 
 \section{Chemical file formats}
 TODO: introduction
 
 \subsection{SDF}
-Structure-data file (SDF) is a widely used chemical file format for representing molecular structures and their associated properties. It is a text-based format that describes the atoms, bonds, and atomic coordinates of a molecule.  [citation]
+Structure-data file (SDF) is a widely used chemical file format for representing molecular structures and their associated properties. It is a text-based format that describes the atoms, bonds, and atomic coordinates of a molecule. 
 
 \subsection{MOL2}
-The Mol2 file format is another text-based format for storing molecular structures and their associated properties. It can store multiple conformations of a molecule and is commonly used in molecular modeling and cheminformatics applications. The Mol2 format provides more flexibility and additional features compared to the SDF format, such as support for multiple substructures and atom types. [citation]
+The Mol2 file format is another text-based format for storing molecular structures and their associated properties. It can store multiple conformations of a molecule and is commonly used in molecular modeling and cheminformatics applications. The Mol2 format provides more flexibility and additional features compared to the SDF format, such as support for multiple substructures and atom types.
 
 \subsection{PDB}
-The Protein Data Bank (PDB) file format is a widely used format for storing three-dimensional structures of proteins, nucleic acids, and other macromolecules. PDB files contain information about the atomic coordinates, secondary structure, and other important details required for understanding macromolecular structures. The PDB format has been widely adopted in structural biology, bioinformatics, and related fields. [citation]
+The Protein Data Bank (PDB) file format is a widely used format for storing three-dimensional structures of proteins, nucleic acids, and other macromolecules. PDB files contain information about the atomic coordinates, secondary structure, and other important details required for understanding macromolecular structures. The PDB format has been widely adopted in structural biology, bioinformatics, and related fields.
 
 \subsection{mmCIF}
-The macromolecular Crystallographic Information File (mmCIF) format is an extension of the CIF format, specifically designed for macromolecular structures. It is a text-based format that provides a more comprehensive and flexible representation of macromolecular crystallography data compared to the PDB format. The mmCIF format supports data dictionaries, allowing users to define new data items and integrate additional information. Additionally, the format is not limited to a fixed amount of lines. [citation]
+The macromolecular Crystallographic Information File (mmCIF) format is an extension of the CIF format, specifically designed for macromolecular structures.
+It is a text-based format that provides a more comprehensive and flexible representation of macromolecular crystallography data compared to the PDB format.
+One of the most important features of the mmCIF format is its support for data dictionaries.
+This allows users to define new data items and integrate additional information.
+In contrast to other formats, the mmCIF format does not impose limits on column width and entry count, making it more flexible and accommodating for storing large amounts of data.
 
 TODO: add example image + better explanation
 
 \section{Partial atomic charges}
-Partial atomic charges are a measure of the distribution of electronic charge within a molecule. These charges are important for understanding and predicting molecular interactions, including hydrogen bonding, electrostatic interactions, and solvation effects. [citation]
+Partial atomic charges are a measure of the distribution of electronic charge within a molecule. These charges are important for understanding and predicting molecular interactions, including hydrogen bonding, electrostatic interactions, and solvation effects.
 
 TODO: visual of electron distribution
 
@@ -175,10 +182,12 @@ There are several methods to represent molecular data, each with its own benefit
 The ball and stick model represents atoms as spheres and bonds as cylindrical connections between these spheres. This model provides a simple and intuitive visualization of a molecule's atomic structure. It highlights individual atoms and their bonds, including their bond types. However, it may not accurately represent the spatial relationships between atoms in larger molecules or macromolecular complexes.
 
 \subsection{Surface}
-Surface representations depict the three-dimensional shape of a molecule by displaying its solvent-accessible surface. [citation] This model provides a more accurate representation of the molecule's overall shape and size, making it especially useful for studying macromolecular interactions and the binding of small molecules. Surface models can be displayed as solid surfaces or wireframe meshes.
+Surface representations depict the three-dimensional shape of a molecule by displaying its solvent-accessible surface.
+This model provides a more accurate representation of the molecule's overall shape and size, making it especially useful for studying macromolecular interactions and the binding of small molecules.
+For example, surface visualization can be used to identify potential binding sites on a protein surface, which can then be targeted by drug molecules.
 
 \subsection{Cartoon}
-Cartoon representations simplify the molecular structure by focusing on the secondary structure elements of proteins and nucleic acids, such as alpha helices, beta sheets, and loops. Alpha helices are often depicted as a spiral-like structures, whereas beta sheets as arrows. This type of visualization is particularly useful for visualizing large macromolecular complexes, as it highlights the overall organization and topology of the molecule without the clutter of atomic details. The simplification of the structure also makes it easier to understand the folding and dynamics of the molecule. [citation]
+Cartoon representations simplify the molecular structure by focusing on the secondary structure elements of proteins and nucleic acids, such as alpha helices, beta sheets, and loops. Alpha helices are often depicted as a spiral-like structures, whereas beta sheets as arrows. This type of visualization is particularly useful for visualizing large macromolecular complexes, as it highlights the overall organization and topology of the molecule without the clutter of atomic details. The simplification of the structure also makes it easier to understand the folding and dynamics of the molecule.
 
 \subsection{Coloring of molecular visualizations}
 Coloring is an essential aspect of molecular visualization, as it can provide additional information and help to emphasize specific features or properties of the molecule. Some common coloring schemes include:
@@ -211,8 +220,7 @@ This chapter describes the requirements for the extension, the custom mmCIF cate
 This section briefly describes the formal requirements for the Molstar extension. Firstly, the extension should enable the coloring of atoms and residues based on their partial atomic charges. Secondly, it should describe the charge values of the atoms and residues. Lastly, the extension should be seamlessly integrated into the Molstar library, facilitating access to its features regardless of the Molstar viewer instance.
 
 \section{Custom mmCIF categories}
-
-TODO: rewrite \\
+\label{section:custom_mmcif_categories}
 
 However, in order to store partial atomic charges within a single file, we needed to create custom categories within the mmCIF format.
 The design of these custom categories was a crucial step in creating the extension since we needed a way to package the charge data together with the structure data into one file.
@@ -249,16 +257,39 @@ Figure \ref{fig:mmcif_erd} provides a detailed illustration of the structure of 
 
 \section{Implementation}
 
-The extension consists of multiple providers that are registered in a global registry. Each provider serves a distinct purpose, which will be described in the following subsections.
+This section will detail the implementation of the extension. The extension consists of multiple providers that are registered in a global registry. Each provider serves a distinct purpose, which will be described in the following subsections.
+
+The extension was created using TypeScript, a superset of JavaScript that adds static typing and other features to the language. The Molstar library is also written in TypeScript, so the extension was written in the same language to ensure compatibility.
 
 \subsection{Charges provider}
 
-In order to use the charges from the mmCIF file, it is necessary to store them into a model property. Later in the color theme and label providers it will be used to access the mmCIF file data.
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=10cm]{figures/charge_data_structure.png}
+  \end{center}
+  \caption{Structure of the custom model property used for storing the charges}
+  \label{figure:charge_data_structure}
+\end{figure}
 
-The provider works by creating a structure for holding 
+This provider is responsible for supplying the partial atomic charges to the rest of the extension providers.
+In order to retrieve the charges it is necessary to parse the mmCIF file.
+This is fortunately already done by the Molstar library.
+The library parses the mmCIF file and provides the parsed mmCIF file data in the form of a $\texttt{MmcifFormat}$ object.
+This object is then used to retrieve the custom mmCIF categories described in Section \ref{section:custom_mmcif_categories}.
 
-TODO: add code of the model property
-TODO: add code of the residue charge sum
+After retrieving the custom categories, the provider creates a custom model property for storing the charges. The interface depicted in Figure \ref{figure:charge_data_structure} describes the structure of the custom model property.
+
+% \begin{itemize}
+%   \item \texttt{typeIdToAtomIdToCharge} and \texttt{typeIdToResidueIdToCharge} - \\ map charges of a specific charge set (typeId) to the appropriate atoms or residues
+%   \item \texttt{maxAbsoluteAtomCharges} and \texttt{maxAbsoluteResidueCharges} - \\ map the maximum absolute charge values for atoms or residues to a specific charge set (typeId)
+%   \item \texttt{typeIdToMethod} - maps the charge set (typeId) to the method name used to calculate the charges 
+% \end{itemize}
+
+The atom charges are stored in the \texttt{typeIdToAtomIdToCharge} map. The map is indexed by the charge set (typeId) and the atom id. The atom id is a pointer to the atom\_site.id. item in the mmCIF file. The atom charges are retrieved from the mmCIF file by iterating over the atom\_site.id category and retrieving the charge values for each atom. The charge values are then stored in the \\ \texttt{typeIdToAtomIdToCharge} map.
+
+The residue charges are calculated by summing the charges of the atoms that make up the residue. This is done by iterating over the atoms of the residue and summing their charges. The residue charge is then stored in the \texttt{typeIdToResidueIdToCharge} map. The maximum absolute charge of the residue is also calculated and stored in the \texttt{maxAbsoluteResidueCharges} map.
+
+Lastly, the maximum absolute charge of both atoms and residues is calculated and stored in the \texttt{maxAbsoluteChargesAll} map and the method name used to calculate the charges of a given charge set is stored in the \texttt{typeIdToMethod} map.
 
 \subsection{Partial charges color theme}
 
