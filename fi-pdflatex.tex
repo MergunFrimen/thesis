@@ -54,15 +54,31 @@
     advisor     = {RNDr. Tomáš Raček, Ph.D.},
     title       = {Modern visualization of partial atomic charges in Mol*},
     TeXtitle    = {Modern visualization of partial atomic charges in Mol*},
-    keywords    = { Molstar, molecular visualization, partial atomic charges },
-    TeXkeywords = { TODO },
+    keywords    = {%
+        Molstar,
+        molecular visualization,
+        partial atomic charges,
+        molecular graphics,
+        scientific visualization,
+        web graphics,
+        structural biology
+    },
+    TeXkeywords = {%
+        Molstar,
+        molecular visualization,
+        partial atomic charges,
+        molecular graphics,
+        scientific visualization,
+        web graphics,
+        structural biology
+     },
     abstract    = {%
         TODO
     },
     thanks      = {%
         TODO
     },
-    bib         = {
+    bib         = {%
         main.bib,
     },
     %% Remove the following line to use the JVS 2018 faculty logo.
@@ -188,6 +204,9 @@ Color interpolation works by calculating the intermediate colors between two or 
 
 TODO: add math equation + image of red,white and white,blue interpolation
 
+\section{Provider pattern}
+\label{section:provider_pattern}
+
 \chapter{Visualizing molecular data}
 \label{chapter:visualizing_molecular_data}
 
@@ -230,9 +249,9 @@ There are numerous software tools available for visualizing molecular data, with
 \subsection{Litemol}
 \label{subsection:litemol}
 
-\parencite{sehnal-litemol}
-
 LiteMol is an open-source, web-native molecular visualization tool that supports various file formats and offers a user-friendly interface for creating visualizations. LiteMol provides essential visualization types, including ball and stick, surface, and cartoon representations, as well as options for customizing colors, lighting, and other display settings. The web-based nature of LiteMol makes it easily accessible and platform-independent.
+
+The LiteMol suite is a freely available tool for visualizing large macromolecular structure datasets, which consists of three components: data delivery services, a compression format, and a lightweight 3D molecular viewer. It enables fast delivery and visualization of large datasets and is compatible with modern web browsers and mobile devices, making it accessible to users with and without structural biology expertise. The tool addresses the challenges of delivering and visualizing large structural data sets, which are becoming increasingly available due to advances in electron microscopy and other techniques. \parencite{sehnal-litemol}
 
 \subsection{Molstar}
 \label{subsection:molstar}
@@ -253,11 +272,28 @@ This chapter describes the requirements for the extension, the custom mmCIF cate
 \section{Requirements}
 \label{section:requirements}
 
+TODO: the extension should also support multiple charges sets \\
+
 This section briefly describes the formal requirements for the Molstar extension. Firstly, the extension should enable the coloring of atoms and residues based on their partial atomic charges. Secondly, it should describe the charge values of the atoms and residues. Lastly, the extension should be seamlessly integrated into the Molstar library, facilitating access to its features regardless of the Molstar viewer instance.
-TODO: the extension should also support multiple charges sets
 
 \section{Custom mmCIF categories}
 \label{section:custom_mmcif_categories}
+
+To store partial atomic charges within a single file, we developed custom categories within the mmCIF format. Creating these categories was a critical step as we needed a way to package the charge data together with the structural data into a single file.
+
+Storing everything in one file was important as it allowed for easier management and distribution of the data. If the charges were stored separately, we would have had to use custom import controls to bring them in.
+
+We chose to use the mmCIF file format because it offered several advantages, as previously discussed in Section 1.2. The most significant advantages for our purposes was the ease of creating custom data categories to describe data related to the partial atomic charges and therefore the ability to store all the data in a single file. And since the mmCIF format is widely used in the field of structural biology, it was a natural choice for our extension.
+
+The custom categories allowed us to store information about the partial atomic charges separately from the other structural data. We used two separate categories for this purpose: one to store the partial charge values for each atom in the structure, and another to store metadata about the charge sets.
+
+The first category binds the atom and its charge using an attribute called atom\_id, which points to the atom\_site.id item. Additionally, we used an attribute called typeId to point into the second category, which is dedicated to storing metadata about the charge sets.
+
+The metadata category has three attributes: id, type, and method. The id attribute is a unique identifier for the charge set, the type attribute describes the type of computation method used (e.g., empirical, quantum, etc.), and the method attribute describes the method name with parameters if applicable (e.g., 'EEM/Racek 2016 (ccd2016\_npa)').
+
+Figure \ref{fig:mmcif_erd} provides a detailed illustration of the structure of the custom mmCIF categories.
+
+TODO: rewrite \\
 
 However, in order to store partial atomic charges within a single file, we needed to create custom categories within the mmCIF format.
 The design of these custom categories was a crucial step in creating the extension since we needed a way to package the charge data together with the structure data into one file.
@@ -277,15 +313,6 @@ Figure \ref{fig:mmcif_erd} provides a detailed illustration of the structure of 
 
 \begin{figure}
   \begin{center}
-    %% PNG and JPG images can be inserted into the document as well,
-    %% but their resolution needs to be adequate. The minimum is
-    %% about 100 pixels per 1 centimeter or 300 pixels per 1 inch.
-    %% That means that a JPG or PNG image typeset at 4 × 4 cm should
-    %% be 400 × 400 px large at the bare minimum.
-    %%
-    %% The optimum is about 250 pixels per 1 centimeter or 600
-    %% pixels per 1 inch. That means that a JPG or PNG image typeset
-    %% at 4 × 4 cm should be 1000 × 1000 px large or larger.
     \includegraphics[width=10cm]{figures/mmcif_erd.png}
   \end{center}
   \caption{Diagram of custom mmCIF categories}
@@ -304,17 +331,15 @@ The extension was created using TypeScript, a superset of JavaScript that adds s
 
 \begin{figure}
   \begin{center}
-    \includegraphics[width=10cm]{figures/charge_data_structure.png}
+    \includegraphics[width=11cm]{figures/charge_data_structure.png}
   \end{center}
-  \caption{Structure of the custom model property used for storing the charges}
+  \caption{Interface of the custom model property used for storing the partial atomic charges.}
   \label{figure:charge_data_structure}
 \end{figure}
 
-This provider is responsible for supplying the partial atomic charges to the rest of the extension providers.
-In order to retrieve the charges it is necessary to parse the mmCIF file.
-This is fortunately already done by the Molstar library.
-The library parses the mmCIF file and provides the parsed mmCIF file data in the form of a $\texttt{MmcifFormat}$ object.
-This object is then used to retrieve the custom mmCIF categories described in Section \ref{section:custom_mmcif_categories}.
+TODO: rewrite this \\
+
+This provider is responsible for supplying the partial atomic charges to the rest of the extension providers. In order to retrieve the charges from the mmCIF file, it is necessary to parse the file. This is already done by the Molstar library, which parses the mmCIF file and provides the parsed mmCIF file data in the form of a $\texttt{MmcifFormat}$ object. This object is then used to retrieve the custom mmCIF categories described in Section \ref{section:custom_mmcif_categories}.
 
 After retrieving the custom categories, the provider creates a custom model property for storing the charges. The interface depicted in Figure \ref{figure:charge_data_structure} describes the structure of the custom model property.
 
@@ -326,12 +351,14 @@ After retrieving the custom categories, the provider creates a custom model prop
 
 The atom charges are stored in the \texttt{typeIdToAtomIdToCharge} map. The map is indexed by the charge set (typeId) and the atom id. The atom id is a pointer to the atom\_site.id. item in the mmCIF file. The atom charges are retrieved from the mmCIF file by iterating over the atom\_site.id category and retrieving the charge values for each atom. The charge values are then stored in the \\ \texttt{typeIdToAtomIdToCharge} map.
 
-The residue charges are calculated by summing the charges of the atoms that make up the residue. This is done by iterating over the atoms of the residue and summing their charges. The residue charge is then stored in the \texttt{typeIdToResidueIdToCharge} map. The maximum absolute charge of the residue is also calculated and stored in the \texttt{maxAbsoluteResidueCharges} map.
+The residue charges are calculated by summing the charges of the atoms that make up the residue. This is done by iterating over the atoms of the residue and summing their charges. The residue charge is then stored in the \texttt{typeIdToResidueIdToCharge} map.
 
-Lastly, the maximum absolute charge of both atoms and residues is calculated and stored in the \texttt{maxAbsoluteChargesAll} map and the method name used to calculate the charges of a given charge set is stored in the \texttt{typeIdToMethod} map.
+The maximum absolute charge values of the atoms and residues are calculated and stored in the \texttt{maxAbsoluteAtomCharges} and \\ \texttt{maxAbsoluteResidueCharges} maps. These maps are used in the color theme provider to normalize the charges to the range of 0 to 1. Additionally, the maximum absolute charge values are used to calculate the color interpolations in the color theme provider. Additionally, the maximum absolute charge of both atoms and residues is calculated and stored in the \texttt{maxAbsoluteChargesAll} map.
 
-\subsection{Partial charges color theme}
-\label{subsection:partial_charges_color_theme}
+Lastly, the method name used to calculate the charges of a given charge set is stored in the \texttt{typeIdToMethod} map. This map is used to display the method name in the UIs.
+
+\subsection{Color theme provider}
+\label{subsection:color_theme_provider}
 
 This provider serves as the central component of the extension, with its primary function being to assign colors to atoms and residues based on their charges. It achieves this by using the ColorTheme API provided by Molstar. The ColorTheme API is a mechanism for assigning colors to structural elements of a molecule. These structural elements can be atoms, residues, bonds, and so on. The API is based on the concept of a ColorTheme object, which is a collection of color assignments for structural elements. The ColorTheme object is then used by the Molstar library to color the structural elements of the molecule.
 
