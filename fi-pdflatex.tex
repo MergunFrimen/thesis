@@ -1,11 +1,3 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% I, the copyright holder of this work, release this work into the
-%% public domain. This applies worldwide. In some countries this may
-%% not be legally possible; if so: I grant anyone the right to use
-%% this work for any purpose, without any conditions, unless such
-%% conditions are required by law.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \documentclass[
   digital,     %% The `digital` option enables the default options for the
                %% digital version of a document. Replace with `printed`
@@ -70,7 +62,9 @@
     thanks      = {%
         TODO
     },
-    % bib         = example.bib,
+    bib         = {
+        main.bib,
+    },
     %% Remove the following line to use the JVS 2018 faculty logo.
     facultyLogo = fithesis-fi,
 }
@@ -180,6 +174,7 @@ TODO: visual of electron distribution
 
 \subsection{ChargeFW2}
 \label{subsection:chargfw2}
+\parencite{10.1093/nar/gkaa367}
 
 \subsection{AlphaCharges}
 \label{subsection:alphacharges}
@@ -235,10 +230,14 @@ There are numerous software tools available for visualizing molecular data, with
 \subsection{Litemol}
 \label{subsection:litemol}
 
+\parencite{sehnal-litemol}
+
 LiteMol is an open-source, web-native molecular visualization tool that supports various file formats and offers a user-friendly interface for creating visualizations. LiteMol provides essential visualization types, including ball and stick, surface, and cartoon representations, as well as options for customizing colors, lighting, and other display settings. The web-based nature of LiteMol makes it easily accessible and platform-independent.
 
 \subsection{Molstar}
 \label{subsection:molstar}
+
+\parencite{sehnal-molstar}
 
 Mol* (Molstar) is another web-native molecular visualization tool, developed as part of the wwPDB OneDep system for macromolecular structure deposition and validation. Mol* offers a wide range of visualization options, including advanced features such as electron density maps and validation reports. Mol* supports many file formats, including PDB, mmCIF, and PDBx/mmJSON. Like LiteMol, Mol* is platform-independent and can be accessed from any web browser.
 
@@ -338,7 +337,7 @@ This provider serves as the central component of the extension, with its primary
 
 For the purposes of this extension, it was necessary to color two structural elements - atoms and residues. For both of these structural elements the charges were retrieved from the provider described in the previous section \ref{subsection:charges_provider}, which provided charges for atoms and residues.
 
-To establish the color for a given charge, two color interpolations are employed: one for negative charges and another for positive charges. Atoms with positive charges receive a color from a white-to-blue color interpolation, while atoms with negative charges are assigned a color from a white-to-red color interpolation. These color interpolations are highlighted in Figure \ref{todo}. 
+To establish the color for a given charge, two color interpolations are employed: one for negative charges and another for positive charges. Atoms with positive charges receive a color from a white-to-blue color interpolation, while atoms with negative charges are assigned a color from a white-to-red color interpolation. These color interpolations are highlighted in Figure \ref{}. 
 
 \subsection{Labels}
 \label{subsection:labels}
@@ -366,14 +365,16 @@ The viewer needs extended functionality
 \chapter{Atomic Charge Calculator II}
 \label{chapter:atomic_charge_calculator_ii}
 
-Atomic Charge Calculator II (ACC2) is a web application for calculating and visualizing partial atomic charges. ACC2 uses the Litemol viewer for visualizing the structures and their partial atomic charges. The viewer is sufficient in visualizing a single charge set, however, it was desired to expand this capability to support multiple charge sets. This is why it was desirable to update the viewer with its modern counterpart Molstar, which has this capabilty provided through the partial atomic charges extension described in chapter \ref{}.
+TODO: fix weak link between description of the application and the limitations \\
 
-This chapter discusses the necessary changes made to the ACC2 web application in order to update the viewer from the Litemol viewer to the Molstar viewer. Firstly, we discuss the extensions made to the ChargeFW2 output, then we will look at the Flask backend changes for supporting multiple charges, and lastly we will mention a couple of frontend changes that were made to support generating multiple charge set calculations.
+Atomic Charge Calculator II (ACC2) is a web application that calculates partial atomic charges for input structure files. The application is built using Flask for the backend and Javascript with Bootstrap for the frontend. It uses ChargeFW2 to perform the charge calculations and the Litemol viewer to visualize the structures with partial atomic charges. \parencite{10.1093/nar/gkaa367} However, the Litemol viewer has some limitations: it cannot handle multiple charge sets, and more importantly, it is no longer supported. Therefore, it was necessary to update the application to use the Molstar viewer, which enables multiple charge sets through the partial atomic charges extension described in Chapter \ref{chapter:molstar_partial_charges_extension}.
+
+This chapter describes the changes made to the ACC2 application to integrate the Molstar viewer. We first discuss the modifications to the ChargeFW2 output, then explain the changes made to the Flask backend to support multiple charges, and finally describe the frontend updates required to generate multiple charge set calculations.
 
 \section{ChargeFW2 extension}
 \label{section:chargefw2_extension}
 
-As mentioned in subsection \ref{}, ChargeFW2 is a C++ application for calculating partial atomic charges.
+As mentioned in \ref{subsection:chargfw2}, ChargeFW2 is a C++ application for calculating partial atomic charges.
 To accommodate the specified output file format discussed in section, ChargeFW2 required an extension that would output a single mmCIF file containing both the molecular structure and charges. The charges were appended to the end of the file.jop
 
 \section{Multicharge support}
@@ -396,5 +397,7 @@ To accommodate the specified output file format discussed in section, ChargeFW2 
 \addcontentsline{toc}{chapter}{Conclusion}
 
 Things were created and some things even work.
+
+\printbibliography[heading=bibintoc]
 
 \end{document}
