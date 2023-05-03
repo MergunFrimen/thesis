@@ -262,6 +262,7 @@ This section will detail the implementation of the extension. The extension cons
 The extension was created using TypeScript, a superset of JavaScript that adds static typing and other features to the language. The Molstar library is also written in TypeScript, so the extension was written in the same language to ensure compatibility.
 
 \subsection{Charges provider}
+\label{subsection:charges_provider}
 
 \begin{figure}
   \begin{center}
@@ -293,15 +294,19 @@ Lastly, the maximum absolute charge of both atoms and residues is calculated and
 
 \subsection{Partial charges color theme}
 
-This provider serves as the central component of the extension, with its primary function being to assign colors to atoms based on their charges. It achieves this by supplying a factory function that generates a ColorTheme object. Within this object, there is a 'color' property featuring a function that assigns a color to a specified location, which could be a structural element, bond location, and so on.
+This provider serves as the central component of the extension, with its primary function being to assign colors to atoms and residues based on their charges. It achieves this by using the ColorTheme API provided by Molstar. The ColorTheme API is a mechanism for assigning colors to structural elements of a molecule. These structural elements can be atoms, residues, bonds, and so on. The API is based on the concept of a ColorTheme object, which is a collection of color assignments for structural elements. The ColorTheme object is then used by the Molstar library to color the structural elements of the molecule.
 
-To establish the color for an atom, two color interpolations are employed: one for negative charges and another for positive charges. Atoms with positive charges receive a color from a white-to-blue gradient, while those with negative charges are assigned a color from a white-to-red gradient. See Figure \ref{} for further details.
+For the purposes of this extension, it was necessary to color two structural elements - atoms and residues. For both of these structural elements the charges were retrieved from the provider described in the previous section \ref{subsection:charges_provider}, which provided charges for atoms and residues.
+
+To establish the color for a given charge, two color interpolations are employed: one for negative charges and another for positive charges. Atoms with positive charges receive a color from a white-to-blue color interpolation, while atoms with negative charges are assigned a color from a white-to-red color interpolation. These color interpolations are highlighted in Figure \ref{todo}. 
 
 \subsection{Labels}
 
-This provider creates labels for a specified Loci object. A Loci object is akin to a Location object but is utilized for general selections. Consequently, it is essential to first extract the location from the Loci object in order to obtain the atom ID. The charge is acquired from the property provider, and the label is an HTML string that conveys the charge of the atom or residue.
+Having colored the structural elements, it was also necessary to create a label provider, which would assign labels that describe the charge of the structural element. In order to determine which element is highlighted, Molstar uses the object Loci. A Loci object is utilized for general selections and highlights. Consequently, it is essential to first extract the location from the Loci object in order to obtain the atom ID. The charge is acquired from the property provider, and the label is an HTML string that conveys the charge of the atom or residue. An example of the label can be seen in in the right-hand corner in figure \ref{}.
 
 \section{Molstar integration}
+
+After creating the extension, it was integrated into the Molstar library. The extension is integrated in a way that allows the user to simply upload a mmCIF file together with the custom charge categories in the Molstar viewer. The color theme is set automatically to the partial atomic charge color theme. By integrating it into the Molstar library the extension was made freely available to anyone to use
 
 \section{Future work}
 
