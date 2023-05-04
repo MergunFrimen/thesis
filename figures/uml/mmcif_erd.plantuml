@@ -1,4 +1,4 @@
-@startuml
+@startuml mmcif_erd
 
 hide circle
 !theme mars
@@ -9,7 +9,7 @@ hide circle
 hide methods
 hide stereotypes
 
-TABLE(_partial_atomic_charges_meta,"_partial_atomic_charges_meta") {
+TABLE(_sb_ncbr_partial_atomic_charges_meta,"_sb_ncbr_partial_atomic_charges_meta") {
   PRIMARY_KEY(id) : id
   type : text
   method : text
@@ -20,13 +20,13 @@ TABLE(_atom_site,"_atom_site") {
   other columns...
 }
 
-TABLE(_partial_atomic_charges,"_partial_atomic_charges") {
+TABLE(_sb_ncbr_partial_atomic_charges,"_sb_ncbr_partial_atomic_charges") {
   FOREIGN_KEY(type_id) : type_id
   FOREIGN_KEY(atom_id) : atom_id
   charge : float
 }
 
-_partial_atomic_charges_meta -ri- _partial_atomic_charges : type_id
-_atom_site -- _partial_atomic_charges : atom_id
+_sb_ncbr_partial_atomic_charges_meta -ri- _sb_ncbr_partial_atomic_charges : type_id
+_atom_site -- _sb_ncbr_partial_atomic_charges : atom_id
 
 @enduml

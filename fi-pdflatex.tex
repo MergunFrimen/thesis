@@ -277,18 +277,13 @@ This section briefly describes the formal requirements for the Molstar extension
 \section{Custom mmCIF categories}
 \label{section:custom_mmcif_categories}
 
+TODO: update the category names in the diagram \\
+
 To store partial atomic charges within a single file, we developed custom categories within the mmCIF format. The mmCIF format was chosen because it is widely used in the field of structural biology and offers several advantages over other formats, as discussed in \ref{subsection:mmcif}. The custom categories allow us to store information about the partial atomic charges separately from the other structural data, while still being able to access it within the same file. Storing all data in one file was important as it allowed for easier management and distribution of the data. If the charges were stored separately, we would have had to create custom import controls in Molstar to bring them in.
 
 We used two separate categories for this purpose: one to store the partial charge values for each atom in the structure, and another to store metadata about the charge sets.
 
-
-We chose to use the mmCIF file format because it offered several advantages, as previously discussed in Section 1.2. The most significant advantages for our purposes was the ease of creating custom data categories to describe data related to the partial atomic charges and therefore the ability to store all the data in a single file. And since the mmCIF format is widely used in the field of structural biology, it was a natural choice for our extension.
-
-The custom categories allowed us to store information about the partial atomic charges separately from the other structural data. We used two separate categories for this purpose: one to store the partial charge values for each atom in the structure, and another to store metadata about the charge sets.
-
-The first category binds the atom and its charge using an attribute called atom\_id, which points to the atom\_site.id item. Additionally, we used an attribute called typeId to point into the second category, which is dedicated to storing metadata about the charge sets.
-
-The metadata category has three attributes: id, type, and method. The id attribute is a unique identifier for the charge set, the type attribute describes the type of computation method used (e.g., empirical, quantum, etc.), and the method attribute describes the method name with parameters if applicable (e.g., 'EEM/Racek 2016 (ccd2016\_npa)').
+The first category is \texttt{\_sb\_ncbr\_partial\_atomic\_charges}. This category binds the atom and its charge through the attribute \texttt{atom\_id}, which points to the \texttt{atom\_site.id} item described in \ref{subsection:mmcif}. Additionally, we used an attribute called \texttt{type\_id} to point to the second category, \texttt{\_sb\_ncbr\_partial\_atomic\_charges\_meta}, which is dedicated to storing metadata about the charge sets. The metadata category has three attributes: \texttt{id}, \texttt{type}, and \texttt{method}. The \texttt{id} attribute is a unique identifier for the charge set, the \texttt{type} attribute describes the type of computation method used to calculate the charge set (e.g. empirical, quantum, etc.), and the method attribute describes the method name with parameters, if applicable (e.g. 'EQeq', 'EEM/Racek 2016 (ccd2016\_npa)', etc.).
 
 Figure \ref{fig:mmcif_erd} provides a detailed illustration of the structure of the custom mmCIF categories.
 
@@ -312,7 +307,7 @@ Figure \ref{fig:mmcif_erd} provides a detailed illustration of the structure of 
 
 \begin{figure}
   \begin{center}
-    \includegraphics[width=10cm]{figures/mmcif_erd.png}
+    \includegraphics[width=12cm]{figures/mmcif_erd.png}
   \end{center}
   \caption{Diagram of custom mmCIF categories}
   \label{fig:mmcif_erd}
