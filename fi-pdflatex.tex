@@ -277,31 +277,14 @@ This section briefly describes the formal requirements for the Molstar extension
 \section{Custom mmCIF categories}
 \label{section:custom_mmcif_categories}
 
-TODO: update the category names in the diagram \\
+To store partial atomic charges within a single file, we developed custom categories within the mmCIF format. The mmCIF format was chosen because it is widely used in the field of structural biology and offers several advantages over other formats, as discussed in \ref{subsection:mmcif}. The custom categories allow us to store information about the partial atomic charges separately from the other structural data, while still being able to access it within the same file. Storing all data in one file was important as it allowed for easier management and distribution of the data. If the charges were stored separately,
+% we would have had to create custom import controls in Molstar to bring them in.
+we would have to provide the charge data to Molstar in a different way e.g. through custom import controls.
 
-To store partial atomic charges within a single file, we developed custom categories within the mmCIF format. The mmCIF format was chosen because it is widely used in the field of structural biology and offers several advantages over other formats, as discussed in \ref{subsection:mmcif}. The custom categories allow us to store information about the partial atomic charges separately from the other structural data, while still being able to access it within the same file. Storing all data in one file was important as it allowed for easier management and distribution of the data. If the charges were stored separately, we would have had to create custom import controls in Molstar to bring them in.
 
 We used two separate categories for this purpose: one to store the partial charge values for each atom in the structure, and another to store metadata about the charge sets.
 
-The first category is \texttt{\_sb\_ncbr\_partial\_atomic\_charges}. This category binds the atom and its charge through the attribute \texttt{atom\_id}, which points to the \texttt{atom\_site.id} item described in \ref{subsection:mmcif}. Additionally, we used an attribute called \texttt{type\_id} to point to the second category, \texttt{\_sb\_ncbr\_partial\_atomic\_charges\_meta}, which is dedicated to storing metadata about the charge sets. The metadata category has three attributes: \texttt{id}, \texttt{type}, and \texttt{method}. The \texttt{id} attribute is a unique identifier for the charge set, the \texttt{type} attribute describes the type of computation method used to calculate the charge set (e.g. empirical, quantum, etc.), and the method attribute describes the method name with parameters, if applicable (e.g. 'EQeq', 'EEM/Racek 2016 (ccd2016\_npa)', etc.).
-
-Figure \ref{fig:mmcif_erd} provides a detailed illustration of the structure of the custom mmCIF categories.
-
-TODO: rewrite \\
-
-However, in order to store partial atomic charges within a single file, we needed to create custom categories within the mmCIF format.
-The design of these custom categories was a crucial step in creating the extension since we needed a way to package the charge data together with the structure data into one file.
-
-Without having everything in one file we would have to provide the charges in a different way e.g. through custom import controls.
-
-For this purpose we have chosen the mmCIF file format. There are a couple of reasons already discussed in section 1.2 as to why mmCIF is more advance file format than the other formats discussed in section 1.2. For our purposes the biggest advantage was the ease of creating custom data categories for describing data relating to the partial atomic charges.
-
-The custom categories allowed us to store information about the partial atomic charges separately from the other structural data.
-
-We used two separate categories for storing the charge data.
-The first category stores the partial charge values for each atom in the structure. The binding of atom and its charge is done using an attribute atom\_id which is a pointer to the atom\_site.id. item. Additionally, we use an attribute typeId as a pointer into the second category which is dedicated to storing metadata about the charge sets.
-
-The metadata category has three attributes - id, type, and method. Attribute id is a unique identifier for the charge set, attribute type serves to describe the type of computation method used (e.g. empirical, quantum etc.), and lastly the method attribute describes the method name with parameters if applicable (e.g. 'EEM/Racek 2016 (ccd2016\_npa)').
+The category \texttt{\_sb\_ncbr\_partial\_atomic\_charges} binds together the atoms of the structure and their charges through the attribute \texttt{atom\_id}, which points to the \texttt{\_atom\_site.id} item described in \ref{subsection:mmcif}. The \texttt{\_sb\_ncbr\_partial\_atomic\_charges} category also contains the \texttt{charge} attribute, which stores the partial charge value for the atom. Additionally, we used the attribute \texttt{type\_id} to point to the second category, \texttt{\_sb\_ncbr\_partial\_atomic\_charges\_meta}, which is dedicated to storing metadata about the charge sets. The metadata category has three attributes: \texttt{id}, \texttt{type}, and \texttt{method}. The \texttt{id} attribute is a unique identifier for the charge set, the \texttt{method} attribute describes the computation method used to calculate the charge set (e.g. 'EQeq', 'EEM/Racek 2016 (ccd2016\_npa)', etc.), and finally the \texttt{type} attribute describes the type of the calculation method (e.g. empirical, quantum, etc.) 
 
 Figure \ref{fig:mmcif_erd} provides a detailed illustration of the structure of the custom mmCIF categories.
 
@@ -316,7 +299,7 @@ Figure \ref{fig:mmcif_erd} provides a detailed illustration of the structure of 
 \section{Implementation}
 \label{section:implementation}
 
-This section will detail the implementation of the extension. The extension consists of multiple providers that are registered in a global registry. Each provider serves a distinct purpose, which will be described in the following subsections.
+This section will detail the implementation of the extension. The extension consists of multiple providers. Each provider serves a distinct functionality, such as supplying the partial charge data and coloring the structural elements based on their charges.
 
 The extension was created using TypeScript, a superset of JavaScript that adds static typing and other features to the language. The Molstar library is also written in TypeScript, so the extension was written in the same language to ensure compatibility.
 
@@ -331,28 +314,22 @@ The extension was created using TypeScript, a superset of JavaScript that adds s
   \label{figure:charge_data_structure}
 \end{figure}
 
-TODO: rewrite this \\
-
-This provider is responsible for supplying the partial atomic charges to the rest of the extension providers. In order to retrieve the charges from the mmCIF file, it is necessary to parse the file. This is already done by the Molstar library, which parses the mmCIF file and provides the parsed mmCIF file data in the form of a $\texttt{MmcifFormat}$ object. This object is then used to retrieve the custom mmCIF categories described in Section \ref{section:custom_mmcif_categories}.
+This provider is responsible for supplying the partial atomic charges to the rest of the extension providers. In order to retrieve the charges from the mmCIF file, it is necessary to parse the file. This is already done by the Molstar library, which parses the mmCIF file and provides the parsed mmCIF file data in the form of a \texttt{MmcifFormat} object. This object is then used to retrieve the custom mmCIF categories described in Section \ref{section:custom_mmcif_categories}.
 
 After retrieving the custom categories, the provider creates a custom model property for storing the charges. The interface depicted in Figure \ref{figure:charge_data_structure} describes the structure of the custom model property.
 
-% \begin{itemize}
-%   \item \texttt{typeIdToAtomIdToCharge} and \texttt{typeIdToResidueIdToCharge} - \\ map charges of a specific charge set (typeId) to the appropriate atoms or residues
-%   \item \texttt{maxAbsoluteAtomCharges} and \texttt{maxAbsoluteResidueCharges} - \\ map the maximum absolute charge values for atoms or residues to a specific charge set (typeId)
-%   \item \texttt{typeIdToMethod} - maps the charge set (typeId) to the method name used to calculate the charges 
-% \end{itemize}
-
-The atom charges are stored in the \texttt{typeIdToAtomIdToCharge} map. The map is indexed by the charge set (typeId) and the atom id. The atom id is a pointer to the atom\_site.id. item in the mmCIF file. The atom charges are retrieved from the mmCIF file by iterating over the atom\_site.id category and retrieving the charge values for each atom. The charge values are then stored in the \\ \texttt{typeIdToAtomIdToCharge} map.
+The atom charges are stored in the \texttt{typeIdToAtomIdToCharge} map. The map is indexed by the charge set (typeId) and the atom id. The atom id is a pointer to the atom\_site.id. item in the mmCIF file. The atom charges are retrieved from the mmCIF file by iterating over the atom\_site.id category and retrieving the charge values for each atom. The charge values are then stored in the \texttt{typeIdToAtomIdToCharge} map.
 
 The residue charges are calculated by summing the charges of the atoms that make up the residue. This is done by iterating over the atoms of the residue and summing their charges. The residue charge is then stored in the \texttt{typeIdToResidueIdToCharge} map.
 
-The maximum absolute charge values of the atoms and residues are calculated and stored in the \texttt{maxAbsoluteAtomCharges} and \\ \texttt{maxAbsoluteResidueCharges} maps. These maps are used in the color theme provider to normalize the charges to the range of 0 to 1. Additionally, the maximum absolute charge values are used to calculate the color interpolations in the color theme provider. Additionally, the maximum absolute charge of both atoms and residues is calculated and stored in the \texttt{maxAbsoluteChargesAll} map.
+The maximum absolute charge values of the atoms and residues are calculated and stored in the \texttt{maxAbsoluteAtomCharges} and \texttt{maxAbsoluteResidueCharges} maps. These maps are used in the color theme provider to normalize the charges to the range of 0 to 1. Additionally, the maximum absolute charge values are used to calculate the color interpolations in the color theme provider. Additionally, the maximum absolute charge of both atoms and residues is calculated and stored in the \texttt{maxAbsoluteChargesAll} map.
 
 Lastly, the method name used to calculate the charges of a given charge set is stored in the \texttt{typeIdToMethod} map. This map is used to display the method name in the UIs.
 
 \subsection{Color theme provider}
 \label{subsection:color_theme_provider}
+
+TODO: mention the color parameters \\
 
 This provider serves as the central component of the extension, with its primary function being to assign colors to atoms and residues based on their charges. It achieves this by using the ColorTheme API provided by Molstar. The ColorTheme API is a mechanism for assigning colors to structural elements of a molecule. These structural elements can be atoms, residues, bonds, and so on. The API is based on the concept of a ColorTheme object, which is a collection of color assignments for structural elements. The ColorTheme object is then used by the Molstar library to color the structural elements of the molecule.
 
@@ -365,9 +342,14 @@ To establish the color for a given charge, two color interpolations are employed
 
 Having colored the structural elements, it was also necessary to create a label provider, which would assign labels that describe the charge of the structural element. In order to determine which element is highlighted, Molstar uses the object Loci. A Loci object is utilized for general selections and highlights. Consequently, it is essential to first extract the location from the Loci object in order to obtain the atom ID. The charge is acquired from the property provider, and the label is an HTML string that conveys the charge of the atom or residue. An example of the label can be seen in in the right-hand corner in figure \ref{}.
 
+\section{Controls}
+\label{section:controls}
+
+TODO: describe the controls and their functionality
+
 \section{Molstar integration}
 
-After creating the extension, it was integrated into the Molstar library. The extension is integrated in a way that allows the user to simply upload a mmCIF file together with the custom charge categories in the Molstar viewer. The color theme is set automatically to the partial atomic charge color theme. By integrating it into the Molstar library the extension was made freely available to anyone to use
+After creating the extension, it was integrated into the Molstar library. The extension is integrated in a way that allows the user to simply upload a mmCIF file containing the custom charge categories to the Molstar viewer and the extension will automatically detect the custom categories and display the partial atomic charges. By integrating it into the Molstar library the extension was made freely available to anyone to use
 
 \section{Future work}
 
