@@ -1,0 +1,32 @@
+@startuml
+
+hide circle
+!theme mars
+
+!define TABLE(name,desc) class name as "desc" << (T,#FFAAAA) >>
+!define PRIMARY_KEY(field) <u>field</u>
+!define FOREIGN_KEY(field) #field
+hide methods
+hide stereotypes
+
+TABLE(_partial_atomic_charges_meta,"_partial_atomic_charges_meta") {
+  PRIMARY_KEY(id) : id
+  type : text
+  method : text
+}
+
+TABLE(_atom_site,"_atom_site") {
+  PRIMARY_KEY(id) : id
+  other columns...
+}
+
+TABLE(_partial_atomic_charges,"_partial_atomic_charges") {
+  FOREIGN_KEY(type_id) : type_id
+  FOREIGN_KEY(atom_id) : atom_id
+  charge : float
+}
+
+_partial_atomic_charges_meta -ri- _partial_atomic_charges : type_id
+_atom_site -- _partial_atomic_charges : atom_id
+
+@enduml
