@@ -265,23 +265,22 @@ Mol* emphasizes interactivity and offers various tools for manipulating and anal
 \chapter{Molstar partial charges extension}
 \label{chapter:molstar_partial_charges_extension}
 
-Visualizing partial atomic charges in molecules is an essential aspect of computational chemistry research, aiding in analyzing complex molecular structures. Molstar, a popular software tool for visualizing molecules, provides an extensive range of features for users to explore molecular structures. However, the tool lacks the functionality to color and label atoms and residues based on their partial atomic charges. This can be a significant limitation for researchers. In response to this need, we have created an extension to Molstar that addresses this limitation.
+Visualizing partial atomic charges in molecules is an essential aspect of computational chemistry research, aiding in analyzing complex molecular structures. Molstar provides an extensive range of features for users to explore molecular structures. However, the tool lacks the functionality to color and label atoms and residues based on their partial atomic charges. This can be a considerable limitation for researchers. In response to this need, we have created an extension to Molstar that addresses this limitation.
 
 This chapter describes the requirements for the extension, the custom mmCIF categories necessary for storing the partial atomic charges, and the implementation of the extension itself.
 
 \section{Requirements}
 \label{section:requirements}
 
-TODO: the extension should also support multiple charges sets \\
-
-This section briefly describes the formal requirements for the Molstar extension. Firstly, the extension should enable the coloring of atoms and residues based on their partial atomic charges. Secondly, it should describe the charge values of the atoms and residues. Lastly, the extension should be seamlessly integrated into the Molstar library, facilitating access to its features regardless of the Molstar viewer instance.
+This section briefly describes the formal requirements for the Molstar extension. Firstly, the extension should enable the coloring of atoms and residues based on their partial atomic charges. Secondly, it should describe the charge values of the atoms and residues. Thirdly, the extension should allow the user to provide multiple charge sets for a single structure and select which one to display. Finally, the extension should be seamlessly integrated into the Molstar library, facilitating access to its features and functionality.
 
 \section{Custom mmCIF categories}
 \label{section:custom_mmcif_categories}
 
-To store partial atomic charges within a single file, we developed custom categories within the mmCIF format. Creating these categories was a critical step as we needed a way to package the charge data together with the structural data into a single file.
+To store partial atomic charges within a single file, we developed custom categories within the mmCIF format. The mmCIF format was chosen because it is widely used in the field of structural biology and offers several advantages over other formats, as discussed in \ref{subsection:mmcif}. The custom categories allow us to store information about the partial atomic charges separately from the other structural data, while still being able to access it within the same file. Storing all data in one file was important as it allowed for easier management and distribution of the data. If the charges were stored separately, we would have had to create custom import controls in Molstar to bring them in.
 
-Storing everything in one file was important as it allowed for easier management and distribution of the data. If the charges were stored separately, we would have had to use custom import controls to bring them in.
+We used two separate categories for this purpose: one to store the partial charge values for each atom in the structure, and another to store metadata about the charge sets.
+
 
 We chose to use the mmCIF file format because it offered several advantages, as previously discussed in Section 1.2. The most significant advantages for our purposes was the ease of creating custom data categories to describe data related to the partial atomic charges and therefore the ability to store all the data in a single file. And since the mmCIF format is widely used in the field of structural biology, it was a natural choice for our extension.
 
