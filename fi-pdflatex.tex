@@ -56,21 +56,28 @@
     TeXtitle    = {Modern visualization of partial atomic charges in Mol*},
     keywords    = {%
         Molstar,
+        Mol*,
         molecular visualization,
         partial atomic charges,
         molecular graphics,
         scientific visualization,
         web graphics,
-        structural biology
+        structural biology,
+        AlphaFold,
+        Atomic Charge Calculator 2,
     },
     TeXkeywords = {%
         Molstar,
+        Mol*,
         molecular visualization,
         partial atomic charges,
         molecular graphics,
         scientific visualization,
         web graphics,
-        structural biology
+        structural biology,
+        AlphaFold,
+        Atomic Charge Calculator 2,
+
      },
     abstract    = {%
         TODO
@@ -84,6 +91,7 @@
     %% Remove the following line to use the JVS 2018 faculty logo.
     facultyLogo = fithesis-fi,
 }
+\usepackage{tipa}
 \usepackage{makeidx}      %% The `makeidx` package contains
 \makeindex                %% helper commands for index typesetting.
 %% These additional packages are used within the document:
@@ -107,6 +115,8 @@
 \usepackage{floatrow} %% Putting captions above tables
 \floatsetup[table]{capposition=top}
 \usepackage[babel]{csquotes} %% Context-sensitive quotation marks
+\usepackage{minted}
+\usepackage{subfigure}
 
 \begin{document}
 
@@ -119,7 +129,7 @@
 
 Theoretical concepts are fundamental to the study of computational chemistry, providing a framework for analyzing molecular structures and properties. This chapter focuses on four key areas of theory, beginning with an overview of molecular structure in Section 1.1. Section 1.2 provides an in-depth examination of chemical file formats, including the advantages and disadvantages of different file formats for storing molecular data. Partial atomic charges are explored in section 1.3, including their importance in the analysis of molecular structures and the various methods used to compute them. Finally, section 1.4 delves into color interpolation, a critical technique for visualizing partial atomic charges in molecular structures.
 
-By providing a comprehensive overview of these theoretical concepts, this chapter aims to provide a strong foundation for the subsequent chapters, which will focus on the implementation and analysis of the Molstar extension for visualizing partial atomic charges in molecular structures.
+By providing a comprehensive overview of these theoretical concepts, this chapter provides a strong foundation for the subsequent chapters, which will focus on the implementation and analysis of the Mol* extension for visualizing partial atomic charges in molecular structures.
 
 \section{Molecular structure}
 \label{section:molecular_structure}
@@ -253,38 +263,58 @@ LiteMol is an open-source, web-native molecular visualization tool that supports
 
 The LiteMol suite is a freely available tool for visualizing large macromolecular structure datasets, which consists of three components: data delivery services, a compression format, and a lightweight 3D molecular viewer. It enables fast delivery and visualization of large datasets and is compatible with modern web browsers and mobile devices, making it accessible to users with and without structural biology expertise. The tool addresses the challenges of delivering and visualizing large structural data sets, which are becoming increasingly available due to advances in electron microscopy and other techniques. \parencite{sehnal-litemol}
 
-\subsection{Molstar}
+\subsection{Mol*}
 \label{subsection:molstar}
 
 \parencite{sehnal-molstar}
 
-Mol* (Molstar) is another web-native molecular visualization tool, developed as part of the wwPDB OneDep system for macromolecular structure deposition and validation. Mol* offers a wide range of visualization options, including advanced features such as electron density maps and validation reports. Mol* supports many file formats, including PDB, mmCIF, and PDBx/mmJSON. Like LiteMol, Mol* is platform-independent and can be accessed from any web browser.
+Mol* (\textipa{/"molstar/}) is another web-native molecular visualization tool, developed as part of the wwPDB OneDep system for macromolecular structure deposition and validation. Mol* offers a wide range of visualization options, including advanced features such as electron density maps and validation reports. Mol* supports many file formats, including PDB, mmCIF, and PDBx/mmJSON. Like LiteMol, Mol* is platform-independent and can be accessed from any web browser.
 
 Mol* emphasizes interactivity and offers various tools for manipulating and analyzing the molecular structure, such as distance and angle measurements, selection and display of specific residues, and custom coloring schemes. Additionally, Mol* provides integration with external databases and services, such as UniProt, PDBe, and RCSB PDB, enabling users to quickly access related information and resources.
 
-\chapter{Molstar partial charges extension}
+\chapter{Mol* partial charges extension}
 \label{chapter:molstar_partial_charges_extension}
 
-Visualizing partial atomic charges in molecules is an essential aspect of computational chemistry research, aiding in analyzing complex molecular structures. Molstar provides an extensive range of features for users to explore molecular structures. However, the tool lacks the functionality to color and label atoms and residues based on their partial atomic charges. This can be a considerable limitation for researchers. In response to this need, we have created an extension to Molstar that addresses this limitation.
+Visualizing partial atomic charges in molecules is an essential aspect of computational chemistry research, aiding in analyzing complex molecular structures. Mol* provides an extensive range of features for users to explore molecular structures. However, the tool lacks the functionality to color and label atoms and residues based on their partial atomic charges.
+This can be a considerable limitation for researchers. In response to this need, we have created an extension to Mol* that addresses this limitation.
+
+It should be noted that the Mol* viewer predecessor, Litemol, supported this functionality. However, since Litemol is no longer supported, we saw the need to bring this functionality to Mol*.
 
 This chapter describes the requirements for the extension, the custom mmCIF categories necessary for storing the partial atomic charges, and the implementation of the extension itself.
 
 \section{Requirements}
 \label{section:requirements}
 
-This section briefly describes the formal requirements for the Molstar extension. Firstly, the extension should enable the coloring of atoms and residues based on their partial atomic charges. Secondly, it should describe the charge values of the atoms and residues. Thirdly, the extension should allow the user to provide multiple charge sets for a single structure and select which one to display. Finally, the extension should be seamlessly integrated into the Molstar library, facilitating access to its features and functionality.
+TODO: describe what residue charges are \\
+TODO: describe what each representation should visualize when colored using partial charges coloring \\
+
+Firstly, the extension should enable the coloring of atoms and residues based on their partial atomic charges. Secondly, it should describe the charge values of the atoms and residues. Thirdly, the extension should allow the user to provide multiple charge sets for a single structure and select which one to display. Finally, the extension should be seamlessly integrated into the Mol* library, facilitating access to its features and functionality.
 
 \section{Custom mmCIF categories}
 \label{section:custom_mmcif_categories}
 
-To store partial atomic charges within a single file, we developed custom categories within the mmCIF format. The mmCIF format was chosen because it is widely used in the field of structural biology and offers several advantages over other formats, as discussed in \ref{subsection:mmcif}. The custom categories allow us to store information about the partial atomic charges separately from the other structural data, while still being able to access it within the same file. Storing all data in one file was important as it allowed for easier management and distribution of the data. If the charges were stored separately, we would have to provide the charge data to Molstar in a different way e.g. through custom import controls.
+To store partial atomic charges within a single file, we developed custom categories within the mmCIF format. The mmCIF format was chosen because it is widely used in the field of structural biology and offers several advantages over other formats, as discussed in \ref{subsection:mmcif}. The custom categories allow us to store information about the partial atomic charges separately from the other structural data, while still being able to access it within the same file. Storing all data in one file was important as it allowed for easier management and distribution of the data. If the charges were stored separately, we would have to provide the charge data to Mol* in a different way e.g. through custom import controls.
 
 
 We used two separate categories for this purpose: one to store the partial charge values for each atom in the structure, and another to store metadata about the charge sets.
 
-The category \texttt{\_sb\_ncbr\_partial\_atomic\_charges} binds together the atoms of the structure and their charges through the attribute \texttt{atom\_id}, which points to the \texttt{\_atom\_site.id} item described in \ref{subsection:mmcif}. The \texttt{\_sb\_ncbr\_partial\_atomic\_charges} category also contains the \texttt{charge} attribute, which stores the partial charge value for the atom. Additionally, we used the attribute \texttt{type\_id} to point to the second category, \texttt{\_sb\_ncbr\_partial\_atomic\_charges\_meta}, which is dedicated to storing metadata about the charge sets. The metadata category has three attributes: \texttt{id}, \texttt{type}, and \texttt{method}. The \texttt{id} attribute is a unique identifier for the charge set, the \texttt{method} attribute describes the computation method used to calculate the charge set (e.g. 'EQeq', 'EEM/Racek 2016 (ccd2016\_npa)', etc.), and finally the \texttt{type} attribute describes the type of the calculation method (e.g. empirical, quantum, etc.) 
+The category \texttt{\_sb\_ncbr\_partial\_atomic\_charges} maps together the atoms of the structure and their charges. The category has three attributes:
 
-Figure \ref{fig:mmcif_erd} provides a detailed illustration of the structure of the custom mmCIF categories.
+\begin{itemize}
+  \item \texttt{type\_id} - pointer to the \\ \texttt{\_sb\_ncbr\_partial\_atomic\_charges\_meta.id} item
+  \item \texttt{atom\_id} - pointer to the \texttt{\_atom\_site.id} item described in \ref{subsection:mmcif}
+  \item \texttt{charge} - partial charge value for the atom
+\end{itemize}
+
+The category \texttt{\_sb\_ncbr\_partial\_atomic\_charges\_meta} is dedicated to storing metadata about the charge sets. The metadata category has the following attributes:
+
+\begin{itemize}
+  \item \texttt{id} - unique identifier for the charge set
+  \item \texttt{type} - type of the calculation method (e.g. 'empirical', 'quantum')
+  \item \texttt{method} - computation method used to calculate the charge set (e.g. 'EQeq', 'EEM/Racek 2016 (ccd2016\_npa)')
+\end{itemize}
+
+Figure \ref{fig:mmcif_erd} provides a detailed illustration of the custom mmCIF categories and their relationships.
 
 \begin{figure}
   \begin{center}
@@ -294,17 +324,19 @@ Figure \ref{fig:mmcif_erd} provides a detailed illustration of the structure of 
   \label{fig:mmcif_erd}
 \end{figure}
 
+\section{How Mol* works}
+
 \section{Implementation}
 \label{section:implementation}
 
 This section will detail the implementation of the extension. The extension consists of multiple providers. Each provider serves a distinct functionality, such as supplying the partial charge data and coloring the structural elements based on their charges. The providers will be described in detail in the following subsections.
 
-The extension was created using TypeScript, a superset of JavaScript that adds static typing and other features to the language. The Molstar library is also written in TypeScript, so the extension was written in the same language to ensure compatibility.
+The extension was created using TypeScript, a superset of JavaScript that adds static typing and other features to the language. The Mol* library is also written in TypeScript, so the extension was written in the same language to ensure compatibility.
 
 \subsection{Property provider}
 \label{subsection:property_provider}
 
-In order to retrieve the charges from the mmCIF file, it is necessary to parse the file. This is done by the Molstar library, which parses the mmCIF file and provides the parsed mmCIF file data in the form of a \texttt{MmcifFormat} object. The purpose of this provider is to process the charge data from this object and supply the charge data to the rest of the extension providers through a custom property. The interface of this property is depicted in Figure \ref{figure:charge_data_structure}.
+In order to retrieve the charges from the mmCIF file, it is necessary to parse the file. This is done by the Mol* library, which parses the mmCIF file and provides the parsed mmCIF file data in the form of a \texttt{MmcifFormat} object. The purpose of this provider is to process the charge data from this object and supply the charge data to the rest of the extension providers through a custom property. The interface of this property is depicted in Figure \ref{figure:charge_data_structure}.
 
 The atom charges are stored in the \texttt{typeIdToAtomIdToCharge} map. The map is indexed by the charge set (typeId) and the atom id. The atom id is a pointer to the atom\_site.id. item in the mmCIF file. The atom charges are retrieved from the mmCIF file by iterating over the atom\_site.id category and retrieving the charge values for each atom. The charge values are then stored in the \texttt{typeIdToAtomIdToCharge} map.
 
@@ -314,12 +346,30 @@ The maximum absolute charge values of the atoms and residues are calculated and 
 
 Lastly, the method name used to calculate the charges of a given charge set is stored in the \texttt{typeIdToMethod} map. This map is used to display the method name in the UIs.
 
-\begin{figure}
-  \begin{center}
-    \includegraphics[width=11cm]{figures/charge_data_structure.png}
-  \end{center}
-  \caption{Interface of the custom model property used for storing the partial atomic charges.}
-  \label{figure:charge_data_structure}
+\begin{figure}[htbp]
+  \caption{Interface of the custom model property for storing partial atomic charges.}
+  \label{fig:custom_model_property}
+  \definecolor{LightGray}{gray}{0.9}
+  \begin{minted}[
+  frame=lines,
+  framesep=2mm,
+  baselinestretch=1.2,
+  bgcolor=LightGray,
+  fontsize=\footnotesize,
+  % linenos
+  ]{Typescript}
+    type TypeId = number;
+    type IdToCharge = Map<number, number>;
+    export interface SBNcbrPartialChargeData {
+        typeIdToMethod: Map<TypeId, string>;
+        typeIdToAtomIdToCharge: Map<TypeId, IdToCharge>;
+        typeIdToResidueToCharge: Map<TypeId, IdToCharge>;
+        maxAbsoluteAtomCharges: IdToCharge;
+        maxAbsoluteResidueCharges: IdToCharge;
+        maxAbsoluteAtomChargeAll: number;
+        params: PartialChargesPropertyParams;
+    }
+  \end{minted}
 \end{figure}
 
 \subsection{Color theme provider}
@@ -327,7 +377,7 @@ Lastly, the method name used to calculate the charges of a given charge set is s
 
 TODO: mention the color parameters \\
 
-This provider serves as the central component of the extension, with its primary function being to assign colors to atoms and residues based on their charges. It achieves this by using the ColorTheme API provided by Molstar. The ColorTheme API is a mechanism for assigning colors to structural elements of a molecule. These structural elements can be atoms, residues, bonds, and so on. The API is based on the concept of a ColorTheme object, which is a collection of color assignments for structural elements. The ColorTheme object is then used by the Molstar library to color the structural elements of the molecule.
+This provider serves as the central component of the extension, with its primary function being to assign colors to atoms and residues based on their charges. It achieves this by using the ColorTheme API provided by Mol*. The ColorTheme API is a mechanism for assigning colors to structural elements of a molecule. These structural elements can be atoms, residues, bonds, and so on. The API is based on the concept of a ColorTheme object, which is a collection of color assignments for structural elements. The ColorTheme object is then used by the Mol* library to color the structural elements of the molecule.
 
 For the purposes of this extension, it was necessary to color two structural elements - atoms and residues. For both of these structural elements the charges were retrieved from the provider described in the previous section \ref{subsection:charges_provider}, which provided charges for atoms and residues.
 
@@ -336,26 +386,40 @@ To establish the color for a given charge, two color interpolations are employed
 \subsection{Labels}
 \label{subsection:labels}
 
-Having colored the structural elements, it was also necessary to create a label provider, which would assign labels that describe the charge of the structural element. In order to determine which element is highlighted, Molstar uses the object Loci. A Loci object is utilized for general selections and highlights. Consequently, it is essential to first extract the location from the Loci object in order to obtain the atom ID. The charge is acquired from the property provider, and the label is an HTML string that conveys the charge of the atom or residue. An example of the label can be seen in in the right-hand corner in figure \ref{}.
+TODO: add a figure of the labels (screenshot from Mol*) \\
+
+Having colored the structural elements, it was also necessary to create a label provider, which would assign labels that describe the charge of the structural element. In order to determine which element is highlighted, Mol* uses the object Loci. A Loci object is utilized for general selections and highlights. Consequently, it is essential to first extract the location from the Loci object in order to obtain the atom ID. The charge is acquired from the property provider, and the label is an HTML string that conveys the charge of the atom or residue. An example of the label can be seen in in the right-hand corner in figure \ref{}.
 
 \section{Controls}
 \label{section:controls}
 
-TODO: describe the controls and their functionality
+The controls are implemented automatically by the Mol* library based on the parameters of the providers. The user has access to controls of the charge set and the color theme. The charge set controls allow the user to select the charge set to display. The color theme controls allow the user to specify the following parameters:
 
-\section{Molstar integration}
+\begin{itemize}
+  \item \textbf{Charge Range}: Sets the range of the color interpolation
+  \item \textbf{Use Range}: Toggles whether the range of the color interpolation is automatically calculated or manually specified.
+  \item \textbf{Charge Type}: Selects whether to display the partial atomic charges or the partial residue charges.
+\end{itemize}
 
-After creating the extension, it was integrated into the Molstar library. The extension is integrated in a way that allows the user to simply upload a mmCIF file containing the custom charge categories to the Molstar viewer and the extension will automatically detect the custom categories and display the partial atomic charges. By integrating it into the Molstar library the extension was made freely available to anyone to use
+The controls are depicted in Figure \ref{fig:controls-charge-set}.
 
-\section{Future work}
+\begin{figure}[htbp]
+  \centering
+  \subfigure[Charge set controls]{\includegraphics[width=0.45\textwidth]{figures/controls-charge-set.png}}
+  \subfigure[Color theme controls]{\includegraphics[width=0.45\textwidth]{figures/controls-color-theme.png}}
+  \caption{Extension controls.}
+  \label{fig:controls-charge-set}
+\end{figure}
 
-The extension can be improved in many areas - mainly in the UI. It can be optimized by storing the atom and residue charge maps statically. The extension unnecessarily recalculates the maps when switching to another charge set. Another area that could use some work is the UI. When a user wants to switch to another charge set, they need to use the State Tree UI. If the user has only one structure loaded, this is fine. However, once you have more than one structure and want to change the charge set for each one of them, then it becomes very tedious. A better approach is to create a custom UI element in the right sidebar which would serve as a shortcut to set a charge set globally or for each structure individually. Another custom UI control could be used for setting a global max absolute charge - this is also done manually for each structure.
+\section{Mol* integration}
 
-\chapter{Molstar viewer plugin}
+After creating the extension, it was integrated into the Mol* library. The extension is integrated in a way that allows the user to simply upload a mmCIF file containing the custom charge categories to the Mol* viewer and the extension will automatically detect the custom categories and display the partial atomic charges. By integrating it into the Mol* library the extension was made freely available to anyone to use
+
+\chapter{Mol* viewer plugin}
 
 TODO: maybe make this a section in chapter about ACC2 \\
 
-In addition to creating the partial atomic charges extension for Molstar, it was necessary to create a custom Molstar viewer instance to facilitate custom functionality not present in the official Molstar viewer instance deployed at molstar.org/viewer. This chapter focuses on describing the implementation and functionality of the custom Molstar viewer instance for the web applications discussed in chapters 5 and 6.
+In addition to creating the partial atomic charges extension for Mol*, it was necessary to create a custom Mol* viewer instance to facilitate custom functionality not present in the official Mol* viewer instance deployed at molstar.org/viewer. This chapter focuses on describing the implementation and functionality of the custom Mol* viewer instance for the web applications discussed in chapters 5 and 6.
 
 \section{Requirements}
 
@@ -366,30 +430,39 @@ The viewer needs extended functionality
 
 TODO: fix weak link between description of the application and the limitations \\
 
-Atomic Charge Calculator II (ACC2) is a web application that calculates partial atomic charges for input structure files. The application is built using Flask for the backend and Javascript with Bootstrap for the frontend. It uses ChargeFW2 to perform the charge calculations and the Litemol viewer to visualize the structures with partial atomic charges. \parencite{10.1093/nar/gkaa367} However, the Litemol viewer has some limitations: it cannot handle multiple charge sets, and more importantly, it is no longer supported. Therefore, it was necessary to update the application to use the Molstar viewer, which enables multiple charge sets through the partial atomic charges extension described in Chapter \ref{chapter:molstar_partial_charges_extension}.
+Atomic Charge Calculator II (ACC2) is a web application that calculates partial atomic charges for input structure files. The application is built using Flask for the backend and Javascript with Bootstrap for the frontend. It uses ChargeFW2 to perform the charge calculations and the Litemol viewer to visualize the structures with partial atomic charges. \parencite{10.1093/nar/gkaa367} However, the Litemol viewer has some limitations: it cannot handle multiple charge sets, and more importantly, it is no longer supported. Therefore, it was necessary to update the application to use the Mol* viewer, which enables multiple charge sets through the partial atomic charges extension described in Chapter \ref{chapter:molstar_partial_charges_extension}.
 
-This chapter describes the changes made to the ACC2 application to integrate the Molstar viewer. We first discuss the modifications to the ChargeFW2 output, then explain the changes made to the Flask backend to support multiple charges, and finally describe the frontend updates required to generate multiple charge set calculations.
+This chapter describes the changes made to the ACC2 application to integrate the Mol* viewer. We first discuss the modifications to the ChargeFW2 output, then explain the changes made to the Flask backend to support multiple charges, and finally describe the frontend updates required to generate multiple charge set calculations.
 
 \section{ChargeFW2 extension}
 \label{section:chargefw2_extension}
 
-As mentioned in \ref{subsection:chargfw2}, ChargeFW2 is a C++ application for calculating partial atomic charges.
-To accommodate the specified output file format discussed in section, ChargeFW2 required an extension that would output a single mmCIF file containing both the molecular structure and charges. The charges were appended to the end of the file.jop
+As mentioned in \ref{subsection:chargfw2}, ChargeFW2 is a C++ application for calculating partial atomic charges. 
+
+To accommodate the specified output file format discussed in section \ref{section:custom_mmcif_categories}, ChargeFW2 required a change to the output mmCIF file format.
+
+The charges were appended to the end of the file.
 
 \section{Multicharge support}
 \label{section:multicharge_support}
 
-\subsection{Backend}
+Apart from the changes to ChargeFW2, it was also necessary to modify the backend to support multiple charge sets. As already mentioned the backend is written in Python using the Flask framework. The backend is responsible for handling the file uploads, running the ChargeFW2 calculations, and returning the results to the frontend. 
 
-\subsection{Frontend}
+\subsection{Backend changes}
+TODO: created a function for generating the charge sets on the backend
 
-\section{Molstar viewer integration}
+\subsection{Frontend changes}
+TODO: created frontend UI for selecting the charges
+
+\section{Mol* viewer integration}
 
 \chapter{AlphaCharges}
 
+As described in \ref{subsection:alphacharges}, AlphaCharges is another web application for calculating partial atomic charges. The application shares the architecture with ACC2 on the backend and the frontend. The calculation of the partial atomic charges is done by the SQe+ method.jpo
+
 \section{Viewer extension}
 
-\section{Molstar viewer integration}
+\section{Mol* viewer integration}
 
 \chapter*{Conclusion}
 \markright{\textsc{Conclusion}}
