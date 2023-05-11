@@ -16,7 +16,7 @@
 }
 
 % Molstar
-@article{sehnal-molstar,
+@article{sehnal2021molstar,
   author   = {Sehnal, David and Bittrich, Sebastian and Deshpande, Mandar and Svobodová, Radka and Berka, Karel and Bazgier, Václav and Velankar, Sameer and Burley, Stephen K and Koča, Jaroslav and Rose, Alexander S},
   title    = {{Mol* Viewer: modern web app for 3D visualization and analysis of large biomolecular structures}},
   journal  = {Nucleic Acids Research},
@@ -33,7 +33,7 @@
 }
 
 % LiteMol
-﻿@article{sehnal-litemol,
+﻿@article{sehnal2017litemol,
   author  = {Sehnal, David
              and Deshpande, Mandar
              and Va{\v{r}}ekov{\'a}, Radka Svobodov{\'a}
@@ -57,7 +57,7 @@
 }
 
 % schindler2019thesis
-@mastersthesis{Schindler2019thesis,
+@mastersthesis{schindler2019thesis,
   author = {Schindler, Ondřej},
   title  = {Empirické metody pro výpočet parciálních atomových nábojů [online]},
   year   = {2019 [cit. 2023-05-08]},
@@ -200,5 +200,95 @@
   eprint   = {https://academic.oup.com/nar/article-pdf/50/D1/D439/43502749/gkab1061.pdf}
 }
 
+% delano2002pymol
+@article{delano2002pymol,
+  title     = {Pymol: An open-source molecular graphics tool},
+  author    = {DeLano, Warren L and others},
+  journal   = {CCP4 Newsl. Protein Crystallogr},
+  volume    = {40},
+  number    = {1},
+  pages     = {82--92},
+  year      = {2002},
+  publisher = {Citeseer}
+}
+
+% rose2015ngl
+@article{rose2015ngl,
+  author   = {Rose, Alexander S. and Hildebrand, Peter W.},
+  title    = {{NGL Viewer: a web application for molecular visualization}},
+  journal  = {Nucleic Acids Research},
+  volume   = {43},
+  number   = {W1},
+  pages    = {W576-W579},
+  year     = {2015},
+  month    = {04},
+  abstract = {{The NGL Viewer (http://proteinformatics.charite.de/ngl) is a web application for the visualization of macromolecular structures. By fully adopting capabilities of modern web browsers, such as WebGL, for molecular graphics, the viewer can interactively display large molecular complexes and is also unaffected by the retirement of third-party plug-ins like Flash and Java Applets. Generally, the web application offers comprehensive molecular visualization through a graphical user interface so that life scientists can easily access and profit from available structural data. It supports common structural file-formats (e.g. PDB, mmCIF) and a variety of molecular representations (e.g. ‘cartoon, spacefill, licorice’). Moreover, the viewer can be embedded in other web sites to provide specialized visualizations of entries in structural databases or results of structure-related calculations.}},
+  issn     = {0305-1048},
+  doi      = {10.1093/nar/gkv402},
+  url      = {https://doi.org/10.1093/nar/gkv402},
+  eprint   = {https://academic.oup.com/nar/article-pdf/43/W1/W576/7476193/gkv402.pdf}
+}
+
+% prlic2019biojava
+@article{prlic2019biojava,
+  doi       = {10.1371/journal.pcbi.1006791},
+  author    = {Lafita, Aleix AND Bliven, Spencer AND Prlić, Andreas AND Guzenko, Dmytro AND Rose, Peter W. AND Bradley, Anthony AND Pavan, Paolo AND Myers-Turnbull, Douglas AND Valasatava, Yana AND Heuer, Michael AND Larson, Matt AND Burley, Stephen K. AND Duarte, Jose M.},
+  journal   = {PLOS Computational Biology},
+  publisher = {Public Library of Science},
+  title     = {BioJava 5: A community driven open-source bioinformatics library},
+  year      = {2019},
+  month     = {02},
+  volume    = {15},
+  url       = {https://doi.org/10.1371/journal.pcbi.1006791},
+  pages     = {1-8},
+  abstract  = {BioJava is an open-source project that provides a Java library for processing biological data. The project aims to simplify bioinformatic analyses by implementing parsers, data structures, and algorithms for common tasks in genomics, structural biology, ontologies, phylogenetics, and more. Since 2012, we have released two major versions of the library (4 and 5) that include many new features to tackle challenges with increasingly complex macromolecular structure data. BioJava requires Java 8 or higher and is freely available under the LGPL 2.1 license. The project is hosted on GitHub at https://github.com/biojava/biojava. More information and documentation can be found online on the BioJava website (http://www.biojava.org) and tutorial (https://github.com/biojava/biojava-tutorial). All inquiries should be directed to the GitHub page or the BioJava mailing list (http://lists.open-bio.org/mailman/listinfo/biojava-l).},
+  number    = {2}
+}
+
+% humphrey1996vmd
+@article{humphrey1996vmd,
+  title    = {VMD: Visual molecular dynamics},
+  journal  = {Journal of Molecular Graphics},
+  volume   = {14},
+  number   = {1},
+  pages    = {33-38},
+  year     = {1996},
+  issn     = {0263-7855},
+  doi      = {https://doi.org/10.1016/0263-7855(96)00018-5},
+  url      = {https://www.sciencedirect.com/science/article/pii/0263785596000185},
+  author   = {William Humphrey and Andrew Dalke and Klaus Schulten},
+  keywords = {molecular modeling, molecular dynamics visualization, interactive visualization},
+  abstract = {VMD is a molecular graphics program designed for the display and analysis of molecular assemblies, in particular biopolymers such as proteins and nucleic acids. VMD can simultaneously display any number of structures using a wide variety of rendering styles and coloring methods. Molecules are displayed as one or more “representations,” in which each representation embodies a particular rendering method and coloring scheme for a selected subset of atoms. The atoms displayed in each representation are chosen using an extensive atom selection syntax, which includes Boolean operators and regular expressions. VMD provides a complete graphical user interface for program control, as well as a text interface using the Tcl embeddable parser to allow for complex scripts with variable substitution, control loops, and function calls. Full session logging is supported, which produces a VMD command script for later playback. High-resolution raster images of displayed molecules may be produced by generating input scripts for use by a number of photorealistic image-rendering applications. VMD has also been expressly designed with the ability to animate molecular dynamics (MD) simulation trajectories, imported either from files or from a direct connection to a running MD simulation. VMD is the visualization component of MDScope, a set of tools for interactive problem solving in structural biology, which also includes the parallel MD program NAMD, and the MDCOMM software used to connect the visualization and simulation programs. VMD is written in C++, using an object-oriented design; the program, including source code and extensive documentation, is freely available via anonymous ftp and through the World Wide Web.}
+}
 
 
+% pettersen2004ucsf
+@article{goddard2018ucsf,
+  author   = {Goddard, Thomas D. and Huang, Conrad C. and Meng, Elaine C. and Pettersen, Eric F. and Couch, Gregory S. and Morris, John H. and Ferrin, Thomas E.},
+  title    = {UCSF ChimeraX: Meeting modern challenges in visualization and analysis},
+  journal  = {Protein Science},
+  volume   = {27},
+  number   = {1},
+  pages    = {14-25},
+  keywords = {interactive molecular graphics, biomolecular visualization and analysis, density maps, structural biology, light-sheet microscopy, integrative hybrid modeling, large-scale data, virtual reality},
+  doi      = {https://doi.org/10.1002/pro.3235},
+  url      = {https://onlinelibrary.wiley.com/doi/abs/10.1002/pro.3235},
+  eprint   = {https://onlinelibrary.wiley.com/doi/pdf/10.1002/pro.3235},
+  abstract = {Abstract UCSF ChimeraX is next-generation software for the visualization and analysis of molecular structures, density maps, 3D microscopy, and associated data. It addresses challenges in the size, scope, and disparate types of data attendant with cutting-edge experimental methods, while providing advanced options for high-quality rendering (interactive ambient occlusion, reliable molecular surface calculations, etc.) and professional approaches to software design and distribution. This article highlights some specific advances in the areas of visualization and usability, performance, and extensibility. ChimeraX is free for noncommercial use and is available from http://www.rbvi.ucsf.edu/chimerax/ for Windows, Mac, and Linux.},
+  year     = {2018}
+}
+
+% kraulis1991molscript
+@article{kraulis1991molscript,
+  author   = {Kraulis, P. J.},
+  title    = {{{\it MOLSCRIPT}: a program to produce both detailed and schematic plots of protein structures}},
+  journal  = {Journal of Applied Crystallography},
+  year     = {1991},
+  volume   = {24},
+  number   = {5},
+  pages    = {946--950},
+  month    = {Oct},
+  doi      = {10.1107/S0021889891004399},
+  url      = {https://doi.org/10.1107/S0021889891004399},
+  abstract = {The {\it MOLSCRIPT} program produces plots of protein structures using several different kinds of representations. Schematic drawings, simple wire models, ball-and-stick models, CPK models and text labels can be mixed freely. The schematic drawings are shaded to improve the illusion of three dimensionality. A number of parameters affecting various aspects of the objects drawn can be changed by the user. The output from the program is in PostScript format.}
+}

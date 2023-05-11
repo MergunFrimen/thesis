@@ -1,0 +1,13 @@
+@startuml custom model property interface
+
+!theme mars
+
+interface SBNcbrPartialChargeData {
+    typeIdToMethod: Map<number, string>
+    typeIdToAtomIdToCharge: Map<number, Map<number, number>>
+    typeIdToResidueToCharge: Map<number, Map<number, number>>
+    maxAbsoluteAtomCharges: Map<number, number>
+    maxAbsoluteResidueCharges: Map<number, number>
+    maxAbsoluteAtomChargeAll: number
+}
+@enduml
