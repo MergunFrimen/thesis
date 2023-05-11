@@ -129,9 +129,9 @@
 \chapter{Theory}
 \label{chapter:theory}
 
-Theoretical concepts are fundamental to the study of computational chemistry, providing a framework for analyzing molecular structures and properties. This chapter focuses on four key areas of theory, beginning with an overview of molecular structure in Section 1.1. Section 1.2 provides an in-depth examination of chemical file formats, including the advantages and disadvantages of different file formats for storing molecular data. Partial atomic charges are explored in section 1.3, including their importance in the analysis of molecular structures and the various methods used to compute them. Finally, section 1.4 delves into color interpolation, a critical technique for visualizing partial atomic charges in molecular structures.
+Theoretical concepts are fundamental to the study of computational chemistry, providing a framework for analyzing molecular structures and properties. This chapter focuses on four key areas of theory, beginning with an overview of molecular structure in Section 1.1. Section 1.2 provides an in-depth examination of chemical file formats, including the advantages and disadvantages of different file formats for storing molecular data. Partial atomic charges are explored in section 1.3, including their importance in analyzing molecular structures and the various methods used to compute them. Finally, section 1.4 delves into color interpolation, a critical technique for visualizing partial atomic charges in molecular structures.
 
-By providing a comprehensive overview of these theoretical concepts, this chapter provides a strong foundation for the subsequent chapters, which will focus on the implementation and analysis of the Mol* extension for visualizing partial atomic charges in molecular structures.
+By providing a comprehensive overview of these theoretical concepts, this chapter provides a strong foundation for the subsequent chapters, focusing on the implementation and analysis of the Mol* extension for visualizing partial atomic charges in molecular structures.
 
 \section{Molecular structure}
 \label{section:molecular_structure}
@@ -139,30 +139,30 @@ By providing a comprehensive overview of these theoretical concepts, this chapte
 Molecular structure refers to the arrangement of atoms and chemical bonds in a molecule. The three main components of molecular structure are atoms, residues, and chains.
 In this section we will look at
 
-\subsection{Atoms}
-\label{subsection:atoms}
-
 Atoms are the basic building blocks of matter. Atoms are composed of protons, neutrons, and electrons. The number of protons determines the element, while the number of neutrons determines the isotope. The number of electrons determines the charge of the atom. Atoms are the smallest unit of matter that can take part in a chemical reaction.
 
 Bonds are the connections between atoms that hold molecules together. There are different types of bonds, e.g. covalent bonds, ionic bonds, and hydrogen bonds.
-
-\subsection{Residues}
-\label{subsection:residues}
 
 A residue refers to a specific building block that remains after a chemical modification or enzymatic reaction.
 In proteins, residues refer to amino acids, which are connected through peptide bonds to form polypeptide chains.
 Residues are crucial in biochemistry because they determine the structure and function of biological molecules.
 The sequence of residues in a protein or nucleic acid, for instance, determines its three-dimensional structure and ultimately its biological activity.
 
-\subsection{Chains}
-\label{subsection:chains}
-
 Polymer chains (chains) are sequences of residues that are linked together. In the context of biomolecules, chains can be either polypeptide chains in proteins or polynucleotide chains in nucleic acids. The sequence and structure of these chains are crucial for understanding the function and properties of the biomolecules.
+
+Alternative conformations, also referred to as conformational isomerism, are different conformations of the same molecule. They can be used to represent different states of a molecule, such as different protonation states or different ligand binding modes. Alternative conformations are important for understanding the structure and function of biomolecules, as they provide insight into how they interact with other molecules.
+
+\section{Partial atomic charges}
+\label{section:partial_atomic_charges}
+
+Partial atomic charges are a measure of the distribution of electronic charge within a molecule. These charges are important for understanding and predicting molecular interactions, including hydrogen bonding, electrostatic interactions, and solvation effects.
+
+TODO: mention chargefw2 and alphacharges \\
 
 \section{Chemical file formats}
 \label{section:chemical_file_formats}
 
-TODO: introduction
+Chemical file formats are used to store molecular data in a computer-readable format. There are many file formats for storing molecular data, each suited to a specific purpose. This section provides an overview of the most common file formats used in computational chemistry.
 
 \subsection{SDF}
 \label{subsection:sdf}
@@ -190,19 +190,6 @@ In contrast to other formats, the mmCIF format does not impose limits on column 
 
 TODO: add example image + better explanation
 
-\section{Alternative conformations}
-\label{section:alternative_conformations}
-
-Alternative conformations, also referred to as conformational isomerism, are different conformations of the same molecule. They can be used to represent different states of a molecule, such as different protonation states or different ligand binding modes. Alternative conformations are important for understanding the structure and function of biomolecules, as they provide insight into how they interact with other molecules.
-
-\section{Partial atomic charges}
-\label{section:partial_atomic_charges}
-
-Partial atomic charges are a measure of the distribution of electronic charge within a molecule. These charges are important for understanding and predicting molecular interactions, including hydrogen bonding, electrostatic interactions, and solvation effects.
-
-TODO: mention chargefw2 and alphacharges \\
-
-
 \section{Color interpolation}
 \label{section:color_interpolation}
 
@@ -211,9 +198,6 @@ Color interpolation is the process of creating new colors by mixing two or more 
 Color interpolation works by calculating the intermediate colors between two or more given colors. This is typically done by taking a weighted average of the red, green, and blue values of the colors being interpolated.
 
 TODO: add math equation + image of red,white and white,blue interpolation
-
-\section{Provider pattern}
-\label{section:provider_pattern}
 
 \chapter{Visualizing molecular data}
 \label{chapter:visualizing_molecular_data}
@@ -252,7 +236,7 @@ Coloring is an essential aspect of molecular visualization, as it can provide ad
 \section{Molecular visualization software}
 \label{section:visualization_software}
 
-There are numerous software tools available for visualizing molecular data, with varying levels of complexity, customization, and features. Some of the most popular tools include MolScript \parencite{kraulis1991molscript}, PyMOL \parencite{delano2002pymol}, VMD \parencite{humphrey1996vmd}, and ChimeraX \parencite{goddard2018ucsf}. More recently, web-based tools, such as LiteMol \parencite{sehnal2017litemol} and Mol* \parencite{sehnal2021molstar}, have become increasingly popular due to their accessibility and ease of use. Furthermore, these web-based tools are especially useful for visualizing large macromolecular complexes, which are becoming increasingly common due to advances in structural biology techniques such as crystallography and electron microscopy. \parencite{sehnal2021molstar}
+There are numerous software tools available for visualizing molecular data, with varying levels of complexity, customization, and features. Some of the most popular tools include MolScript \parencite{kraulis1991molscript}, PyMOL \parencite{delano2002pymol}, VMD \parencite{humphrey1996vmd}, and ChimeraX \parencite{goddard2018ucsf}. More recently, web-based tools, such as NGL Viewer \parencite{rose2015ngl}, LiteMol \parencite{sehnal2017litemol} and Mol* \parencite{sehnal2021molstar}, have become increasingly popular due to their accessibility and ease of use. Furthermore, these web-based tools are especially useful for visualizing large macromolecular complexes, which are becoming increasingly common due to advances in structural biology techniques such as crystallography and electron microscopy. \parencite{sehnal2021molstar}
 
 In the following sections, we will discuss the two web-based molecular visualization tools used in this work: LiteMol and Mol*.
 
@@ -261,14 +245,12 @@ In the following sections, we will discuss the two web-based molecular visualiza
 
 LiteMol is an open-source, web-native molecular visualization tool that supports various file formats and offers a user-friendly interface for creating visualizations. LiteMol provides essential visualization types, including ball and stick, surface, and cartoon representations, as well as options for customizing colors, lighting, and other display settings. The web-based nature of LiteMol makes it easily accessible and platform-independent.
 
-The LiteMol suite is a freely available tool for visualizing large macromolecular structure datasets, which consists of three components: data delivery services, a compression format, and a lightweight 3D molecular viewer. It enables fast delivery and visualization of large datasets and is compatible with modern web browsers and mobile devices, making it accessible to users with and without structural biology expertise. The tool addresses the challenges of delivering and visualizing large structural data sets, which are becoming increasingly available due to advances in electron microscopy and other techniques. \parencite{sehnal-litemol}
+The LiteMol suite is a freely available tool for visualizing large macromolecular structure datasets, which consists of three components: data delivery services, a compression format, and a lightweight 3D molecular viewer. It enables fast delivery and visualization of large datasets and is compatible with modern web browsers and mobile devices, making it accessible to users with and without structural biology expertise. The tool addresses the challenges of delivering and visualizing large structural data sets, which are becoming increasingly available due to advances in electron microscopy and other techniques. \parencite{sehnal2017litemol}
 
 \subsection{Mol*}
 \label{subsection:molstar}
 
-\parencite{sehnal-molstar}
-
-Mol* (/'molstar/) is another web-native molecular visualization tool, developed as part of the wwPDB OneDep system for macromolecular structure deposition and validation. Mol* offers a wide range of visualization options, including advanced features such as electron density maps and validation reports. Mol* supports many file formats, including PDB, mmCIF, and PDBx/mmJSON. Like LiteMol, Mol* is platform-independent and can be accessed from any web browser.
+Mol* (/'molstar/) is another web-native molecular visualization tool, developed as part of the wwPDB OneDep system for macromolecular structure deposition and validation. Mol* offers a wide range of visualization options, including advanced features such as electron density maps and validation reports. Mol* supports many file formats, including PDB, mmCIF, and PDBx/mmJSON. Like LiteMol, Mol* is platform-independent and can be accessed from any web browser. \parencite{sehnal2021molstar}
 
 Mol* emphasizes interactivity and offers various tools for manipulating and analyzing the molecular structure, such as distance and angle measurements, selection and display of specific residues, and custom coloring schemes. Additionally, Mol* provides integration with external databases and services, such as UniProt, PDBe, and RCSB PDB, enabling users to quickly access related information and resources.
 
