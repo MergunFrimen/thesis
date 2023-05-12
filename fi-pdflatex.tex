@@ -65,7 +65,8 @@
         molecular visualization,
         molecular graphics,
         partial atomic charges,
-        structural biology
+        structural biology,
+        AlphaFold
      },
     TeXkeywords = {%
         Molstar,
@@ -78,7 +79,8 @@
         molecular visualization,
         molecular graphics,
         partial atomic charges,
-        structural biology
+        structural biology,
+        AlphaFold
     },
     abstract    = {%
         TODO
@@ -129,12 +131,22 @@
 \chapter{Theory}
 \label{chapter:theory}
 
+\textbf{TODO}: this chapter is has placeholder text and is not finished yet. \\
+
 Theoretical concepts are fundamental to the study of computational chemistry, providing a framework for analyzing molecular structures and properties. This chapter focuses on four key areas of theory, beginning with an overview of molecular structure in Section 1.1. Section 1.2 provides an in-depth examination of chemical file formats, including the advantages and disadvantages of different file formats for storing molecular data. Partial atomic charges are explored in section 1.3, including their importance in analyzing molecular structures and the various methods used to compute them. Finally, section 1.4 delves into color interpolation, a critical technique for visualizing partial atomic charges in molecular structures.
 
 By providing a comprehensive overview of these theoretical concepts, this chapter provides a strong foundation for the subsequent chapters, focusing on the implementation and analysis of the Mol* extension for visualizing partial atomic charges in molecular structures.
 
 \section{Molecular structure}
 \label{section:molecular_structure}
+
+\textbf{TODO}: the section is not split into many subsections to allow for better reading flow; first i describe small molecules (micromolecules) which are just described by their atoms and bonds, these are usually drug molecules (think ligands, ions etc); for macromolecules explain the hierarchy of chain-residue-atom, in this work we used carbohydrates and proteins - describe those as well; explain somehow that this separation is done on purpose; add a schematic image that shows a small protein with 2 chains, then zoom in on one chain and show the residues, lastly zoom on one of the residues to show the atoms and bonds \\
+
+\textbf{TODO}: don't focus too much on explaining things that aren't relevant further in the thesis \\
+
+\subsection{Micromolecules}
+
+\subsection{Macromolecules}
 
 Molecular structure refers to the arrangement of atoms and chemical bonds in a molecule. The three main components of molecular structure are atoms, residues, and chains.
 In this section we will look at
@@ -155,6 +167,8 @@ Alternative conformations, also referred to as conformational isomerism, are dif
 \section{Partial atomic charges}
 \label{section:partial_atomic_charges}
 
+\textbf{TODO}: this section will describe partial atomic charges, their applications, then it will describe how they are calculated using quantum mechanics, explain the need for empirical methods, describe empirical methods, and lastly mention chargefw2 and alphacharges as applications that use the empirical methods \\
+
 Partial atomic charges are numerical values assigned to individual atoms within a molecule, representing their contribution to the overall charge distribution. These charges provide information about the electron density and the distribution of positive and negative charges within the molecule.
 
 There are several applications for partial atomic charges in computational chemistry, including molecular dynamics simulations, molecular docking, and molecular mechanics.
@@ -172,6 +186,8 @@ However, the quantum mechanics of molecules is too complex to be solved analytic
 \section{Chemical file formats}
 \label{section:chemical_file_formats}
 
+\textbf{TODO}: this section describes the file formats used during the thesis work; i will briefly describe SDF, MOL2, and PDB focus in more detail on the mmCIF file format: i will explain the data dictionaries; show one example molecule in each file format for SDF-MOL2 and PDB-mmCIF \\
+
 Chemical file formats are used to store molecular data in a computer-readable format. There are many file formats for storing molecular data, each suited to a specific purpose. This section provides an overview of the most common file formats used in computational chemistry.
 
 \subsection{SDF}
@@ -187,12 +203,16 @@ The Mol2 file format is another text-based format for storing molecular structur
 \subsection{PDB}
 \label{subsection:pdb}
 
-\parencite{gu2009structural}
+\cite{gu2009structural}
 
 The Protein Data Bank (PDB) file format is a widely used format for storing three-dimensional structures of proteins, nucleic acids, and other macromolecules. PDB files contain information about the atomic coordinates, secondary structure, and other important details required for understanding macromolecular structures. The PDB format has been widely adopted in structural biology, bioinformatics, and related fields.
 
 \subsection{mmCIF}
 \label{subsection:mmcif}
+
+\textbf{TODO}: explain the need for creating the mmCIF file format, why isn't the PDB format enough (limited amount of rows, poor support for extending the format to add custom data)? describe the mmcif file format; make sure to explain the core data dictionaries, can mention binary cif \\
+
+\cite{gu2009structural}
 
 The macromolecular Crystallographic Information File (mmCIF) format is an extension of the CIF format, specifically designed for macromolecular structures.
 It is a text-based format that provides a more comprehensive and flexible representation of macromolecular crystallography data compared to the PDB format.
@@ -205,6 +225,8 @@ TODO: add example image + better explanation
 \section{Color interpolation}
 \label{section:color_interpolation}
 
+\textbf{TODO}: this section will briefly describe color interpolation, add math equation so that it looks pro, add example of interpolations used in the partial charges color theme \\
+
 Color interpolation is the process of creating new colors by mixing two or more colors together. It is a common technique used in computer graphics and digital image processing to create smooth transitions between colors.
 
 Color interpolation works by calculating the intermediate colors between two or more given colors. This is typically done by taking a weighted average of the red, green, and blue values of the colors being interpolated.
@@ -214,9 +236,10 @@ TODO: add math equation + image of red,white and white,blue interpolation
 \chapter{Visualizing molecular data}
 \label{chapter:visualizing_molecular_data}
 
-
 \section{Types of visualizations}
 \label{section:types_of_visualizations}
+
+\textbf{TODO}: thinking about merging the types of visualizations into one section like i did with the molecular structure \\
 
 There are several methods to represent molecular data, each serving a different purpose and providing a different level of detail. The methods most relevant to this work are the following three types: ball and stick, surface, and cartoon.
 
@@ -246,6 +269,8 @@ An example of a cartoon model is shown in Figure \ref{fig:partial_charges_color_
 \section{Coloring of molecular visualizations}
 \label{subsection:coloring_of_molecular_visualizations}
 
+\textbf{TODO}: select a handful of color themes; don't list them out; instead describe them in text and give examples of how they are used by researchers \\
+
 Equally important as the type of visualization is the coloring scheme used to represent the molecule. Coloring is an essential aspect of molecular visualization, as it can provide additional information and help to emphasize specific features or properties of the molecule. Some common coloring schemes include:
 
 \begin{itemize}
@@ -264,7 +289,9 @@ Equally important as the type of visualization is the coloring scheme used to re
 \section{Visualization software}
 \label{section:visualization_software}
 
-There are numerous software tools available for visualizing molecular data, with varying levels of complexity, customization, and features. Some of the most popular tools include MolScript \parencite{kraulis1991molscript}, PyMOL \parencite{delano2002pymol}, VMD \parencite{humphrey1996vmd}, and ChimeraX \parencite{goddard2018ucsf}. More recently, web-based tools, such as NGL Viewer \parencite{rose2015ngl}, LiteMol \parencite{sehnal2017litemol} and Mol* \parencite{sehnal2021molstar}, have become increasingly popular due to their accessibility and ease of use. Furthermore, these web-based tools are especially useful for visualizing large macromolecular complexes, which are becoming increasingly common due to advances in structural biology techniques such as crystallography and electron microscopy. \parencite{sehnal2021molstar}
+\textbf{TODO}: describe the web based \\
+
+There are numerous software tools available for visualizing molecular data, with varying levels of complexity, customization, and features. Some of the most popular tools include MolScript \cite{kraulis1991molscript}, PyMOL \cite{delano2002pymol}, VMD \cite{humphrey1996vmd}, and ChimeraX \cite{goddard2018ucsf}. More recently, web-based tools, such as NGL Viewer \cite{rose2015ngl}, LiteMol \cite{sehnal2017litemol}, and Mol* \cite{sehnal2021molstar}, have become increasingly popular due to their accessibility and ease of use. Furthermore, these web-based tools are especially useful for visualizing large macromolecular complexes, which are becoming increasingly common due to advances in structural biology techniques such as crystallography and electron microscopy. \cite{sehnal2021molstar}
 
 In the following sections, we will discuss the two web-based molecular visualization tools used in this work: LiteMol and Mol*.
 
@@ -273,12 +300,12 @@ In the following sections, we will discuss the two web-based molecular visualiza
 
 LiteMol is an open-source, web-native molecular visualization tool that supports various file formats and offers a user-friendly interface for creating visualizations. LiteMol provides essential visualization types, including ball and stick, surface, and cartoon representations, as well as options for customizing colors, lighting, and other display settings. The web-based nature of LiteMol makes it easily accessible and platform-independent.
 
-The LiteMol suite is a freely available tool for visualizing large macromolecular structure datasets, which consists of three components: data delivery services, a compression format, and a lightweight 3D molecular viewer. It enables fast delivery and visualization of large datasets and is compatible with modern web browsers and mobile devices, making it accessible to users with and without structural biology expertise. The tool addresses the challenges of delivering and visualizing large structural data sets, which are becoming increasingly available due to advances in electron microscopy and other techniques. \parencite{sehnal2017litemol}
+The LiteMol suite is a freely available tool for visualizing large macromolecular structure datasets, which consists of three components: data delivery services, a compression format, and a lightweight 3D molecular viewer. It enables fast delivery and visualization of large datasets and is compatible with modern web browsers and mobile devices, making it accessible to users with and without structural biology expertise. The tool addresses the challenges of delivering and visualizing large structural data sets, which are becoming increasingly available due to advances in electron microscopy and other techniques. \cite{sehnal2017litemol}
 
 \subsection{Mol*}
 \label{subsection:molstar}
 
-Mol* (/'molstar/) is another web-native molecular visualization tool, developed as part of the wwPDB OneDep system for macromolecular structure deposition and validation. Mol* offers a wide range of visualization options, including advanced features such as electron density maps and validation reports. Mol* supports many file formats, including PDB, mmCIF, and PDBx/mmJSON. Like LiteMol, Mol* is platform-independent and can be accessed from any web browser. \parencite{sehnal2021molstar}
+Mol* (/'molstar/) is another web-native molecular visualization tool, developed as part of the wwPDB OneDep system for macromolecular structure deposition and validation. Mol* offers a wide range of visualization options, including advanced features such as electron density maps and validation reports. Mol* supports many file formats, including PDB, mmCIF, and PDBx/mmJSON. Like LiteMol, Mol* is platform-independent and can be accessed from any web browser. \cite{sehnal2021molstar}
 
 Mol* emphasizes interactivity and offers various tools for manipulating and analyzing the molecular structure, such as distance and angle measurements, selection and display of specific residues, and custom coloring schemes. Additionally, Mol* provides integration with external databases and services, such as UniProt, PDBe, and RCSB PDB, enabling users to quickly access related information and resources.
 
@@ -299,6 +326,8 @@ TODO: describe what residue charges are \\
 TODO: describe what each representation should visualize when colored using partial charges coloring \\
 
 Firstly, the extension should enable the coloring of atoms and residues based on their partial atomic charges. Secondly, it should describe the charge values of the atoms and residues. Thirdly, the extension should allow the user to provide multiple charge sets for a single structure and select which one to display. Finally, the extension should be seamlessly integrated into the Mol* library, facilitating access to its features and functionality.
+
+\section{How Mol* works}
 
 \section{Custom mmCIF categories}
 \label{section:custom_mmcif_categories}
@@ -328,13 +357,11 @@ Figure \ref{fig:mmcif_erd} provides a detailed illustration of the custom mmCIF 
 
 \begin{figure}
   \begin{center}
-    \includegraphics[width=12cm]{figures/mmcif_erd.png}
+    \includegraphics[width=\textwidth]{figures/mmcif_erd.png}
   \end{center}
   \caption{Diagram of custom mmCIF categories.}
   \label{fig:mmcif_erd}
 \end{figure}
-
-\section{How Mol* works}
 
 \section{Implementation}
 \label{section:implementation}
@@ -455,7 +482,7 @@ The viewer needs extended functionality
 \chapter{Atomic Charge Calculator II}
 \label{chapter:atomic_charge_calculator_ii}
 
-Atomic Charge Calculator II (ACC2) is a web application for calculating partial atomic charges for structure files. The application is built using Flask for the backend and Javascript with Bootstrap for the frontend. The core of the ACC2 application is the ChargeFW2 program, which is used to calculate the partial atomic charges. For visualizing the calculation results, the application uses the Litemol software. \parencite{racek2020acc2} However, since the Litemol software is no longer supported, it was necessary to replace it with its modern counterpart, Mol*.
+Atomic Charge Calculator II (ACC2) is a web application for calculating partial atomic charges for structure files. The application is built using Flask for the backend and Javascript with Bootstrap for the frontend. The core of the ACC2 application is the ChargeFW2 program, which is used to calculate the partial atomic charges. For visualizing the calculation results, the application uses the Litemol software. \cite{racek2020acc2} However, since the Litemol software is no longer supported, it was necessary to replace it with its modern counterpart, Mol*.
 
 This chapter describes the changes made to the ACC2 application. We first discuss the modifications to the ChargeFW2 program, then explain the changes made to the backend and frontend to support calculations of multiple charge sets, and lastly we describe the integration of the Mol* viewer into the ACC2 application.
 
@@ -489,7 +516,7 @@ The following subsections describe in detail how ChargeFW2 was modified to produ
 
 \subsection*{mmCIF}
 
-For mmCIF input files, the program simply appends the custom categories to the input file. To add the categories, the program uses the GEMMI library \parencite{wojdyr2022gemmi} to parse the input mmCIF file into a \texttt{Block} object, which provides access to all mmCIF categories in the file. Before appending the charge categories, the program first removes alternative conformations from the \texttt{Block} object. This is necessary because the Mol* viewer does not support alternative conformations. The program then appends the custom charge categories to the \texttt{Block} object and writes the \texttt{Block} object to a new mmCIF file.
+For mmCIF input files, the program simply appends the custom categories to the input file. To add the categories, the program uses the GEMMI library \cite{wojdyr2022gemmi} to parse the input mmCIF file into a \texttt{Block} object, which provides access to all mmCIF categories in the file. Before appending the charge categories, the program first removes alternative conformations from the \texttt{Block} object. This is necessary because the Mol* viewer does not support alternative conformations. The program then appends the custom charge categories to the \texttt{Block} object and writes the \texttt{Block} object to a new mmCIF file.
 
 \subsection*{PDB}
 
@@ -564,19 +591,37 @@ The user can download all the output files generated by the backend by clicking 
 
 \chapter{AlphaCharges}
 
-AlphaCharges (αCharges) is a web application for calculating partial atomic charges for structures from AlphaFoldDB, a database of protein structures predicted by the AlphaFold2 algorithm. \parencite{jumper2021alphafold} The AlphaCharges application protonates the protein structures (i.e. adds hydrogens) and calculates the partial atomic charges for the structures with the SQE+q0 empirical method. \parencite{schindler2023alphacharges}
+AlphaCharges (αCharges) is a web application for calculating partial atomic charges for structures from AlphaFoldDB, a database of protein structures predicted by AlphaFold2 \cite{jumper2021alphafold}. The AlphaCharges application protonates the protein structures (i.e. adds hydrogens) and calculates the partial atomic charges for the structures with the SQE+q0 empirical method \cite{schindler2021sqe}. \cite{schindler2023alphacharges}
 
-During the development of the AlphaCharges application, the Mol* viewer was integrated into the application to visualize the calculated partial atomic charges. The following sections describe the changes made to the Mol* viewer to support the AlphaCharges application and the integration of the Mol* viewer into the application.
+During the development of the AlphaCharges application, the Mol* viewer was incorporated into the application to visualize the calculated partial atomic charges. The following sections describe the changes made to the Mol* viewer to support the AlphaCharges application and the integration of the Mol* viewer into the application.
 
 \section{Integration of the the Mol* viewer}
 
-The AlphaCharges application shares the architecture with the ACC2 application. The frontend is written in Javascript with the Bootstrap framework, the backend is written in Python and uses the Flask framework. This shared architecture allowed the integration of the Mol* viewer into the AlphaCharges application with minimal adjustments.
+\textbf{TODO}: explain the conversion of PDB into mmCIF and addition of ma\_qa mmCIF categories with confidence scores \\
 
-As with the ACC2 application, the Mol* viewer is integrated into the result page by initializing the plugin viewer, loading the mmCIF file generated by the backend, and mounting the controls for managing the viewer.
+The AlphaCharges application shares the architecture with the ACC2 application. The frontend is written in Javascript with the Bootstrap framework, the backend is written in Python and uses the Flask framework. This shared architecture allowed the integration of the Mol* viewer into the AlphaCharges application with minimal adjustments. As with the ACC2 application, the Mol* viewer is incorporated into the result page by initializing the plugin viewer, loading the mmCIF file generated by the backend, and mounting the controls for managing the viewer.
 
-The controls for changing the coloring and visualization type of the structures function in the same way as in the ACC2 application. However, the AlphaCharges application requires an additional control for selecting the coloring by the pLDDT confidence score described in section \ref{section:plddt_coloring}. Moreover, the AlphaCharges application does not support switching between multiple structures or switching between multiple charge sets. Therefore, the dropdown menus for selecting the structure and the charge set were ommited from the result page.
+The creators of the AlphaCharge application requested the addition of two new features to the Mol* viewer. Firstly, the creators requested the addition of a new color theme for the coloring of the structure by the pLDDT confidence score. Secondly, the creators requested a focus control for the viewer, which would allow the user to focus (i.e. zoom in and center) on a specific atom in the structure. The following subsections describe the implementation of the new features.
 
-The figure \ref{fig:alpha-charges-results} shows the result page for the AlphaCharges application. The additional control for changing the coloring of the structure by the pLDDT confidence score is highlighted in red.
+% The controls for changing the coloring and visualization type of the structures function in the same way as in the ACC2 application. However, the AlphaCharges application requires an additional control for selecting the coloring by the pLDDT confidence score. Moreover, the AlphaCharges application does not support switching between multiple structures or switching between multiple charge sets. Therefore, the dropdown menus for selecting the structure and the charge set were ommited from the result page.
+
+% The figure \ref{fig:alpha-charges-results} shows the result page for the AlphaCharges application. The additional control for changing the coloring of the structure by the pLDDT confidence score is highlighted in red.
+
+\subsection{Coloring by pLDDT confidence score}
+
+AlphaFold2 generates a confidence score for each residue in the predicted protein structures using a measure called pLDDT. The confidence score is a value ranging between 0 and 100, where higher values indicate higher confidence levels. \cite{varadi2021alphafold} The AlphaFoldDB includes the confidence scores along with the predicted protein structures in the mmCIF file format. These confidence scores are stored in the mmCIF file under the following categories:
+
+\textbf{TODO}: the descriptions in the following list are taken from PDBx/mmCIF; how can i cite this? \\
+
+\begin{itemize}
+  \item \texttt{\_ma\_qa\_metric} - contains details of the metrics use to assess model quality.
+  \item \texttt{\_ma\_qa\_metric\_local} - contains information about the local QA metrics calculated at the residue-level.
+  \item \texttt{\_ma\_qa\_metric\_global} - contains information about the global QA metrics calculated at the model-level.
+\end{itemize}
+
+To support this feature, the Mol* viewer was extended to include a color theme provided by the Mol* library for visualizing the pLDDT confidence score. This pLDDT color theme uses a set of colors ranging from orange to blue, where orange indicates low confidence and blue indicates high confidence. The color theme is applied to the structure by mapping the pLDDT scores to the set of colors.
+
+To incorporate this coloring in AlphaCharges, the custom Mol* viewer plugin was extended to include a function for switching to the pLDDT color theme. The AlphaCharges application then uses this function to add a new coloring control to the result page. This control is similar to the existing coloring controls, which allow the user to color the structure by the element symbol or by the partial atomic charges. The pLDDT coloring control is shown in Figure \ref{fig:alpha-charges-results}.
 
 \begin{figure}[htbp]
   \begin{center}
@@ -586,52 +631,41 @@ The figure \ref{fig:alpha-charges-results} shows the result page for the AlphaCh
   \label{fig:alpha-charges-results}
 \end{figure}
 
-\section{Coloring by pLDDT confidence score}
-
-AlphaFold2 generates a confidence score for each residue in the predicted protein structures using a measure called pLDDT. The confidence score is a value ranging between 0 and 100, where higher values indicate higher confidence levels. \parencite{varadi2021alphafold} The AlphaFoldDB includes the confidence scores along with the predicted protein structures in the mmCIF file format. These confidence scores are stored in the mmCIF file under the following categories:
-
-TODO: add citation for PDBx/mmCIF dictionary
-
-\begin{itemize}
-  \item \texttt{\_ma\_qa\_metric} - contains details of the metrics use to assess model quality.
-  \item \texttt{\_ma\_qa\_metric\_local} - contains information about the local QA metrics calculated at the residue-level.
-  \item \texttt{\_ma\_qa\_metric\_global} - contains information about the global QA metrics calculated at the model-level.
-\end{itemize}
-
-The creators of the AlphaCharge application requested the addition of a coloring control to the AlphaCharges result page, which would allow the user to color the structure by the pLDDT confidence score. To support this feature, the Mol* viewer was extended to include a color theme provided by the Mol* library for visualizing the pLDDT confidence score. This pLDDT color theme uses a set of colors ranging from orange to blue, where orange indicates low confidence and blue indicates high confidence. The color theme is applied to the structure by mapping the pLDDT scores to the set of colors.
-
-To support the coloring by the pLDDT confidence score in AlphaCharges, the custom Mol* viewer plugin was extended to include a function for switching to the pLDDT color theme. The AlphaCharges application then uses this function to add a new coloring control to the result page. This control is similar to the existing coloring controls, which allow the user to color the structure by the element symbol or by the partial atomic charges. The pLDDT coloring control is shown in Figure \ref{fig:alpha-charges-results}.
-
-\section{Focus on problematic atoms}
+\subsection{Focus on problematic atoms}
 
 The AlphaCharges application cannot calculate the partial atomic charges for all protein structures. Some structures can be incorrectly predicted by the AlphaFold2 algorithm or the application can fail to protonate the structure.
-\parencite{jumper2021alphafold}
+\cite{jumper2021alphafold} In such instances, the application automatically redirects the user to an error page, which displays the problematic structure and the error message.
 
-In such instances, the application automatically redirects the user to an error page. This page displays the problematic structure with the Mol* viewer and an error message indicating the specific atoms causing the issue.
+We cover the implementation of the error page in more detail in the next section \ref{}. For the purpose of this section, it is sufficient to know that the error page contains an error message with the atoms that caused the error. The user has an option to click on the problematic atoms to focus on them in the structure. This feature needed to be implemented in the Mol* plugin viewer.
 
-The user has the option to hover over the problematic atoms to display an explanation for the probable cause of the error. Figure \ref{fig:wrong_structure_text} shows the explanation provided for the atom \textit{GLN 33 CD}.
+% The user has the option to hover over the problematic atoms to display an explanation for the probable cause of the error. Figure \ref{fig:wrong_structure_text} shows the explanation provided for the atom \textit{GLN 33 CD}.
 
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=12cm]{figures/wrong_structure_text.png}
+    \includegraphics[width=\textwidth]{figures/wrong_structure_text.png}
   \end{center}
   \caption{Explanation for error of atom \textit{GLN 33 CD}.}
   \label{fig:wrong_structure_text}
 \end{figure}
 
-The Mol* library provides a function to focus on a specific structure selection. The selection can be created programmatically using the Mol* query language. The query language is built using the Molscript language \parencite{kraulis1991molscript} and allows the user to select atoms based on their properties, such as their element symbol or their residue name. To focus on the problematic atom, the query language was used to first select the atom with the residue name \textit{GLN}, the residue number \textit{33}, and the atom name \textit{CD}. This combination of properties uniquely identifies the problematic atom in the structure. Then the selected atom was focused using the Mol* focus function. Figure \ref{fig:wrong_structure_focus} shows the Mol* viewer with the atom \textit{GLN 33 CD} focused
+The Mol* library provides a function to focus on a specific structure selection. The selection can be created programmatically using the Mol* query language. The query language is built using the Molscript language \cite{kraulis1991molscript} and allows the user to select atoms based on their properties, such as their element symbol or their residue name.
+
+To focus on the problematic atom \textit{GLN 33 CD}, displayed in Figure \ref{fig:wrong_structure_text}, the query language was used to first select the atom with the residue name \textit{GLN}, the residue number \textit{33}, and the atom name \textit{CD}. This combination of properties uniquely identifies the problematic atom in the structure. Then the selected atom was focused using the Mol* focus function. Figure \ref{fig:wrong_structure_focus} shows the Mol* viewer with the atom \textit{GLN 33 CD} focused.
+
 
 \section{Problematic atoms webpage}
 
+\textbf{TODO}: should this be merged into the previous section? \\ 
+
 The backend sends a JSON object to the frontend containing problematic atoms and the explanations. Figure \ref{} shows the structure of the JSON schema. This JSON object is then used by the frontend to display the problematic atoms and their explanations.
 
-The problematic atoms are added to the error message as a link. When the user clicks on the link, a event listener will be trigger, which will make the Mol* viewer to visually focus (i.e. zoom in and highlight) the problematic atom. This allows the user to visually identify the problematic atom in the structure. Figure \ref{fig:wrong_structure_focus} shows the Mol* viewer with the atom \textit{GLN 33 CD} focused.
+The problematic atoms are added to the error message as a link. When the user clicks on the link, a event listener will be trigger, which will make the Mol* viewer focus on the problematic atom. Figure \ref{fig:wrong_structure_focus} shows the Mol* viewer with the atom \textit{GLN 33 CD} focused.
 
 The user can also hover over a icon adjacent to the problematic atom to display the explanation for the probable cause of the error in a pop-up text. Figure \ref{fig:wrong_structure_text} shows the explanation provided for the atom \textit{GLN 33 CD}.
 
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=12cm]{figures/wrong_structure_focus.png}
+    \includegraphics[width=\textwidth]{figures/wrong_structure_focus.png}
   \end{center}
   \caption{Focus on the atom GLN 33 CD, one of two problematic atoms in the structure with UniProt code Q55GB6.}
   \label{fig:wrong_structure_focus}
