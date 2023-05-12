@@ -1,0 +1,43 @@
+@startuml viewer
+class MolstarPartialCharges {
+  - plugin: PluginUIContext
+  - setInitialRepresentationState(targetWebApp: string)
+  + constructor(plugin: PluginUIContext)
+
+  + charges: Charges
+  + color: Color
+  + type: Type
+  + visual: Visual
+
+  + static create(target: string, extensions: object)
+  + async load(url: string, format: BuiltInTrajectoryFormat: string, targetWebApp: string)
+  + updateType(name: string, params: object)
+  + updateColor(name: string, params: object)
+}
+
+class Charges {
+  + getMethodNames(): string[]
+  + getTypeId(): number
+  + setTypeId(typeId: number)
+  + getMaxCharge(): number
+}
+
+class Color {
+  + default()
+  + alphaFold()
+  + absolute(max: number)
+  + relative()
+}
+
+class Type {
+  + isDefaultApplicable(): boolean
+  + default()
+  + ballAndStick()
+  + surface()
+}
+
+MolstarPartialCharges --> Type
+MolstarPartialCharges --> Color
+MolstarPartialCharges --> Charges
+
+@enduml

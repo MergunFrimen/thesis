@@ -327,7 +327,7 @@ TODO: describe what each representation should visualize when colored using part
 
 Firstly, the extension should enable the coloring of atoms and residues based on their partial atomic charges. Secondly, it should describe the charge values of the atoms and residues. Thirdly, the extension should allow the user to provide multiple charge sets for a single structure and select which one to display. Finally, the extension should be seamlessly integrated into the Mol* library, facilitating access to its features and functionality.
 
-\section{How Mol* works}
+\section{Mol* state tree}
 
 \section{Custom mmCIF categories}
 \label{section:custom_mmcif_categories}
@@ -443,8 +443,8 @@ To establish the color for a given charge, two color interpolations are employed
 
 Having colored the structural elements, it was also necessary to create a label provider, which would assign labels that describe the charge of the structural element. In order to determine which element is highlighted, Mol* uses the object Loci. A Loci object is utilized for general selections and highlights. Consequently, it is essential to first extract the location from the Loci object in order to obtain the atom ID. The charge is acquired from the property provider, and the label is an HTML string that conveys the charge of the atom or residue. An example of the label can be seen in in the right-hand corner in figure \ref{}.
 
-\section{Controls}
-\label{section:controls}
+\subsection{Controls}
+\label{subsection:controls}
 
 The controls are implemented automatically by the Mol* library based on the parameters of the providers. The user has access to controls of the charge set and the color theme. The charge set controls allow the user to select the charge set to display. The color theme controls allow the user to specify the following parameters:
 
@@ -464,20 +464,12 @@ The controls are depicted in Figure \ref{fig:controls-charge-set}.
   \label{fig:controls-charge-set}
 \end{figure}
 
-\section{Mol* integration}
-
-After creating the extension, it was integrated into the Mol* library. The extension is integrated in a way that allows the user to simply upload a mmCIF file containing the custom charge categories to the Mol* viewer and the extension will automatically detect the custom categories and display the partial atomic charges. By integrating it into the Mol* library the extension was made freely available to anyone to use
-
-\chapter{Mol* viewer plugin}
+\section{Mol* viewer plugin}
 \label{chapter:molstar_viewer_plugin}
 
-TODO: maybe make this a section in chapter about ACC2 \\
+In addition to the partial charges extension for the Mol* library, it was necessary to create a custom Mol* viewer plugin. By using a plugin, it is possible to create custom behavior for the Mol* viewer, which is not possible using the standard Mol* viewer.
 
-In addition to creating the partial atomic charges extension for Mol*, it was necessary to create a custom Mol* viewer instance to facilitate custom functionality not present in the official Mol* viewer instance deployed at molstar.org/viewer. This chapter focuses on describing the implementation and functionality of the custom Mol* viewer instance for the web applications discussed in chapters 5 and 6.
-
-\section{Requirements}
-
-The viewer needs extended functionality
+The plugin is implemented as a Typescript class that extends the Plugin superclass provided by Mol*. The plugin class is then registered with the Mol* viewer, which allows the plugin to be used. The plugin class implements the following methods:
 
 \chapter{Atomic Charge Calculator II}
 \label{chapter:atomic_charge_calculator_ii}
