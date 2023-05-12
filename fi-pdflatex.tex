@@ -155,9 +155,19 @@ Alternative conformations, also referred to as conformational isomerism, are dif
 \section{Partial atomic charges}
 \label{section:partial_atomic_charges}
 
-Partial atomic charges are a measure of the distribution of electronic charge within a molecule. These charges are important for understanding and predicting molecular interactions, including hydrogen bonding, electrostatic interactions, and solvation effects.
+Partial atomic charges are numerical values assigned to individual atoms within a molecule, representing their contribution to the overall charge distribution. These charges provide information about the electron density and the distribution of positive and negative charges within the molecule.
 
-TODO: mention chargefw2 and alphacharges \\
+There are several applications for partial atomic charges in computational chemistry, including molecular dynamics simulations, molecular docking, and molecular mechanics.
+
+\begin{itemize}
+  \item Molecular dynamics - are used to simulate the motion of molecules over time. It is used to study the dynamics of molecules, such as proteins and nucleic acids.
+  \item Molecular docking is used to predict the binding affinity of a ligand to its receptor. It is used to study the interactions between molecules, such as proteins and nucleic acids.
+  \item Molecular mechanics is used to calculate the energy of a molecule. It is used to study the stability of molecules, such as proteins and nucleic acids.
+\end{itemize}
+
+\subsection{Empirical methods}
+
+However, the quantum mechanics of molecules is too complex to be solved analytically. Therefore, empirical methods are used to approximate the electron density and the distribution of positive and negative charges within the molecule.
 
 \section{Chemical file formats}
 \label{section:chemical_file_formats}
@@ -176,6 +186,8 @@ The Mol2 file format is another text-based format for storing molecular structur
 
 \subsection{PDB}
 \label{subsection:pdb}
+
+\parencite{gu2009structural}
 
 The Protein Data Bank (PDB) file format is a widely used format for storing three-dimensional structures of proteins, nucleic acids, and other macromolecules. PDB files contain information about the atomic coordinates, secondary structure, and other important details required for understanding macromolecular structures. The PDB format has been widely adopted in structural biology, bioinformatics, and related fields.
 
@@ -202,17 +214,18 @@ TODO: add math equation + image of red,white and white,blue interpolation
 \chapter{Visualizing molecular data}
 \label{chapter:visualizing_molecular_data}
 
-This chapter will discuss various types of visualizations, the role of coloring in molecular representations, and some commonly used software tools for creating these visualizations.
 
 \section{Types of visualizations}
 \label{section:types_of_visualizations}
 
-There are several methods to represent molecular data, each with its own benefits and drawbacks. The methods most relevant to this work are the following three types: ball and stick, surface, and cartoon.
+There are several methods to represent molecular data, each serving a different purpose and providing a different level of detail. The methods most relevant to this work are the following three types: ball and stick, surface, and cartoon.
 
 \subsection{Ball and stick}
 \label{subsection:ball_and_stick}
 
 The ball and stick model represents atoms as spheres and bonds as cylindrical connections between these spheres. This model provides a simple and intuitive visualization of a molecule's atomic structure. It highlights individual atoms and their bonds, including their bond types. However, it may not accurately represent the spatial relationships between atoms in larger molecules or macromolecular complexes.
+
+An example of a ball and stick model is shown in Figure \ref{fig:partial_charges_color_theme-bas}.
 
 \subsection{Surface}
 \label{subsection:surface}
@@ -221,19 +234,34 @@ Surface representations depict the three-dimensional shape of a molecule by disp
 This model provides a more accurate representation of the molecule's overall shape and size, making it especially useful for studying macromolecular interactions and the binding of small molecules.
 For example, surface visualization can be used to identify potential binding sites on a protein surface, which can then be targeted by drug molecules.
 
+An example of a surface model is shown in Figure \ref{fig:partial_charges_color_theme-surface}.
+
 \subsection{Cartoon}
 \label{subsection:cartoon}
 
 Cartoon representations simplify the molecular structure by focusing on the secondary structure elements of proteins and nucleic acids, such as alpha helices, beta sheets, and loops. Alpha helices are often depicted as a spiral-like structures, whereas beta sheets as arrows. This type of visualization is particularly useful for visualizing large macromolecular complexes, as it highlights the overall organization and topology of the molecule without the clutter of atomic details. The simplification of the structure also makes it easier to understand the folding and dynamics of the molecule.
 
-\subsection{Coloring of molecular visualizations}
+An example of a cartoon model is shown in Figure \ref{fig:partial_charges_color_theme-cartoon}.
+
+\section{Coloring of molecular visualizations}
 \label{subsection:coloring_of_molecular_visualizations}
 
-Coloring is an essential aspect of molecular visualization, as it can provide additional information and help to emphasize specific features or properties of the molecule. Some common coloring schemes include:
-- By element: Atoms are colored according to their chemical element (e.g., carbon in grey, oxygen in red, nitrogen in blue).
-- By partial atomic charge: Atoms or residues are colored according to their charge or charge sum. Negative charges are depicted in red, positive charges in blue.
+Equally important as the type of visualization is the coloring scheme used to represent the molecule. Coloring is an essential aspect of molecular visualization, as it can provide additional information and help to emphasize specific features or properties of the molecule. Some common coloring schemes include:
 
-\section{Molecular visualization software}
+\begin{itemize}
+  \item \textbf{Element symbol}: atoms are colored according to their chemical element (e.g., carbon in grey, oxygen in red, nitrogen in blue).
+  \item \textbf{Partial charge}: atoms are colored according to their partial charge (e.g., positive in blue, negative in red).
+  \item \textbf{B-factor}: atoms are colored according to their B-factor value (e.g., low in blue, high in red).
+  \item \textbf{Residue index}: atoms or residues are colored according to their residue index (e.g., low in blue, high in red).
+  \item \textbf{Residue type}: atoms or residues are colored according to their residue type (e.g., hydrophobic in green, hydrophilic in blue).
+  \item \textbf{Chain identifier}: atoms or residues are colored according to their chain identifier (e.g., chain A in blue, chain B in red).
+  \item \textbf{Atom type}: atoms are colored according to their atom type (e.g., carbon in grey, oxygen in red, nitrogen in blue).
+  \item \textbf{Secondary structure}: Residues are colored according to their secondary structure type (e.g., alpha helix in red, beta sheet in blue).
+  \item \textbf{Hydrophobicity}: atoms or residues are colored according to their hydrophobicity. Hydrophobic residues are depicted in green, hydrophilic residues in blue.
+\end{itemize}
+
+
+\section{Visualization software}
 \label{section:visualization_software}
 
 There are numerous software tools available for visualizing molecular data, with varying levels of complexity, customization, and features. Some of the most popular tools include MolScript \parencite{kraulis1991molscript}, PyMOL \parencite{delano2002pymol}, VMD \parencite{humphrey1996vmd}, and ChimeraX \parencite{goddard2018ucsf}. More recently, web-based tools, such as NGL Viewer \parencite{rose2015ngl}, LiteMol \parencite{sehnal2017litemol} and Mol* \parencite{sehnal2021molstar}, have become increasingly popular due to their accessibility and ease of use. Furthermore, these web-based tools are especially useful for visualizing large macromolecular complexes, which are becoming increasingly common due to advances in structural biology techniques such as crystallography and electron microscopy. \parencite{sehnal2021molstar}
@@ -376,17 +404,15 @@ To establish the color for a given charge, two color interpolations are employed
 
 \begin{figure}[htbp]
   \centering
-  \subfigure[Cartoon]{\includegraphics[width=0.45\textwidth]{figures/1F16-cartoon.png}}
-  \subfigure[Ball and stick]{\includegraphics[width=0.45\textwidth]{figures/1F16-bas.png}}
-  \subfigure[Surface]{\includegraphics[width=0.45\textwidth]{figures/1F16-surface.png}}
+  \subfigure[Ball and stick]{\label{fig:partial_charges_color_theme-bas}\includegraphics[width=0.45\textwidth]{figures/1F16-bas.png}}
+  \subfigure[Surface]{\label{fig:partial_charges_color_theme-surface}\includegraphics[width=0.45\textwidth]{figures/1F16-surface.png}}
+  \subfigure[Cartoon]{\label{fig:partial_charges_color_theme-cartoon}\includegraphics[width=0.45\textwidth]{figures/1F16-cartoon.png}}
   \caption{Partial charges color theme for different visualization types.}
   \label{fig:partial_charges_color_theme}
 \end{figure}
 
-\subsection{Labels}
-\label{subsection:labels}
-
-TODO: add a figure of the labels (screenshot from Mol*) \\
+\subsection{Label provider}
+\label{subsection:label_provider}
 
 Having colored the structural elements, it was also necessary to create a label provider, which would assign labels that describe the charge of the structural element. In order to determine which element is highlighted, Mol* uses the object Loci. A Loci object is utilized for general selections and highlights. Consequently, it is essential to first extract the location from the Loci object in order to obtain the atom ID. The charge is acquired from the property provider, and the label is an HTML string that conveys the charge of the atom or residue. An example of the label can be seen in in the right-hand corner in figure \ref{}.
 
