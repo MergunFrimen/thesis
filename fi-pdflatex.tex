@@ -486,9 +486,9 @@ The controls are depicted in Figure \ref{fig:controls-charge-set}.
 \section{Mol* viewer plugin}
 \label{chapter:molstar_viewer_plugin}
 
-In addition to the partial charges extension for the Mol* library, it was necessary to create a custom Mol* viewer plugin. By using a plugin, it is possible to create custom behavior for the Mol* viewer, which is not possible using the standard Mol* viewer.
+In addition to the partial charges extension for the Mol* library, it was necessary to create a custom Mol* viewer plugin. By using a plugin, it is possible to create custom behavior, which is not provided by the standard Mol* viewer.
 
-The plugin is designed as a Typescript class. The structure of the class is depicted in Figure \ref{fig:plugin_structure}. It contains a method to create the plugin and another to load structure files. Furthermore, it includes four attributes, each an object with methods that act as an interface for managing the plugin:
+The plugin is designed as a Typescript class. The structure of the class is depicted in Figure \ref{fig:plugin_structure}. It contains a method to create the plugin and another to load a structure file. Furthermore, it includes four attributes, each an object with methods that act as an interface for managing the plugin:
 
 \begin{itemize}
   \item \textit{Charges} - provides functions for setting the charge set and retrieving information about the charge sets.
@@ -507,15 +507,15 @@ The plugin is designed as a Typescript class. The structure of the class is depi
 
 The \textit{Color} and \textit{Type} attributes set the color theme and visualization type through the private methods \textit{updateColor} and \textit{updateType}. These methods change the color theme and visualization type by iterating over the Mol* state tree and updating the representation nodes.
 
-The focus functionality, implemented by the \textit{Behavior} attribute, is achieved by first selecting the desired atom using a query language. Mol* provides multiple query languages: MolScript, PyMOL, VMD, and Jmol. The query language used in this plugin is MolScript. The query language is used to uniquely identify and select the atom by the following attributes of the mmCIF category \textit{atom\_site}:
+The focus functionality, implemented by the \textit{Behavior} attribute, is achieved by first selecting the desired atom using a query language. Mol* supports multiple query languages: MolScript, PyMOL, VMD, and Jmol. The query language used in this plugin is MolScript. The query language is used to uniquely identify and select the atom by the following attributes of the mmCIF category \textit{atom\_site}:
 
 \begin{itemize}
-  \item \textit{labelCompId} - chain identifier.
-  \item \textit{labelSeqId} - sequence number of the residue in the chain.
-  \item \textit{labelAtomId} - atom id in the residue.
+  \item \textit{labelCompId} - identifier for the chain containing the residue with the atom.
+  \item \textit{labelSeqId} - sequence number of the residue containing the atom.
+  \item \textit{labelAtomId} - identifier for the atom in the residue.
 \end{itemize}
 
-The MolScript query is depicted in Figure \ref{fig:focus}. Once the atom is selected, the selection is highlighted and focused on with methods provided by the Mol* library.
+The MolScript query selection is depicted in Figure \ref{fig:focus}. Once the atom is selected, the selection is highlighted and focused on with methods provided by the Mol* library.
 
 \begin{figure}[htbp]
   \definecolor{LightGray}{gray}{0.95}
