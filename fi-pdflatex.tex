@@ -329,6 +329,16 @@ Firstly, the extension should enable the coloring of atoms and residues based on
 
 \section{Mol* state tree}
 
+After loading a structure the Mol* viewer loads the structure into a state tree. The state tree is a tree structure that contains node which can be anything really. At the leaves of the tree are 3D Representations of the parent selections. The selections are just a collection of atoms that should be visualized.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{figures/state_tree.png}
+  \end{center}
+  \caption{Diagram of custom mmCIF categories.}
+  \label{fig:state_tree}
+\end{figure}
+
 \section{Custom mmCIF categories}
 \label{section:custom_mmcif_categories}
 
@@ -469,7 +479,11 @@ The controls are depicted in Figure \ref{fig:controls-charge-set}.
 
 In addition to the partial charges extension for the Mol* library, it was necessary to create a custom Mol* viewer plugin. By using a plugin, it is possible to create custom behavior for the Mol* viewer, which is not possible using the standard Mol* viewer.
 
-The plugin is implemented as a Typescript class that extends the Plugin superclass provided by Mol*. The plugin class is then registered with the Mol* viewer, which allows the plugin to be used. The plugin class implements the following methods:
+TODO: describe the structure of the plugin
+
+The plugin is implemented as a Typescript class which contains a method for initializing the plugin. After initializing the plugin, the user can load a structure file for the viewer to visualize. The plugin supports loading structure files in the PDB and mmCIF formats. After loading the structure the user has an option of either changing the color theme, representation type, or charge set.
+
+The color themes and visualization types are changed by iterating over the Mol* state tree and changing each representation node.
 
 \chapter{Atomic Charge Calculator II}
 \label{chapter:atomic_charge_calculator_ii}
