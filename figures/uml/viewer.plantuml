@@ -9,12 +9,12 @@ class MolstarPartialCharges {
   + charges: Charges
   + color: Color
   + type: Type
-  + visual: Visual
+  + behavior: Behavior
 
   + static create(target: string, extensions: object)
   + async load(url: string, format: string, targetWebApp: string)
-  + updateColor(name: string, params: object)
-  + updateType(name: string, params: object)
+  - updateColor(name: string, params: object)
+  - updateType(name: string)
 }
 
 class Charges {
@@ -38,13 +38,13 @@ class Type {
   + surface()
 }
 
-class Visual {
+class Behavior {
   + focus(key: object)
 }
 
 MolstarPartialCharges --> Type
 MolstarPartialCharges --> Color
 MolstarPartialCharges --> Charges
-MolstarPartialCharges --> Visual
+MolstarPartialCharges --> Behavior
 
 @enduml

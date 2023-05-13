@@ -477,8 +477,8 @@ The controls are depicted in Figure \ref{fig:controls-charge-set}.
 
 \begin{figure}[htbp]
   \centering
-  \subfigure[Charge set controls]{\includegraphics[width=0.45\textwidth]{figures/controls-charge-set.png}}
-  \subfigure[Color theme controls]{\includegraphics[width=0.45\textwidth]{figures/controls-color-theme.png}}
+  \subfigure[Charge set controls]{\includegraphics[width=0.49\textwidth]{figures/controls1.png}}
+  \subfigure[Color theme controls]{\includegraphics[width=0.49\textwidth]{figures/controls2.png}}
   \caption{Extension controls.}
   \label{fig:controls-charge-set}
 \end{figure}
@@ -488,19 +488,69 @@ The controls are depicted in Figure \ref{fig:controls-charge-set}.
 
 In addition to the partial charges extension for the Mol* library, it was necessary to create a custom Mol* viewer plugin. By using a plugin, it is possible to create custom behavior for the Mol* viewer, which is not possible using the standard Mol* viewer.
 
-The plugin is implemented as a Typescript class which contains a method for creating the plugin, loading structure files, and four properties that serve as an interface for the plugin.
+The plugin is designed as a Typescript class. The structure of the class is depicted in Figure \ref{fig:plugin_structure}. It contains a method to create the plugin and another to load structure files. Furthermore, it includes four attributes, each an object with methods that act as an interface for managing the plugin:
 
-The plugin provides a static method for creating the plugin.
-
-The color themes and visualization types are changed by iterating over the Mol* state tree and changing each representation node.
+\begin{itemize}
+  \item \textit{Charges} - provides functions for setting the charge set and retrieving information about the charge sets.
+  \item \textit{Color} - provides functions for setting the color theme.
+  \item \textit{Type} - provides functions for setting the visualization type.
+  \item \textit{Behavior} - provides a function for focusing on a specific atom.
+\end{itemize}
 
 \begin{figure}[htbp]
   \begin{center}
     \includegraphics[width=\textwidth]{out/figures/uml/viewer/viewer.png}
   \end{center}
-  \caption{Interface of the custom model property for storing partial atomic charges.}
-  \label{fig:property_provider_interface}
+  \caption{Diagram of the custom Mol* viewer class .}
+  \label{fig:plugin_structure}
 \end{figure}
+
+The \textit{Color} and \textit{Type} attributes set the color theme and visualization type through the private methods \textit{updateColor} and \textit{updateType}. These methods change the color theme and visualization type by iterating over the Mol* state tree and updating the representation nodes.
+
+The focus functionality, implemented by the \textit{Behavior} attribute, is achieved by first selecting the desired atom using a query language. Mol* provides multiple query languages: MolScript, PyMOL, VMD, and Jmol. The query language used in this plugin is MolScript. The query language is used to uniquely identify and select the atom by the following attributes of the mmCIF category \textit{atom\_site}:
+
+\begin{itemize}
+  \item \textit{labelCompId} - chain identifier.
+  \item \textit{labelSeqId} - sequence number of the residue in the chain.
+  \item \textit{labelAtomId} - atom id in the residue.
+\end{itemize}
+
+The MolScript query is depicted in Figure \ref{fig:focus}. Once the atom is selected, the selection is highlighted and focused on with methods provided by the Mol* library.
+
+\begin{figure}[htbp]
+  \definecolor{LightGray}{gray}{0.95}
+  \begin{minted}[
+  frame=lines,
+  framesep=2mm,
+  baselinestretch=1.2,
+  bgcolor=LightGray,
+  fontsize=\footnotesize,
+  % linenos
+  ]{Typescript}
+  const selection = Script.getStructureSelection(
+    (Q) =>
+        Q.struct.generator.atomGroups({
+            'atom-test': Q.core.logic.and([
+                Q.core.rel.eq([Q.struct.atomProperty.macromolecular.
+                label_comp_id(), labelCompId]),
+                Q.core.rel.eq([Q.struct.atomProperty.macromolecular.
+                label_seq_id(), labelSeqId]),
+                Q.core.rel.eq([Q.struct.atomProperty.macromolecular.
+                label_atom_id(), labelAtomId]),
+            ]),
+        }),
+    data
+);
+\end{minted}
+\caption{MolScript query for selecting an atom.}
+\label{fig:focus}
+\end{figure}
+
+\subsection{Technologies used during development}
+
+The plugin was developed using Vite. Vite is a build tool that was created to address some of the problems faced by developers when building large applications with traditional build tools such as Webpack. One of the main advantages of Vite is that it provides a fast development server. The speed of the development server is achieved by pre-bundling the static project dependencies with esbuild, a modern bundler written in Go, and serving the project source code with native ES module imports. \cite{vite}
+
+The plugin is written in Typescript and uses the Mol* library. The plugin is bundled using Rollup \cite{rollup}, a module bundler for Javascript, and published to NPM, a package manager for Javascript applications. \cite{npm}
 
 \chapter{Atomic Charge Calculator II}
 \label{chapter:atomic_charge_calculator_ii}
