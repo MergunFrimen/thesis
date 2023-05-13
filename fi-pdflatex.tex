@@ -488,16 +488,26 @@ The controls are depicted in Figure \ref{fig:controls-charge-set}.
 
 In addition to the partial charges extension for the Mol* library, it was necessary to create a custom Mol* viewer plugin. By using a plugin, it is possible to create custom behavior for the Mol* viewer, which is not possible using the standard Mol* viewer.
 
-The plugin is implemented as a Typescript class which contains a method for creating the plugin, loading structure files, and four properties that serve as an interface for the plugin. 
+The plugin is implemented as a Typescript class which contains a method for creating the plugin, loading structure files, and four properties that serve as an interface for the plugin.
+
+The plugin provides a static method for creating the plugin.
 
 The color themes and visualization types are changed by iterating over the Mol* state tree and changing each representation node.
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=\textwidth]{out/figures/uml/viewer/viewer.png}
+  \end{center}
+  \caption{Interface of the custom model property for storing partial atomic charges.}
+  \label{fig:property_provider_interface}
+\end{figure}
 
 \chapter{Atomic Charge Calculator II}
 \label{chapter:atomic_charge_calculator_ii}
 
-Atomic Charge Calculator II (ACC2) is a web application for calculating partial atomic charges for structure files. The application is built using Flask for the backend and Javascript with Bootstrap for the frontend. The core of the ACC2 application is the ChargeFW2 program, which is used to calculate the partial atomic charges. For visualizing the calculation results, the application uses the Litemol software. \cite{racek2020acc2} However, since the Litemol software is no longer supported, it was necessary to replace it with its modern counterpart, Mol*.
+Atomic Charge Calculator II (ACC2) is a web application for calculating partial atomic charges for structure files. The application is built using Flask for the backend and Javascript with Bootstrap for the frontend. The core of the ACC2 application is the ChargeFW2 program, which is used to calculate the partial atomic charges. For visualizing the calculation results, the application uses the Litemol software. \cite{racek2020acc2} 
 
-This chapter describes the changes made to the ACC2 application. We first discuss the modifications to the ChargeFW2 program, then explain the changes made to the backend and frontend to support calculations of multiple charge sets, and lastly we describe the integration of the Mol* viewer into the ACC2 application.
+Since the Litemol software is no longer supported, it was necessary to replace it with its modern counterpart, Mol*. This chapter describes the incorporation of the Mol* viewer into the ACC2 application. We first discuss the modifications to the ChargeFW2 program, then explain the changes made to the backend and frontend to support calculations of multiple charge sets, and lastly we describe the integration of the Mol* viewer into the ACC2 application.
 
 \section{Extension of ChargeFW2}
 \label{section:chargefw2_extension}
