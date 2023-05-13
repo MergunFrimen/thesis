@@ -164,6 +164,15 @@ Polymer chains (chains) are sequences of residues that are linked together. In t
 
 Alternative conformations, also referred to as conformational isomerism, are different conformations of the same molecule. They can be used to represent different states of a molecule, such as different protonation states or different ligand binding modes. Alternative conformations are important for understanding the structure and function of biomolecules, as they provide insight into how they interact with other molecules.
 
+\begin{figure}[htbp]
+  \centering
+  \subfigure[Residues of chain B.]{\label{fig:structure1}\includegraphics[height=4.5cm]{figures/structure1.png}}
+  \subfigure[Atoms of residue ARG 19.]{\label{fig:structure2}\includegraphics[height=4.5cm,]{figures/structure2.png}}
+  \caption{Hierarchy of structure 1A1U.}
+  \label{fig:partial_charges_color_theme}
+\end{figure}
+
+
 \section{Partial atomic charges}
 \label{section:partial_atomic_charges}
 
@@ -335,7 +344,7 @@ After loading a structure the Mol* viewer loads the structure into a state tree.
   \begin{center}
     \includegraphics[width=\textwidth]{figures/state_tree.png}
   \end{center}
-  \caption{Diagram of custom mmCIF categories.}
+  \caption{Mol* state tree.}
   \label{fig:state_tree}
 \end{figure}
 
@@ -479,9 +488,7 @@ The controls are depicted in Figure \ref{fig:controls-charge-set}.
 
 In addition to the partial charges extension for the Mol* library, it was necessary to create a custom Mol* viewer plugin. By using a plugin, it is possible to create custom behavior for the Mol* viewer, which is not possible using the standard Mol* viewer.
 
-TODO: describe the structure of the plugin
-
-The plugin is implemented as a Typescript class which contains a method for initializing the plugin. After initializing the plugin, the user can load a structure file for the viewer to visualize. The plugin supports loading structure files in the PDB and mmCIF formats. After loading the structure the user has an option of either changing the color theme, representation type, or charge set.
+The plugin is implemented as a Typescript class which contains a method for creating the plugin, loading structure files, and four properties that serve as an interface for the plugin. 
 
 The color themes and visualization types are changed by iterating over the Mol* state tree and changing each representation node.
 

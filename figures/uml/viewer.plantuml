@@ -1,66 +1,50 @@
-@startuml
+@startuml viewer
 
+hide circle
 !theme mars
 
-[*] --> Initialized
+class MolstarPartialCharges {
+  - plugin: PluginUIContext
 
-Initialized --> Loaded : load structure
-Loaded --> Loaded : load structure
+  + charges: Charges
+  + color: Color
+  + type: Type
+  + visual: Visual
 
-Loaded --> State4
-Loaded --> State6
+  + static create(target: string, extensions: object)
+  + async load(url: string, format: string, targetWebApp: string)
+  + updateColor(name: string, params: object)
+  + updateType(name: string, params: object)
+}
 
-State1 --> State2
-State1 --> State3
-State1 --> State4
-State1 --> State5
-State1 --> State6
+class Charges {
+  + setTypeId(typeId: number)
+  + getTypeId(): number
+  + getMaxCharge(): number
+  + getMethodNames(): string[]
+}
 
-State2 --> State1
-State2 --> State3
-State2 --> State4
-State2 --> State5
-State2 --> State6
+class Color {
+  + default()
+  + alphaFold()
+  + relative()
+  + absolute(max: number)
+}
 
-State3 --> State1
-State3 --> State2
-State3 --> State4
-State3 --> State5
-State3 --> State6
+class Type {
+  + isDefaultApplicable(): boolean
+  + default()
+  + ballAndStick()
+  + surface()
+}
 
-State4 --> State1
-State4 --> State2
-State4 --> State3
-State4 --> State5
-State4 --> State6
+class Visual {
+  + focus(key: object)
+}
 
-State5 --> State1
-State5 --> State2
-State5 --> State3
-State5 --> State4
-State5 --> State6
+MolstarPartialCharges --> Type
+MolstarPartialCharges --> Color
+MolstarPartialCharges --> Charges
+MolstarPartialCharges --> Visual
 
-State6 --> State1
-State6 --> State2
-State6 --> State3
-State6 --> State4
-State6 --> State5
-
-State1: Cartoon
-State1: Partial charges
-
-State2: Surface
-State2: Partial charges
-
-State3: Ball-and-stick
-State3: Partial charges
-
-State4: Cartoon
-State4: Element symbol
-
-State5: Surface
-State5: Element symbol
-
-State6: Ball-and-stick
-State6: Element symbol
 @enduml
