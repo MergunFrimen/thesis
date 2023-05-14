@@ -128,13 +128,13 @@
 \markright{\textsc{Introduction}}
 \addcontentsline{toc}{chapter}{Introduction}
 
-Partial atomic charges are real numbers that describe a molecule's electron density. They are used in various fields of chemistry, e.g., in molecular dynamics, molecular docking, and pharmacophore design. \cite{} Partial atomic charges are a theoretical concept; therefore, they cannot be measured. However, their values can be calculated. Standard calculation methods are based on quantum mechanical methods. However, these methods are computationally complex and are applicable only to small molecules. Therefore, empirical methods are often used instead, which are much faster with sufficient accuracy. \cite{schindler2021sqe}
+Partial atomic charges are real numbers that describe a molecule's electron density. They are used in various fields of computational chemistry such as molecular dynamics, molecular docking, and pharmacophore design. \cite{racek2022thesis} Partial atomic charges are a theoretical concept; therefore, they cannot be measured. Nevertheless, their values can be calculated with calculation methods based on quantum mechanics. \cite{gupta2015principles} However, these methods pose significant computational challenges, particularly for larger molecules, leading researchers to employ faster, albeit less accurate, empirical methods. \cite{schindler2019thesis}
 
-Atomic Charge Calculator II \cite{racek2020acc2} and αCharges \cite{schindler2023alphacharges} are two web-based applications that allow fast calculations of partial atomic charges by empirical methods. The Atomic Charge Calculator II integrated the Litemol viewer \cite{sehnal2017litemol} to enable the users to visualize the calculated partial atomic charges. However, the Litemol viewer is no longer maintained. Its modern replacement is the Mol* viewer \cite{sehnal2021molstar}, which does not, however, support the visualization of partial atomic charges.
+Atomic Charge Calculator II \cite{racek2020acc2} and αCharges \cite{schindler2023alphacharges} are two web-based applications that allow rapid calculations of partial atomic charges by empirical methods. The Atomic Charge Calculator II application incorporates the Litemol viewer \cite{sehnal2017litemol} to enable the users to visualize the calculated charges. However, the Litemol viewer is no longer maintained, and its replacement, the Mol* viewer \cite{sehnal2021molstar}, does not currently support the visualization of partial atomic charges. This gap in functionality presents a great limitation for researchers in the field of computational chemistry. Therefore, the goal of this thesis is to extend the Mol* viewer to support the visualization of partial atomic charges and, subsequently, incorporate the enhanced Mol* viewer into the Atomic Charge Calculator II and αCharges web applications.
 
-Therefore, the main goal of this thesis is to extend the Mol* library to support the visualization of partial atomic charges and, subsequently, incorporate the Mol* viewer into the Atomic Charge Calculator II and αCharges web applications.
+Chapter \ref{chapter:theory} explains the theoretical concepts of molecular structures and partial atomic charges, along with the chemical file formats utilized in this work. Building on this foundation, Chapter \ref{chapter:visualizing_molecular_data} discusses the various visualization methods and software tools for visualizing molecular structures. Chapter \ref{chapter:molstar_partial_charges_extension} then describes the implementation of the Mol* extension for visualizing partial atomic charges and the creation of a Mol* viewer plugin. Finally, the extended Mol* viewer is integrated into the Atomic Charge Calculator II and αCharges web applications, as detailed in Chapters \ref{chapter:atomic_charge_calculator_ii} and \ref{chapter:alphacharges}.
 
-Chapter 1 explains the theoretical concepts of molecular structures and partial atomic charges and describes the chemical file formats used in the thesis. Chapter 2 describes the various ways to visualize molecular structures and the Mol* library. Chapter 3 describes the implementation of the Mol* extension for visualizing partial atomic charges. Additionally, it describes the implementation of the Mol* viewer plugin, which is integrated into the Atomic Charge Calculator II and αCharges web applications in Chapters 4 and 5.
+Through these efforts, this thesis seeks to advance the field of computational chemistry by enabling researchers to visualize partial atomic charges in molecular structures using the Mol* viewer.
 
 \newpage
 \chapter{Theory}
@@ -184,7 +184,7 @@ Alternative conformations, also referred to as conformational isomerism, are dif
   \subfigure[Residues of chain B.]{\label{fig:structure1}\includegraphics[height=4.5cm]{figures/structure1.png}}
   \subfigure[Atoms of residue ARG 19.]{\label{fig:structure2}\includegraphics[height=4.5cm,]{figures/structure2.png}}
   \caption{Hierarchy of structure 1A1U.}
-  \label{fig:partial_charges_color_theme}
+  \label{fig:structure}
 \end{figure}
 
 
@@ -262,12 +262,14 @@ In contrast to other formats, the mmCIF format does not impose limits on column 
 \chapter{Visualizing molecular data}
 \label{chapter:visualizing_molecular_data}
 
+
+
 \section{Types of visualizations}
 \label{section:types_of_visualizations}
 
 % TODO: thinking about merging the types of visualizations into one section like i did with the molecular structure \\
 
-There are several methods to represent molecular data, each serving a different purpose and providing a different level of detail. The methods most relevant to this work are the following three types: ball and stick, surface, and cartoon.
+There are several methods to represent molecular data, each serving a different purpose and providing a different level of detail. The methods most relevant to this work are the following three types: ball and stick, surface, and cartoon. These methods are described in more detail below.
 
 \subsection{Ball and stick}
 \label{subsection:ball_and_stick}
@@ -504,7 +506,7 @@ The controls are depicted in Figure \ref{fig:controls-charge-set}.
 \end{figure}
 
 \section{Mol* viewer plugin}
-\label{chapter:molstar_viewer_plugin}
+\label{section:molstar_viewer_plugin}
 
 In addition to the partial charges extension for the Mol* library, it was necessary to create a custom Mol* viewer plugin. By using a plugin, it is possible to create custom behavior, which is not provided by the standard Mol* viewer.
 
@@ -711,6 +713,7 @@ Finally, the user can download all the output files generated by the backend in 
 
 \newpage
 \chapter{αCharges}
+\label{chapter:alphacharges}
 
 αCharges (AlphaCharges) is a web application for calculating partial atomic charges for structures from AlphaFoldDB, a database of protein structures predicted by AlphaFold2 \cite{jumper2021alphafold}. The αCharges application protonates the protein structures (i.e. adds hydrogens) and calculates the partial atomic charges for the structures with the SQE+qp empirical method \cite{schindler2021sqe}. \cite{schindler2023alphacharges}
 
@@ -781,7 +784,12 @@ Additionally, when the user clicks on an atom in the list, the Mol* viewer is fo
 \markright{\textsc{Conclusion}}
 \addcontentsline{toc}{chapter}{Conclusion}
 
-In this thesis, we have explored the theory, techniques, and tools for visualizing and analyzing molecular structures with enhanced molecular visualization software. Our research focused on extending the capabilities of the popular Mol* viewer, addressing the visualization and analysis of both micromolecules and macromolecules.
+The goal of this thesis was to extend the capabilities of the Mol* viewer to include the visualization of partial atomic charges and to incorporate the Mol* viewer into the Atomic Charge Calculator II and αCharges web applications. We have achieved this goal by implementing a new coloring scheme for the Mol* viewer that allows the coloring of molecular structures by partial atomic charges
+. Additionally, we developed an extension for the Atomic Charge Calculator II that expands the compatibility of the calculator to support multiple molecular file formats and multicharge support. The integration of the Atomic Charge Calculator II with the Mol* viewer creates a seamless workflow for analyzing and visualizing molecular structures with partial atomic charges.
+
+In this thesis, we have explored the theory, techniques, and tools for visualizing and analyzing molecular structures with modern molecular visualization software. Our research focused on extending the capabilities of the Mol* viewer to support the visualization of partial atomic charges. 
+
+Additionally, we have developed an extension for the Atomic Charge Calculator II that expands the compatibility of the calculator to support multiple molecular file formats and multicharge support. 
 
 Chapter 1 laid the foundation by discussing molecular structure, partial atomic charges, chemical file formats, and color interpolation techniques. These concepts are essential for accurately representing and understanding molecular structures. By leveraging these theoretical principles, we can create informative and visually appealing visualizations.
 
@@ -823,9 +831,10 @@ All source code can be found in the attachments. Additionally, the source code c
   \url{https://github.com/MergunFrimen/molstar-partial-charges}
 \end{itemize}
 
-\chapter{αCharges paper}
+\chapter[αCharges paper]{αCharges: partial atomic charges for AlphaFold
+structures in high quality}
 \label{appendix:alpha-charges}
-  
-\includepdf[pages=-,width=\textwidth]{figures/alphachargespaper.pdf}
+
+\includepdf[pages=-,width=\textwidth,offset=0cm 0cm]{figures/alphachargespaper.pdf}
 
 \end{document}
