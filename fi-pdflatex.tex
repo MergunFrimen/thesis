@@ -55,32 +55,28 @@
     title       = {Modern visualization of partial atomic charges in Mol*},
     TeXtitle    = {Modern visualization of partial atomic charges in Mol*},
     keywords    = {%
-        Molstar,
         Mol*,
-        Atomic Charge Calculator 2,
-        ACC2,
-        AlphaCharges,
+        ACC~II,
         αCharges,
+        AlphaFold
         SB NCBR,
         molecular visualization,
-        molecular graphics,
+        molecular structures,
         partial atomic charges,
         structural biology,
-        AlphaFold
-     },
+        chemical file formats
+    },
     TeXkeywords = {%
-        Molstar,
         Mol*,
-        Atomic Charge Calculator 2,
-        ACC2,
-        AlphaCharges,
+        ACC~II,
         αCharges,
+        AlphaFold
         SB NCBR,
         molecular visualization,
-        molecular graphics,
+        molecular structures,
         partial atomic charges,
         structural biology,
-        AlphaFold
+        chemical file formats
     },
     abstract    = {%
         TODO
@@ -122,17 +118,37 @@
 \usepackage{subfigure}
 \usepackage{textalpha}
 \usepackage{dirtree}
+\usepackage[export]{adjustbox}
+\usepackage{pdfpages}
 
 \begin{document}
 
+\newpage
 \chapter*{Introduction}
 \markright{\textsc{Introduction}}
 \addcontentsline{toc}{chapter}{Introduction}
 
+The study of molecular structures plays a crucial role in various scientific disciplines, including chemistry, biochemistry, and materials science. Understanding the spatial arrangement and interactions of molecules is essential for comprehending their properties and functions. With advancements in computational techniques and software tools, scientists have gained the ability to visualize and analyze molecular structures in unprecedented detail.
+
+This thesis aims to explore the theory, techniques, and tools used for visualizing and analyzing molecular data. The investigation focuses on enhancing the capabilities of molecular visualization software, specifically the popular tool, Mol* \parencite{sehnal2021molstar}. The research addresses the visualization of both micromolecules and macromolecules, encompassing the visualization of molecular structures ranging from small organic compounds to complex biomolecules.
+
+Chapter 1 delves into the theoretical foundations underlying molecular structures. It begins by examining molecular structure in terms of its composition, encompassing micromolecules and macromolecules. The discussion further extends to the concept of partial atomic charges and the empirical methods employed to calculate them efficiently. Additionally, the chapter explores various chemical file formats commonly used for storing molecular data, including SDF, MOL2, PDB, and mmCIF. Finally, color interpolation techniques are explored, which facilitate the representation of molecular structures with informative visualizations.
+
+Chapter 2 focuses on the different types of visualizations employed in molecular structure analysis. It explores popular visualization techniques such as ball and stick, surface representations, and cartoon representations. Moreover, the chapter discusses the significance of coloring molecular visualizations, enabling the highlighting of specific features or properties of molecules. An overview of visualization software, with a particular emphasis on Litemol and Mol*, is provided to understand the capabilities and limitations of existing tools.
+
+Chapter 3 presents the development of an extension for the Mol* viewer, specifically addressing the incorporation of partial atomic charges. The chapter outlines the requirements for the extension and provides insights into the Mol* state tree and custom mmCIF categories. It further discusses the implementation details, including the development of property providers, color theme providers, label providers, and controls. The chapter concludes with a comprehensive overview of the Mol* viewer plugin's structure and the technologies utilized during its development.
+
+Chapter 4 introduces the Atomic Charge Calculator II, an extension built upon the ChargeFW2 framework. The chapter explores the extension's enhancements for multiple molecular file formats, including mmCIF, PDB, SDF, and MOL2. Additionally, the integration of multicharge support, involving frontend and backend changes, is discussed. The chapter concludes with an exploration of the integration of the Atomic Charge Calculator II with the Mol* viewer, enabling seamless analysis and visualization of atomic charges.
+
+Chapter 5 presents the AlphaCharges tool, which integrates with the Mol* viewer and introduces novel functionalities. The chapter explores the integration process and the enhancements made to the Mol* viewer to facilitate the utilization of AlphaCharges. Additionally, the chapter delves into coloring molecular visualizations based on pLDDT confidence scores, a measure of structural reliability. Furthermore, the problematic structure page feature is introduced, providing a comprehensive analysis of challenging molecular structures.
+
+In conclusion, this thesis offers a comprehensive exploration of the theory, techniques, and software tools used for visualizing and analyzing molecular structures. The research expands upon the capabilities of the Mol* viewer, introducing extensions that enable the incorporation of partial atomic charges and enhanced visualizations. The integration of the Atomic Charge Calculator II and the AlphaCharges tool further enhances the analytical capabilities of the Mol* viewer. Overall, this thesis contributes to the advancement of molecular visualization and analysis techniques, facilitating deeper insights into the world of molecular structures.
+
+\newpage
 \chapter{Theory}
 \label{chapter:theory}
 
-\textbf{TODO}: this chapter is has placeholder text and is not finished yet. \\
+% TODO: this chapter is has placeholder text and is not finished yet. \\
 
 Theoretical concepts are fundamental to the study of computational chemistry, providing a framework for analyzing molecular structures and properties. This chapter focuses on four key areas of theory, beginning with an overview of molecular structure in Section 1.1. Section 1.2 provides an in-depth examination of chemical file formats, including the advantages and disadvantages of different file formats for storing molecular data. Partial atomic charges are explored in section 1.3, including their importance in analyzing molecular structures and the various methods used to compute them. Finally, section 1.4 delves into color interpolation, a critical technique for visualizing partial atomic charges in molecular structures.
 
@@ -141,9 +157,9 @@ By providing a comprehensive overview of these theoretical concepts, this chapte
 \section{Molecular structure}
 \label{section:molecular_structure}
 
-\textbf{TODO}: the section is not split into many subsections to allow for better reading flow; first i describe small molecules (micromolecules) which are just described by their atoms and bonds, these are usually drug molecules (think ligands, ions etc); for macromolecules explain the hierarchy of chain-residue-atom, in this work we used carbohydrates and proteins - describe those as well; explain somehow that this separation is done on purpose; add a schematic image that shows a small protein with 2 chains, then zoom in on one chain and show the residues, lastly zoom on one of the residues to show the atoms and bonds \\
+% TODO: the section is not split into many subsections to allow for better reading flow; first i describe small molecules (micromolecules) which are just described by their atoms and bonds, these are usually drug molecules (think ligands, ions etc); for macromolecules explain the hierarchy of chain-residue-atom, in this work we used carbohydrates and proteins - describe those as well; explain somehow that this separation is done on purpose; add a schematic image that shows a small protein with 2 chains, then zoom in on one chain and show the residues, lastly zoom on one of the residues to show the atoms and bonds \\
 
-\textbf{TODO}: don't focus too much on explaining things that aren't relevant further in the thesis \\
+% TODO: don't focus too much on explaining things that aren't relevant further in the thesis \\
 
 Molecules are the building blocks of matter. They are composed of atoms, which are connected through chemical bonds. Molecules can be divided into two main categories: micromolecules and macromolecules. Micromolecules are small molecules that are not biologically relevant, such as drug molecules. Macromolecules are large molecules that are biologically relevant, such as proteins and carbohydrates.  
 
@@ -183,7 +199,7 @@ Alternative conformations, also referred to as conformational isomerism, are dif
 \section{Partial atomic charges}
 \label{section:partial_atomic_charges}
 
-\textbf{TODO}: this section will describe partial atomic charges, their applications, then it will describe how they are calculated using quantum mechanics, explain the need for empirical methods, describe empirical methods, and lastly mention chargefw2 and alphacharges as applications that use the empirical methods \\
+% TODO: this section will describe partial atomic charges, their applications, then it will describe how they are calculated using quantum mechanics, explain the need for empirical methods, describe empirical methods, and lastly mention chargefw2 and alphacharges as applications that use the empirical methods \\
 
 Partial atomic charges are numerical values assigned to individual atoms within a molecule, representing their contribution to the overall charge distribution. These charges provide information about the electron density and the distribution of positive and negative charges within the molecule.
 
@@ -203,7 +219,7 @@ However, the quantum mechanics of molecules is too complex to be solved analytic
 \section{Chemical file formats}
 \label{section:chemical_file_formats}
 
-\textbf{TODO}: this section describes the file formats used during the thesis work; i will briefly describe SDF, MOL2, and PDB focus in more detail on the mmCIF file format: i will explain the data dictionaries; show one example molecule in each file format for SDF-MOL2 and PDB-mmCIF \\
+% TODO: this section describes the file formats used during the thesis work; i will briefly describe SDF, MOL2, and PDB focus in more detail on the mmCIF file format: i will explain the data dictionaries; show one example molecule in each file format for SDF-MOL2 and PDB-mmCIF \\
 
 Chemical file formats are used to store molecular data in a computer-readable format. There are many file formats for storing molecular data, each suited to a specific purpose. This section provides an overview of the most common file formats used in computational chemistry.
 
@@ -227,7 +243,7 @@ The Protein Data Bank (PDB) file format is a widely used format for storing thre
 \subsection{mmCIF}
 \label{subsection:mmcif}
 
-\textbf{TODO}: explain the need for creating the mmCIF file format, why isn't the PDB format enough (limited amount of rows, poor support for extending the format to add custom data)? describe the mmcif file format; make sure to explain the core data dictionaries, can mention binary cif \\
+% TODO: explain the need for creating the mmCIF file format, why isn't the PDB format enough (limited amount of rows, poor support for extending the format to add custom data)? describe the mmcif file format; make sure to explain the core data dictionaries, can mention binary cif \\
 
 \cite{gu2009structural}
 
@@ -237,26 +253,27 @@ One of the most important features of the mmCIF format is its support for data d
 This allows users to define new data items and integrate additional information.
 In contrast to other formats, the mmCIF format does not impose limits on column width and entry count, making it more flexible and accommodating for storing large amounts of data.
 
-TODO: add example image + better explanation
+% TODO: add example image + better explanation
 
 \section{Color interpolation}
 \label{section:color_interpolation}
 
-\textbf{TODO}: this section will briefly describe color interpolation, add math equation so that it looks pro, add example of interpolations used in the partial charges color theme \\
+% TODO: this section will briefly describe color interpolation, add math equation so that it looks pro, add example of interpolations used in the partial charges color theme \\
 
 Color interpolation is the process of creating new colors by mixing two or more colors together. It is a common technique used in computer graphics and digital image processing to create smooth transitions between colors.
 
 Color interpolation works by calculating the intermediate colors between two or more given colors. This is typically done by taking a weighted average of the red, green, and blue values of the colors being interpolated.
 
-TODO: add math equation + image of red,white and white,blue interpolation
+% TODO: add math equation + image of red,white and white,blue interpolation
 
+\newpage
 \chapter{Visualizing molecular data}
 \label{chapter:visualizing_molecular_data}
 
 \section{Types of visualizations}
 \label{section:types_of_visualizations}
 
-\textbf{TODO}: thinking about merging the types of visualizations into one section like i did with the molecular structure \\
+% TODO: thinking about merging the types of visualizations into one section like i did with the molecular structure \\
 
 There are several methods to represent molecular data, each serving a different purpose and providing a different level of detail. The methods most relevant to this work are the following three types: ball and stick, surface, and cartoon.
 
@@ -286,7 +303,7 @@ An example of a cartoon model is shown in Figure \ref{fig:partial_charges_color_
 \section{Coloring of molecular visualizations}
 \label{subsection:coloring_of_molecular_visualizations}
 
-\textbf{TODO}: select a handful of color themes; don't list them out; instead describe them in text and give examples of how they are used by researchers \\
+% TODO: select a handful of color themes; don't list them out; instead describe them in text and give examples of how they are used by researchers \\
 
 Equally important as the type of visualization is the coloring scheme used to represent the molecule. Coloring is an essential aspect of molecular visualization, as it can provide additional information and help to emphasize specific features or properties of the molecule. Some common coloring schemes include:
 
@@ -306,7 +323,7 @@ Equally important as the type of visualization is the coloring scheme used to re
 \section{Visualization software}
 \label{section:visualization_software}
 
-\textbf{TODO}: describe the web based \\
+% TODO: describe the web based \\
 
 There are numerous software tools available for visualizing molecular data, with varying levels of complexity, customization, and features. Some of the most popular tools include MolScript \cite{kraulis1991molscript}, PyMOL \cite{delano2002pymol}, VMD \cite{humphrey1996vmd}, and ChimeraX \cite{goddard2018ucsf}. More recently, web-based tools, such as NGL Viewer \cite{rose2015ngl}, LiteMol \cite{sehnal2017litemol}, and Mol* \cite{sehnal2021molstar}, have become increasingly popular due to their accessibility and ease of use. Furthermore, these web-based tools are especially useful for visualizing large macromolecular complexes, which are becoming increasingly common due to advances in structural biology techniques such as crystallography and electron microscopy. \cite{sehnal2021molstar}
 
@@ -326,6 +343,7 @@ Mol* (/'molstar/) is another web-native molecular visualization tool, developed 
 
 Mol* emphasizes interactivity and offers various tools for manipulating and analyzing the molecular structure, such as distance and angle measurements, selection and display of specific residues, and custom coloring schemes. Additionally, Mol* provides integration with external databases and services, such as UniProt, PDBe, and RCSB PDB, enabling users to quickly access related information and resources.
 
+\newpage
 \chapter{Mol* partial charges extension}
 \label{chapter:molstar_partial_charges_extension}
 
@@ -339,8 +357,8 @@ This chapter describes the requirements for the extension, the custom mmCIF cate
 \section{Requirements}
 \label{section:requirements}
 
-TODO: describe what residue charges are \\
-TODO: describe what each representation should visualize when colored using partial charges coloring \\
+% TODO: describe what residue charges are \\
+% TODO: describe what each representation should visualize when colored using partial charges coloring \\
 
 Firstly, the extension should enable the coloring of atoms and residues based on their partial atomic charges. Secondly, it should describe the charge values of the atoms and residues. Thirdly, the extension should allow the user to provide multiple charge sets for a single structure and select which one to display. Finally, the extension should be seamlessly integrated into the Mol* library, facilitating access to its features and functionality.
 
@@ -448,7 +466,7 @@ Lastly, the method name used to calculate the charges of a given charge set is s
 \subsection{Color theme provider}
 \label{subsection:color_theme_provider}
 
-TODO: mention the color parameters \\
+% TODO: mention the color parameters \\
 
 This provider serves as the central component of the extension, with its primary function being to assign colors to atoms and residues based on their charges. It achieves this by using the ColorTheme API provided by Mol*. The ColorTheme API is a mechanism for assigning colors to structural elements of a molecule. These structural elements can be atoms, residues, bonds, and so on. The API is based on the concept of a ColorTheme object, which is a collection of color assignments for structural elements. The ColorTheme object is then used by the Mol* library to color the structural elements of the molecule.
 
@@ -468,7 +486,7 @@ To establish the color for a given charge, two color interpolations are employed
 \subsection{Label provider}
 \label{subsection:label_provider}
 
-TODO: cite the Mol* documentation where the Loci object is described \\
+% TODO: cite the Mol* documentation where the Loci object is described \\
 
 Having colored the structural elements, it was also necessary to create a label provider, which would assign labels that describe the charge of the structural element. In order to determine which element is highlighted, Mol* uses the object Loci. A Loci object is utilized for general selections and highlights. Consequently, it is essential to first extract the location from the Loci object in order to obtain the atom ID. The charge is acquired from the property provider, and the label is an HTML string that conveys the charge of the atom or residue. An example of the label can be seen in in the right-hand corner in figure \ref{}.
 
@@ -564,19 +582,20 @@ The MolScript query selection is depicted in Figure \ref{fig:focus}. Once the at
 \label{fig:focus}
 \end{figure}
 
+\newpage
 \chapter{Atomic Charge Calculator II}
 \label{chapter:atomic_charge_calculator_ii}
 
-Atomic Charge Calculator II (ACC2) is a web application for calculating partial atomic charges for structure files. The application is built using Flask for the backend and Javascript with Bootstrap for the frontend. The core of the ACC2 application is the ChargeFW2 program, which is used to calculate the partial atomic charges. For visualizing the calculation results, the application uses the Litemol software. \cite{racek2020acc2} 
+Atomic Charge Calculator II (ACC~II) is a web application for calculating partial atomic charges for structure files. The application is built using Flask for the backend and Javascript with Bootstrap for the frontend. The core of the ACC~II application is the ChargeFW2 program, which is used to calculate the partial atomic charges. For visualizing the calculation results, the application uses the Litemol software. \cite{racek2020acc2} 
 
-Since the Litemol software is no longer supported, it was necessary to replace it with its modern counterpart, Mol*. This chapter describes the incorporation of the Mol* viewer into the ACC2 application. We first discuss the modifications to the ChargeFW2 program, then explain the changes made to the backend and frontend to support calculations of multiple charge sets, and lastly we describe the integration of the Mol* viewer into the ACC2 application.
+Since the Litemol software is no longer supported, it was necessary to replace it with its modern counterpart, Mol*. This chapter describes the incorporation of the Mol* viewer into the ACC~II application. We first discuss the modifications to the ChargeFW2 program, then explain the changes made to the backend and frontend to support calculations of multiple charge sets, and lastly we describe the integration of the Mol* viewer into the ACC~II application.
 
 \section{Extension of ChargeFW2}
 \label{section:chargefw2_extension}
 
-As described in \ref{subsection:empirical_methods}, ChargeFW2 is a C++ program for computing partial atomic charges. The program supports the following input file formats: SDF, MOL2, PDB, and mmCIF, all of which are described in Section \ref{section:chemical_file_formats}. The program parses the necessary atom and bond data for each molecule in the input file and stores it in a \texttt{Molecule} object. These objects are then stored in a \texttt{MoleculeSet} object over which the program then iterates and calculates the partial atomic charges for each molecule.
+As described in Section \ref{subsection:empirical_methods}, ChargeFW2 is a C++ program for computing partial atomic charges. The program supports the following input file formats: SDF, MOL2, PDB, and mmCIF, all of which are described in Section \ref{section:chemical_file_formats}. The program parses the necessary atom and bond data for each molecule in the input file and stores it in a \texttt{Molecule} object. These objects are then stored in a \texttt{MoleculeSet} object over which the program then iterates and calculates the partial atomic charges for each molecule.
 
-The program outputs the charge results in multiple file formats. The following table \ref{table:chargefw2_output_formats} lists the output file formats generated by ChargeFW2 for the corresponding input file formats.
+The program outputs the charge results in multiple file formats. The following Table \ref{table:chargefw2_output_formats} lists the output file formats generated by ChargeFW2 for the corresponding input file formats.
 
 \begin{table}[htbp]
   \centering
@@ -633,17 +652,17 @@ For each calculation the ChargeFW2 produces a mmCIF file, which is compatible wi
 \section{Multicharge support}
 \label{section:multicharge_support}
 
-The ACC2 application allows the user to select the method and parameters that will be used to calculate the partial atomic charges for the user's input file. Once the user confirms their selection, the application sends it to the backend, which runs the ChargeFW2 program with the chosen method and parameters. The application then displays the results of the calculation to the user.
+The ACC~II application allows the user to select the method and parameters that will be used to calculate the partial atomic charges for the user's input file. Once the user confirms their selection, the application sends it to the backend, which runs the ChargeFW2 program with the chosen method and parameters. The application then displays the results of the calculation to the user.
 
-However, the application only supports one calculation per request and does not support the visualization of multiple charge sets. This limitation was previously caused by the Litemol viewer, which only supported one charge set per structure. Since the Mol* viewer supports multiple charge sets, the ACC2 application was modified to support multiple charge sets as well.
+However, the application only supports one calculation per request and does not support the visualization of multiple charge sets. This limitation was previously caused by the Litemol viewer, which only supported one charge set per structure. Since the Mol* viewer supports multiple charge sets, the ACC~II application was modified to support multiple charge sets as well.
 
-The following subsections describe the necessary changes made to the ACC2 application to facilitate multiple calculations per one request and the visualization of multiple charge sets.
+The following subsections describe the necessary changes made to the ACC~II application to facilitate multiple calculations per one request and the visualization of multiple charge sets.
 
 \subsection{Frontend changes}
 
-As explained in the previous section, the ACC2 application used to limit the user to selecting only one combination of method and parameters. This limitation was resolved by introducing new controls to the calculation setup.
+As explained in the previous section, the ACC~II application used to limit the user to selecting only one combination of method and parameters. This limitation was resolved by introducing new controls to the calculation setup.
 
-Figure \ref{fig:new_setup} shows the updated setup page for the ACC2 application. The page now contains a list of calculations, where each calculation represents a combination of method and parameters. The list is initially empty and the user can add a new calculation to the list by selecting the desired method and parameters from the drop-down menus and clicking the \textit{Add to calculation} button. The user can also remove any calculation from the list by clicking the cross button next to the calculation name.
+Figure \ref{fig:new_setup} shows the updated setup page for the ACC~II application. The page now contains a list of calculations, where each calculation represents a combination of method and parameters. The list is initially empty and the user can add a new calculation to the list by selecting the desired method and parameters from the drop-down menus and clicking the \textit{Add to calculation} button. The user can also remove any calculation from the list by clicking the cross button next to the calculation name.
 
 Once the user clicks the \textit{Compute} button, the list of calculations is sent to the backend where it is used to generate the desired charge sets for the user's input file.
 
@@ -651,20 +670,20 @@ Once the user clicks the \textit{Compute} button, the list of calculations is se
   \begin{center}
     \includegraphics[width=\textwidth]{figures/new_setup.png}
   \end{center}
-  \caption{Updated setup page for the ACC2 application.}
+  \caption{Updated setup page for the ACC~II application.}
   \label{fig:new_setup}
 \end{figure}
 
 \subsection{Backend changes}
 
-The Flask backend of the ACC2 application was modified to support multiple charge calculations per request. The backend now receives a list of calculations from the frontend, which it uses to generate the desired charge sets for the user's input file. It does this by running the ChargeFW2 program for each calculation in the list. For each calculation the ChargeFW2 generates the output file formats described in Table \ref{table:new_chargefw2_output_formats}. The backend then parses the charge values from the output TXT files and stores them in a dictionary, creating a mapping between the charge set name and the charge values.
+The Flask backend of the ACC~II application was modified to support multiple charge calculations per request. The backend now receives a list of calculations from the frontend, which it uses to generate the desired charge sets for the user's input file. It does this by running the ChargeFW2 program for each calculation in the list. For each calculation the ChargeFW2 generates the output file formats described in Table \ref{table:new_chargefw2_output_formats}. The backend then parses the charge values from the output TXT files and stores them in a dictionary, creating a mapping between the charge set name and the charge values.
 
 After all of the calculations are completed, the dictionary is used to generate a single mmCIF file. Firstly, the backend parses one of the output mmCIF files generated by ChargeFW2 into a \texttt{Block} object using the GEMMI library. The backend then iterates over the dictionary and appends the charge values to the \texttt{Block} object under the custom charge categories. Lastly, the backend writes the \texttt{Block} object to a new mmCIF file. This mmCIF file is then sent to the frontend, where it is loaded into the Mol* viewer.
 
 \section{Mol* viewer integration}
 \label{section:viewer_integration}
 
-Figure \ref{fig:result_page} shows the result page for the ACC2 application with the Mol* viewer. The result page initializes the custom viewer plugin and loads the mmCIF file generated by the backend. The loaded structure can then be visualized as a ball and stick model, as a surface model, or if applicable as a cartoon model. The page also provides controls for coloring the structure by partial atomic charges or by the element symbol of each atom. The user can also set the maximum charge value, which will be used for the partial atomic charges coloring.
+Figure \ref{fig:result_page} shows the result page for the ACC~II application with the Mol* viewer. The result page initializes the custom viewer plugin and loads the mmCIF file generated by the backend. The loaded structure can then be visualized as a ball and stick model, as a surface model, or if applicable as a cartoon model. The page also provides controls for coloring the structure by partial atomic charges or by the element symbol of each atom. The user can also set the maximum charge value, which will be used for the partial atomic charges coloring.
 
 The result page also contains two dropdown menus. The structure dropdown menu contains all the structures provided by the user in the input file. The charge set dropdown menu contains all the charge sets, which were generated by the backend according to the user's selection on the setup page.
 
@@ -672,7 +691,7 @@ The result page also contains two dropdown menus. The structure dropdown menu co
   \begin{center}
     \includegraphics[width=\textwidth]{figures/results-full.png}
   \end{center}
-  \caption{Updated result page for the ACC2 application.}
+  \caption{Updated result page for the ACC~II application.}
   \label{fig:result_page}
 \end{figure}
 
@@ -698,24 +717,23 @@ Finally, the user can download all the output files generated by the backend in 
 \label{fig:output_dir_structure}
 \end{figure}
 
-\chapter{AlphaCharges}
+\newpage
+\chapter{αCharges}
 
-AlphaCharges (αCharges) is a web application for calculating partial atomic charges for structures from AlphaFoldDB, a database of protein structures predicted by AlphaFold2 \cite{jumper2021alphafold}. The AlphaCharges application protonates the protein structures (i.e. adds hydrogens) and calculates the partial atomic charges for the structures with the SQE+q0 empirical method \cite{schindler2021sqe}. \cite{schindler2023alphacharges}
+αCharges (AlphaCharges) is a web application for calculating partial atomic charges for structures from AlphaFoldDB, a database of protein structures predicted by AlphaFold2 \cite{jumper2021alphafold}. The αCharges application protonates the protein structures (i.e. adds hydrogens) and calculates the partial atomic charges for the structures with the SQE+qp empirical method \cite{schindler2021sqe}. \cite{schindler2023alphacharges}
 
-During the development of the AlphaCharges application, the Mol* viewer was incorporated into the application to visualize the calculated partial atomic charges. The creators of the AlphaCharge application requested two additional features for the application: a color theme for coloring the structure by the pLDDT confidence score and a page for visualizing problematic atoms in the structure.
+During the development of the αCharges application, the Mol* viewer was incorporated into the application to visualize the calculated partial atomic charges. The creators of the AlphaCharge application requested two additional features for the application: a color theme for coloring the structure by the pLDDT confidence score and a page for visualizing problematic atoms in the structure.
 
-The following sections describe the changes made to the Mol* viewer to support the AlphaCharges application and the implementation of the new features.
+The following sections describe the changes made to the Mol* viewer to support the αCharges application and the implementation of the new features.
 
 \section{Integration of the the Mol* viewer}
 
-The AlphaCharges application shares the architecture with the ACC2 application. The frontend is written in Javascript with the Bootstrap framework, the backend is written in Python and uses the Flask framework. This shared architecture allowed the integration of the Mol* viewer into the AlphaCharges application with minimal adjustments. As with the ACC2 application, the Mol* viewer is incorporated into the result page by initializing the plugin viewer, loading the mmCIF file generated by the backend, and mounting the controls for managing the viewer.
+The αCharges application shares the architecture with the ACC~II application. The frontend is written in Javascript with the Bootstrap framework, the backend is written in Python and uses the Flask framework. This shared architecture allowed the integration of the Mol* viewer into the αCharges application with minimal adjustments. As with the ACC~II application, the Mol* viewer is incorporated into the result page by initializing the plugin viewer, loading the mmCIF file generated by the backend, and mounting the controls for managing the viewer.
 
 
 \section{Coloring by pLDDT confidence score}
 
-AlphaFold2 generates a confidence score for each residue in the predicted protein structures using a measure called pLDDT. The confidence score is a value ranging between 0 and 100, where higher values indicate higher confidence levels. \cite{varadi2021alphafold} The AlphaFoldDB includes the confidence scores along with the predicted protein structures in the mmCIF file format. These confidence scores are stored in the mmCIF file under the following categories:
-
-\textbf{TODO}: the descriptions in the following list are taken from PDBx/mmCIF; how can i cite this? \\
+AlphaFold2 generates a confidence score for each residue in the predicted protein structures using a measure called pLDDT. The confidence score is a value ranging between 0 and 100, where higher values indicate higher confidence levels. \cite{varadi2021alphafold} The AlphaFoldDB includes the confidence scores along with the predicted protein structures in the mmCIF file format. These confidence scores are stored in the mmCIF file under the following categories \cite{mmcif_dictionary}:
 
 \begin{itemize}
   \item \texttt{\_ma\_qa\_metric} - contains details of the metrics use to assess model quality.
@@ -723,19 +741,19 @@ AlphaFold2 generates a confidence score for each residue in the predicted protei
   \item \texttt{\_ma\_qa\_metric\_global} - contains information about the global QA metrics calculated at the model-level.
 \end{itemize}
 
-To incorporate this coloring into AlphaCharges, the backend of the application was extended to include the confidence scores in the output mmCIF file. This mmCIF file is sent to the frontend where it is loaded into the Mol* viewer. The AlphaCharges application adds a new control to the result page for switching to the pLDDT color theme. Figure \ref{fig:alpha-charges-results} shows the result page of the AlphaCharges application and highlights the new coloring control.
+To incorporate this coloring into αCharges, the backend of the application was extended to include the confidence scores in the output mmCIF file. This mmCIF file is sent to the frontend where it is loaded into the Mol* viewer. The αCharges application adds a new control to the result page for switching to the pLDDT color theme. Figure \ref{fig:alpha-charges-results} shows the result page of the αCharges application and highlights the new coloring control.
 
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=\textwidth]{figures/alpha-charges-results.png}
+    \includegraphics[width=\textwidth,frame]{figures/alpha-charges-results.png}
   \end{center}
-  \caption{Result page of the AlphaCharges application. The control for switching to the pLDDT color theme is highlighted in red.}
+  \caption{Result page of the αCharges application. The control for switching to the pLDDT color theme is highlighted in red.}
   \label{fig:alpha-charges-results}
 \end{figure}
 
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=\textwidth]{figures/alphafold_coloring.png}
+    \includegraphics[width=\textwidth,frame]{figures/alphafold_coloring.png}
   \end{center}
   \caption{Coloring of the structure by the pLDDT confidence score.}
   \label{fig:alphafold-coloring}
@@ -743,7 +761,7 @@ To incorporate this coloring into AlphaCharges, the backend of the application w
 
 \section{Problematic structure page}
 
-The AlphaCharges application cannot calculate the partial atomic charges for all protein structures. Some structures can be incorrectly predicted by the AlphaFold2 algorithm or the application can fail to protonate the structure.
+The αCharges application cannot calculate the partial atomic charges for all protein structures. Some structures can be incorrectly predicted by the AlphaFold2 algorithm or the application can fail to protonate the structure.
 \cite{jumper2021alphafold} In such instances, the application automatically redirects the user to an error page, which displays the problematic structure in the Mol* viewer and an error message.
 
 The error message is generated by the backend and contains a description of the error together with a list of each atom in the problematic structure that caused the error. When the user hovers over an atom in the list, a pop-up text is displayed with an explanation for the probable cause of the error. Figure \ref{fig:wrong_structure_text} shows the error message for a structure wrongly predicted by AlphaFold2 and the explanation for the atom \textit{GLN 33 CD}.
@@ -752,7 +770,7 @@ Additionally, when the user clicks on an atom in the list, the Mol* viewer is fo
 
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=\textwidth]{figures/wrong_structure_text.png}
+    \includegraphics[width=\textwidth,frame]{figures/wrong_structure_text.png}
   \end{center}
   \caption{Explanation of error for atom \textit{GLN 33 CD}.}
   \label{fig:wrong_structure_text}
@@ -760,16 +778,62 @@ Additionally, when the user clicks on an atom in the list, the Mol* viewer is fo
 
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=\textwidth]{figures/wrong_structure_focus.png}
+    \includegraphics[width=\textwidth,frame]{figures/wrong_structure_focus.png}
   \end{center}
   \caption{Focus on the atom GLN 33 CD.}
   \label{fig:wrong_structure_focus}
 \end{figure}
 
+\newpage
 \chapter*{Conclusion}
 \markright{\textsc{Conclusion}}
 \addcontentsline{toc}{chapter}{Conclusion}
 
+In this thesis, we have explored the theory, techniques, and tools for visualizing and analyzing molecular structures with enhanced molecular visualization software. Our research focused on extending the capabilities of the popular Mol* viewer, addressing the visualization and analysis of both micromolecules and macromolecules.
+
+Chapter 1 laid the foundation by discussing molecular structure, partial atomic charges, chemical file formats, and color interpolation techniques. These concepts are essential for accurately representing and understanding molecular structures. By leveraging these theoretical principles, we can create informative and visually appealing visualizations.
+
+Chapter 2 delved into various types of molecular visualizations, including ball and stick, surface, and cartoon representations. We emphasized the importance of color in visualizations to highlight specific features or properties of molecules. Additionally, we explored different visualization software, with a particular focus on the capabilities of Litemol and Mol*.
+
+In Chapter 3, we presented the development of an extension for the Mol* viewer, specifically focusing on the incorporation of partial atomic charges. By extending the Mol* viewer, we enabled users to analyze and visualize atomic charges, providing valuable insights into the electrostatic properties of molecules. The implementation of property providers, color theme providers, label providers, and controls enhanced the user experience and facilitated the analysis of molecular structures.
+
+Chapter 4 introduced the Atomic Charge Calculator II, an extension built upon the ChargeFW2 framework. This extension expanded the compatibility of the calculator to support multiple molecular file formats, ensuring broader accessibility for users. The integration of multicharge support further enhanced the accuracy and versatility of atomic charge calculations. The integration of the Atomic Charge Calculator II with the Mol* viewer created a seamless workflow for analyzing and visualizing molecular structures with atomic charges.
+
+In Chapter 5, we presented the AlphaCharges tool, which introduced novel functionalities to the Mol* viewer. The integration of AlphaCharges expanded the capabilities of the viewer by enabling the visualization of pLDDT confidence scores, providing users with valuable information about the reliability of structural predictions. The introduction of the problematic structure page feature further facilitated the analysis of challenging molecular structures.
+
+In conclusion, this thesis has contributed to the advancement of molecular visualization and analysis techniques. By extending the capabilities of the Mol* viewer, we have empowered researchers and scientists with enhanced tools to gain deeper insights into molecular structures. The integration of the Atomic Charge Calculator II and the AlphaCharges tool further strengthens the analytical capabilities of the viewer. These advancements open up new possibilities for studying molecular structures in various scientific disciplines, ranging from chemistry to biochemistry and materials science.
+
+As technology continues to evolve, we anticipate further improvements and innovations in molecular visualization software. Future research could explore additional extensions and functionalities to address emerging challenges and enhance the analysis and understanding of complex molecular systems. By pushing the boundaries of molecular visualization, we can unlock new discoveries and advancements in scientific research.
+
+Overall, this thesis has shed light on the significance of visualizing and analyzing molecular structures, providing researchers with powerful tools to unravel the secrets of the microscopic world and contribute to advancements in various scientific fields.
+
+Keywords: molecular visualization, molecular structures, partial atomic charges, visualization software, Atomic Charge Calculator II, AlphaCharges, scientific research.
+
 \printbibliography[heading=bibintoc]
+
+\newpage
+\pagenumbering{roman}
+\appendix
+
+\chapter{Source code}
+\label{appendix:source-code}
+
+All source code can be found in the attachments. Additionally, the source code can be found on GitHub. Below are the links to the GitHub repositories:
+
+\begin{itemize}
+  \item αCharges: \\
+  \url{https://github.com/sb-ncbr/AlphaCharges}
+  \item Atomic Charge Calculator II: \\
+  \url{https://github.com/sb-ncbr/AtomicChargeCalculator2}
+  \item ChargeFW2: \\
+  \url{https://github.com/sb-ncbr/ChargeFW2}
+  \item Mol* viewer plugin: \\
+  \url{https://github.com/MergunFrimen/molstar-partial-charges}
+\end{itemize}
+
+\chapter{αCharges paper}
+\label{appendix:alpha-charges}
+  
+\includepdf[pages=-,width=\textwidth]{figures/alphachargespaper.pdf}
 
 \end{document}
