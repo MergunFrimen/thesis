@@ -145,9 +145,15 @@ By providing a comprehensive overview of these theoretical concepts, this chapte
 
 \textbf{TODO}: don't focus too much on explaining things that aren't relevant further in the thesis \\
 
+Molecules are the building blocks of matter. They are composed of atoms, which are connected through chemical bonds. Molecules can be divided into two main categories: micromolecules and macromolecules. Micromolecules are small molecules that are not biologically relevant, such as drug molecules. Macromolecules are large molecules that are biologically relevant, such as proteins and carbohydrates.  
+
 \subsection{Micromolecules}
 
+The structure of micromolecules is not hierarchical, consisting only of atoms and bonds.
+
 \subsection{Macromolecules}
+
+The structure of macromolecules is hierarchical, consisting of chains, residues, atoms, and bonds.
 
 Molecular structure refers to the arrangement of atoms and chemical bonds in a molecule. The three main components of molecular structure are atoms, residues, and chains.
 In this section we will look at
@@ -340,7 +346,7 @@ Firstly, the extension should enable the coloring of atoms and residues based on
 
 \section{Mol* state tree}
 
-After loading a structure the Mol* viewer loads the structure into a state tree. The state tree is a tree structure that contains node which can be anything really. At the leaves of the tree are 3D Representations of the parent selections. The selections are just a collection of atoms that should be visualized.
+To store information about the molecular structure and its visualization, the Mol* library uses a state tree. The state tree is a hierarchical data structure, which consists of several layers, each of which contains information about a specific aspect of the structure. The layers are organized in a hierarchical manner, with each layer containing information about the layer below it.
 
 \begin{figure}
   \begin{center}
@@ -462,6 +468,8 @@ To establish the color for a given charge, two color interpolations are employed
 \subsection{Label provider}
 \label{subsection:label_provider}
 
+TODO: cite the Mol* documentation where the Loci object is described \\
+
 Having colored the structural elements, it was also necessary to create a label provider, which would assign labels that describe the charge of the structural element. In order to determine which element is highlighted, Mol* uses the object Loci. A Loci object is utilized for general selections and highlights. Consequently, it is essential to first extract the location from the Loci object in order to obtain the atom ID. The charge is acquired from the property provider, and the label is an HTML string that conveys the charge of the atom or residue. An example of the label can be seen in in the right-hand corner in figure \ref{}.
 
 \subsection{Controls}
@@ -489,6 +497,14 @@ The controls are depicted in Figure \ref{fig:controls-charge-set}.
 \label{chapter:molstar_viewer_plugin}
 
 In addition to the partial charges extension for the Mol* library, it was necessary to create a custom Mol* viewer plugin. By using a plugin, it is possible to create custom behavior, which is not provided by the standard Mol* viewer.
+
+\subsection{Technologies used during development}
+
+The plugin was developed using Vite. Vite is a build tool that was created to address some of the problems faced by developers when building large applications with traditional build tools such as Webpack. One of the main advantages of Vite is that it provides a fast development server. The speed of the development server is achieved by pre-bundling the static project dependencies with esbuild, a modern bundler written in Go, and serving the project source code with native ES module imports. \cite{vite}
+
+The plugin is written in Typescript and uses the Mol* library. The plugin is bundled using Rollup \cite{rollup}, a module bundler for Javascript, and published to NPM, a package manager for Javascript applications. \cite{npm}
+
+\subsection{Structure of the plugin}
 
 The plugin is designed as a Typescript class. The structure of the class is depicted in Figure \ref{fig:plugin_structure}. It contains a method to create the plugin and another to load a structure file. Furthermore, it includes four attributes, each an object with methods that act as an interface for managing the plugin:
 
@@ -547,12 +563,6 @@ The MolScript query selection is depicted in Figure \ref{fig:focus}. Once the at
 \caption{MolScript query for selecting an atom.}
 \label{fig:focus}
 \end{figure}
-
-\subsection{Technologies used during development}
-
-The plugin was developed using Vite. Vite is a build tool that was created to address some of the problems faced by developers when building large applications with traditional build tools such as Webpack. One of the main advantages of Vite is that it provides a fast development server. The speed of the development server is achieved by pre-bundling the static project dependencies with esbuild, a modern bundler written in Go, and serving the project source code with native ES module imports. \cite{vite}
-
-The plugin is written in Typescript and uses the Mol* library. The plugin is bundled using Rollup \cite{rollup}, a module bundler for Javascript, and published to NPM, a package manager for Javascript applications. \cite{npm}
 
 \chapter{Atomic Charge Calculator II}
 \label{chapter:atomic_charge_calculator_ii}
@@ -721,6 +731,14 @@ To incorporate this coloring into AlphaCharges, the backend of the application w
   \end{center}
   \caption{Result page of the AlphaCharges application. The control for switching to the pLDDT color theme is highlighted in red.}
   \label{fig:alpha-charges-results}
+\end{figure}
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=\textwidth]{figures/alphafold_coloring.png}
+  \end{center}
+  \caption{Coloring of the structure by the pLDDT confidence score.}
+  \label{fig:alphafold-coloring}
 \end{figure}
 
 \section{Problematic structure page}
