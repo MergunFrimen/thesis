@@ -128,21 +128,13 @@
 \markright{\textsc{Introduction}}
 \addcontentsline{toc}{chapter}{Introduction}
 
-The study of molecular structures plays a crucial role in various scientific disciplines, including chemistry, biochemistry, and materials science. Understanding the spatial arrangement and interactions of molecules is essential for comprehending their properties and functions. With advancements in computational techniques and software tools, scientists have gained the ability to visualize and analyze molecular structures in unprecedented detail.
+Partial atomic charges are real numbers which describe the electron density in a molecule. They are used in various fields of chemistry, e.g. in molecular dynamics, molecular docking, and pharmacophore design. \cite{} Partial atomic charges are not measurable, therefore, their values need to be calculated. Standard calculation methods are based on quantum mechanical methods. However, these methods are computationally complex and are applicable only to small molecules. Therefore, empirical methods are often used instead, which are much faster with comparable accuracy. \cite{schindler2021sqe}
 
-This thesis aims to explore the theory, techniques, and tools used for visualizing and analyzing molecular data. The investigation focuses on enhancing the capabilities of molecular visualization software, specifically the popular tool, Mol* \parencite{sehnal2021molstar}. The research addresses the visualization of both micromolecules and macromolecules, encompassing the visualization of molecular structures ranging from small organic compounds to complex biomolecules.
+Atomic Charge Calculator II \cite{racek2020acc2} and αCharges \cite{schindler2023alphacharges} are two web-based applications which allow fast calculation of partial atomic charges by empirical methods. The Atomic Charge Calculator II integrated the Litemol viewer \cite{sehnal2017litemol} to allow users to visualize the calculated partial atomic charges. However, the Litemol viewer is no longer maintained. Its modern replacement is the Mol* viewer \cite{sehnal2021molstar}, which however does not support the visualization of partial atomic charges.
 
-Chapter 1 delves into the theoretical foundations underlying molecular structures. It begins by examining molecular structure in terms of its composition, encompassing micromolecules and macromolecules. The discussion further extends to the concept of partial atomic charges and the empirical methods employed to calculate them efficiently. Additionally, the chapter explores various chemical file formats commonly used for storing molecular data, including SDF, MOL2, PDB, and mmCIF. Finally, color interpolation techniques are explored, which facilitate the representation of molecular structures with informative visualizations.
+Therefore, the main goal of this thesis is to extend the Mol* library \cite{sehnal2021molstar} to support the visualization of partial atomic charges and subsequently incorporate the Mol* viewer into the Atomic Charge Calculator II and αCharges web applications.
 
-Chapter 2 focuses on the different types of visualizations employed in molecular structure analysis. It explores popular visualization techniques such as ball and stick, surface representations, and cartoon representations. Moreover, the chapter discusses the significance of coloring molecular visualizations, enabling the highlighting of specific features or properties of molecules. An overview of visualization software, with a particular emphasis on Litemol and Mol*, is provided to understand the capabilities and limitations of existing tools.
-
-Chapter 3 presents the development of an extension for the Mol* viewer, specifically addressing the incorporation of partial atomic charges. The chapter outlines the requirements for the extension and provides insights into the Mol* state tree and custom mmCIF categories. It further discusses the implementation details, including the development of property providers, color theme providers, label providers, and controls. The chapter concludes with a comprehensive overview of the Mol* viewer plugin's structure and the technologies utilized during its development.
-
-Chapter 4 introduces the Atomic Charge Calculator II, an extension built upon the ChargeFW2 framework. The chapter explores the extension's enhancements for multiple molecular file formats, including mmCIF, PDB, SDF, and MOL2. Additionally, the integration of multicharge support, involving frontend and backend changes, is discussed. The chapter concludes with an exploration of the integration of the Atomic Charge Calculator II with the Mol* viewer, enabling seamless analysis and visualization of atomic charges.
-
-Chapter 5 presents the AlphaCharges tool, which integrates with the Mol* viewer and introduces novel functionalities. The chapter explores the integration process and the enhancements made to the Mol* viewer to facilitate the utilization of AlphaCharges. Additionally, the chapter delves into coloring molecular visualizations based on pLDDT confidence scores, a measure of structural reliability. Furthermore, the problematic structure page feature is introduced, providing a comprehensive analysis of challenging molecular structures.
-
-In conclusion, this thesis offers a comprehensive exploration of the theory, techniques, and software tools used for visualizing and analyzing molecular structures. The research expands upon the capabilities of the Mol* viewer, introducing extensions that enable the incorporation of partial atomic charges and enhanced visualizations. The integration of the Atomic Charge Calculator II and the AlphaCharges tool further enhances the analytical capabilities of the Mol* viewer. Overall, this thesis contributes to the advancement of molecular visualization and analysis techniques, facilitating deeper insights into the world of molecular structures.
+Chapter 1 explains the theoretical concepts of molecular structures and partial atomic charges. Furthermore, it describes the chemical file formats used in the thesis. Chapter 2 covers the software used for visualizing molecular structures, with a focus on the Mol* viewer. Chapter 3 describes the implementation of the partial atomic charges extension in Mol*. Additionally, it describes the implementation of the Mol* viewer plugin, which is integrated into the Atomic Charge Calculator II and AlphaFold web applications in Chapters 4 and 5.
 
 \newpage
 \chapter{Theory}
@@ -255,14 +247,14 @@ In contrast to other formats, the mmCIF format does not impose limits on column 
 
 % TODO: add example image + better explanation
 
-\section{Color interpolation}
-\label{section:color_interpolation}
+% \section{Color interpolation}
+% \label{section:color_interpolation}
 
-% TODO: this section will briefly describe color interpolation, add math equation so that it looks pro, add example of interpolations used in the partial charges color theme \\
+% % TODO: this section will briefly describe color interpolation, add math equation so that it looks pro, add example of interpolations used in the partial charges color theme \\
 
-Color interpolation is the process of creating new colors by mixing two or more colors together. It is a common technique used in computer graphics and digital image processing to create smooth transitions between colors.
+% Color interpolation is the process of creating new colors by mixing two or more colors together. It is a common technique used in computer graphics and digital image processing to create smooth transitions between colors.
 
-Color interpolation works by calculating the intermediate colors between two or more given colors. This is typically done by taking a weighted average of the red, green, and blue values of the colors being interpolated.
+% Color interpolation works by calculating the intermediate colors between two or more given colors. This is typically done by taking a weighted average of the red, green, and blue values of the colors being interpolated.
 
 % TODO: add math equation + image of red,white and white,blue interpolation
 
