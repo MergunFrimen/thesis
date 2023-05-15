@@ -58,7 +58,7 @@
         Mol*,
         ACC~II,
         αCharges,
-        AlphaFold
+        AlphaFold,
         SB NCBR,
         molecular visualization,
         molecular structures,
@@ -70,7 +70,7 @@
         Mol*,
         ACC~II,
         αCharges,
-        AlphaFold
+        AlphaFold,
         SB NCBR,
         molecular visualization,
         molecular structures,
@@ -120,6 +120,8 @@
 \usepackage{dirtree}
 \usepackage[export]{adjustbox}
 \usepackage{pdfpages}
+\usepackage{chemfig}
+\usepackage{listings}
 
 \begin{document}
 
@@ -142,9 +144,8 @@ Through these efforts, this thesis seeks to advance the field of computational c
 \chapter{Theory}
 \label{chapter:theory}
 
-% TODO: this chapter is has placeholder text and is not finished yet. \\
-
-Theoretical concepts are fundamental to the study of computational chemistry, providing a framework for analyzing molecular structures and properties. This chapter focuses on four key areas of theory, beginning with an overview of molecular structure in Section 1.1. Section 1.2 provides an in-depth examination of chemical file formats, including the advantages and disadvantages of different file formats for storing molecular data. Partial atomic charges are explored in section 1.3, including their importance in analyzing molecular structures and the various methods used to compute them. Finally, section 1.4 delves into color interpolation, a critical technique for visualizing partial atomic charges in molecular structures.
+Theoretical concepts are fundamental to the study of computational chemistry, providing a framework for analyzing molecular structures and properties. This chapter focuses on four key areas of theory, beginning with an overview of molecular structures in Section 1.1. Section 1.2 explores partial atomic charges
+examination of chemical file formats, including the advantages and disadvantages of different file formats for storing molecular data. Partial atomic charges are explored in section 1.3, including their importance in analyzing molecular structures and the various methods used to compute them. Finally, section 1.4 describes color interpolation, a critical technique for visualizing partial atomic charges in molecular structures.
 
 By providing a comprehensive overview of these theoretical concepts, this chapter provides a strong foundation for the subsequent chapters, focusing on the implementation and analysis of the Mol* extension for visualizing partial atomic charges in molecular structures.
 
@@ -155,31 +156,57 @@ By providing a comprehensive overview of these theoretical concepts, this chapte
 
 % TODO: don't focus too much on explaining things that aren't relevant further in the thesis \\
 
-Molecules are the building blocks of matter. They are composed of atoms, which are connected through chemical bonds. Molecules can be divided into two main categories: micromolecules and macromolecules. Micromolecules are small molecules that are not biologically relevant, such as drug molecules. Macromolecules are large molecules that are biologically relevant, such as proteins and carbohydrates.  
+Molecules are the fundamental building blocks of matter, consisting of two or more atoms connected by chemical bonds. Molecules can vary widely in size and complexity, ranging from simple diatomic molecules like oxygen (O2) to highly complex organic compounds like proteins and DNA
+Molecules are composed of atoms, which are connected through chemical bonds. Molecules can be divided into two main categories: micromolecules and macromolecules.
+
+In this thesis work, we focus on two types of molecules: micromolecules and macromolecules. Micromolecules are relatively small in size and typically consist of a limited number of atoms. They are characterized by their low molecular weight and simple structure. Micromolecules play crucial roles in various biological processes and are involved in numerous chemical reactions in living organisms. Examples of micromolecules include water, glucose, or ethanol.
+
+The reason for this separation is that micromolecules are usually drug molecules (think ligands, ions, etc.), while macromolecules are usually proteins or carbohydrates. The structure of micromolecules is typically represented by their constituent atoms and bonds. The atoms are represented by their chemical symbols, while the bonds are represented by lines connecting the atoms. The atoms and bonds are arranged in a two-dimensional (2D) or three-dimensional (3D) space, depending on the molecule's structure. Figure \ref{fig:micromolecule} shows the 2D structure of ethanol, a micromolecule consisting of two carbon atoms, six hydrogen atoms, and one oxygen atom. 
 
 \subsection{Micromolecules}
 
-The structure of micromolecules is not hierarchical, consisting only of atoms and bonds.
+Micromolecules, also known as small molecules, are relatively small in size and typically consist of a limited number of atoms. They are characterized by their low molecular weight and simple structure. Micromolecules play crucial roles in various biological processes and are involved in numerous chemical reactions in living organisms. Examples of micromolecules include water, glucose, or ethanol.
+
+The structure of micromolecules is typically represented by their constituent atoms and bonds. The atoms are represented by their chemical symbols, while the bonds are represented by lines connecting the atoms. The atoms and bonds are arranged in a two-dimensional (2D) or three-dimensional (3D) space, depending on the molecule's structure. Figure \ref{fig:micromolecule} shows the 2D structure of ethanol, a micromolecule consisting of two carbon atoms, six hydrogen atoms, and one oxygen atom.
+
+% \begin{figure}[htbp]
+%   \centering
+%   \chemfig{-[2]H(-[6]H)-C(-[2]H)(-[6]H)-O-H}
+%   \caption{Hierarchy of structure 1A1U.}
+%   \label{fig:micromolecule}
+% \end{figure}
+
+
+Micromolecules are small molecules typically consisting of a relatively low number of atoms.
+
+Micromolecules are involved in various cellular processes and perform essential functions within living organisms.
+
+Examples of micromolecules include:
 
 \subsection{Macromolecules}
 
-The structure of macromolecules is hierarchical, consisting of chains, residues, atoms, and bonds.
+Macromolecules are large molecules composed of a high number of atoms, often thousands or even millions.
 
-Molecular structure refers to the arrangement of atoms and chemical bonds in a molecule. The three main components of molecular structure are atoms, residues, and chains.
-In this section we will look at
+They are typically formed through polymerization, where smaller subunits, called monomers, combine to form larger chain-like structures. This structure of macromolecules is hierarchical, consisting of chains, residues, and atoms.
 
-Atoms are the basic building blocks of matter. Atoms are composed of protons, neutrons, and electrons. The number of protons determines the element, while the number of neutrons determines the isotope. The number of electrons determines the charge of the atom. Atoms are the smallest unit of matter that can take part in a chemical reaction.
+ Macromolecules are crucial for the structure, function, and regulation of cells and organisms. Their large size allows for complex interactions and the ability to carry out specialized tasks within living systems.
 
-Bonds are the connections between atoms that hold molecules together. There are different types of bonds, e.g. covalent bonds, ionic bonds, and hydrogen bonds.
+There are four major classes of biological macromolecules: proteins, nucleic acids, carbohydrates, and lipids.
 
-A residue refers to a specific building block that remains after a chemical modification or enzymatic reaction.
-In proteins, residues refer to amino acids, which are connected through peptide bonds to form polypeptide chains.
-Residues are crucial in biochemistry because they determine the structure and function of biological molecules.
-The sequence of residues in a protein or nucleic acid, for instance, determines its three-dimensional structure and ultimately its biological activity.
+Proteins are composed of amino acid monomers, proteins play crucial roles in cell structure, enzyme catalysis, immune response, and cell signaling.
 
-Polymer chains (chains) are sequences of residues that are linked together. In the context of biomolecules, chains can be either polypeptide chains in proteins or polynucleotide chains in nucleic acids. The sequence and structure of these chains are crucial for understanding the function and properties of the biomolecules.
+Nucleic Acids: DNA (deoxyribonucleic acid) and RNA (ribonucleic acid) are nucleic acids, which are polymers of nucleotide monomers. They store and transmit genetic information and are involved in protein synthesis.
 
-Alternative conformations, also referred to as conformational isomerism, are different conformations of the same molecule. They can be used to represent different states of a molecule, such as different protonation states or different ligand binding modes. Alternative conformations are important for understanding the structure and function of biomolecules, as they provide insight into how they interact with other molecules.
+Carbohydrates are composed of sugar monomers, carbohydrates include simple sugars (monosaccharides), double sugars (disaccharides), and complex carbohydrates (polysaccharides). They provide energy and serve as structural components in cells.
+
+Lipids are a diverse group of molecules that include fats, oils, phospholipids, and steroids. Lipids are hydrophobic and serve as energy storage, insulation, and structural components of cell membranes.
+
+
+A residue refers to a specific monomer or building block within a macromolecule. In the case of proteins, each residue corresponds to an amino acid. For nucleic acids, each residue corresponds to a nucleotide. Residues are linked together by chemical bonds to form chains.
+
+A chain is a linear sequence of residues within a macromolecule. It represents the backbone of the molecule, with each residue connected to the next one. In proteins, the chain is often referred to as a polypeptide chain.
+
+% Alternative conformations, also referred to as conformational isomerism, are different conformations of the same molecule. They can be used to represent different states of a molecule, such as different protonation states or different ligand binding modes. Alternative conformations are important for understanding the structure and function of biomolecules, as they provide insight into how they interact with other molecules.
 
 \begin{figure}[htbp]
   \centering
@@ -193,39 +220,63 @@ Alternative conformations, also referred to as conformational isomerism, are dif
 \section{Partial atomic charges}
 \label{section:partial_atomic_charges}
 
-% TODO: this section will describe partial atomic charges, their applications, then it will describe how they are calculated using quantum mechanics, explain the need for empirical methods, describe empirical methods, and lastly mention chargefw2 and alphacharges as applications that use the empirical methods \\
+When two atoms of a molecule form a chemical bond, they share electrons. However, the electrons are not evenly shared between the two atoms due to differences in their electronegativities \footnote[1]{Electronegativity is a measure of an atom's ability to attract electrons towards itself. \cite{racek2022thesis}}. Atoms with higher electronegativities attract electrons more strongly than atoms with lower electronegativities. This uneven distribution of electron density influences the physical properties of the molecule and determines how it interacts with other molecules or substances.One way to represent this uneven distribution of electron density is by assigning partial atomic charges to individual atoms within the molecule. 
 
-Partial atomic charges are numerical values assigned to individual atoms within a molecule, representing their contribution to the overall charge distribution. These charges provide information about the electron density and the distribution of positive and negative charges within the molecule.
+Partial atomic charges are numerical values assigned to individual atoms within a molecule, representing their contribution to the distribution of electron density. Atoms with higher electronegativities have a partial negative charge, while atoms with lower electronegativities have a partial positive charge. Figure \ref{fig:partial_atomic_charges} shows the partial atomic charges of water (H2O). The partial atomic charges are represented by the red and blue spheres, with the red spheres representing the partial negative charges and the blue spheres representing the partial positive charges. 
 
-There are several applications for partial atomic charges in computational chemistry, including molecular dynamics simulations, molecular docking, and molecular mechanics.
+There are several applications for partial atomic charges in computational chemistry, such as molecular dynamics, molecular docking, and pharmacophore design. \cite{racek2022thesis}
 
-\begin{itemize}
-  \item Molecular dynamics - are used to simulate the motion of molecules over time. It is used to study the dynamics of molecules, such as proteins and nucleic acids.
-  \item Molecular docking is used to predict the binding affinity of a ligand to its receptor. It is used to study the interactions between molecules, such as proteins and nucleic acids.
-  \item Molecular mechanics is used to calculate the energy of a molecule. It is used to study the stability of molecules, such as proteins and nucleic acids.
-\end{itemize}
+% TODO: maybe break it up here into a subsection about calculation methods
 
-\subsection{Empirical methods}
-\label{subsection:empirical_methods}
+It is important to note that partial charges are simplify a theoretical concept and cannot be directly measured or observed; they can only be calculated using computational methods. One approach for calculating partial atomic charges is by quantum mechanical methods. However, these methods are computationally expensive and require a lot of computational resources. Another approach is by empirical methods, which are less accurate but faster and more efficient than quantum mechanical methods. \cite{schindler2019thesis}
 
-However, the quantum mechanics of molecules is too complex to be solved analytically. Therefore, empirical methods are used to approximate the electron density and the distribution of positive and negative charges within the molecule.
+Empirical methods are an efficient alternative to quantum mechanical methods, which operate at the atomic level rather than directly considering individual electrons or molecular orbitals. These methods aim to produce charges that are comparable to those obtained through quantum mechanical methods while keeping the computational complexity manageable. \cite{racek2022thesis}
+
+There are several empirical methods for calculating partial atomic charges, such as the EEM (Electronegativity Equalization Method), SQE+qp (Semi-Quantitative Electrostatic Potential Method), and MMFF (Merck Molecular Force Field). These methods are based on the assumption that the electron density of a molecule can be approximated by a sum of atomic densities. \cite{racek2022thesis}
 
 \section{Chemical file formats}
 \label{section:chemical_file_formats}
 
-% TODO: this section describes the file formats used during the thesis work; i will briefly describe SDF, MOL2, and PDB focus in more detail on the mmCIF file format: i will explain the data dictionaries; show one example molecule in each file format for SDF-MOL2 and PDB-mmCIF \\
-
-Chemical file formats are used to store molecular data in a computer-readable format. There are many file formats for storing molecular data, each suited to a specific purpose. This section provides an overview of the most common file formats used in computational chemistry.
+Chemical file formats are used to store molecular data in a computer-readable format. There are several file formats for storing molecular data, each suited to a specific purpose. This section provides an overview of the most common file formats used in computational chemistry: SDF, MOL2, PDB, and mmCIF.
 
 \subsection{SDF}
 \label{subsection:sdf}
 
-Structure-data file (SDF) is a widely used chemical file format for representing molecular structures and their associated properties. It is a text-based format that describes the atoms, bonds, and atomic coordinates of a molecule. 
+Structure-data file (SDF) is a widely used text-based chemical file format for describing the atoms, bonds, and atomic coordinates of small molecules. It is a container for the MOL V2000 and V3000 file formats. The SDF format is commonly used in cheminformatics applications, such as molecular modeling and drug discovery.
+
+Figure \ref{} depicts the contents of an SDF file containing the structure of phenol in the MOL V2000 format.
+
+% The first line contains the name of the molecule, followed by the number of atoms and bonds in the molecule. The next lines contain the atomic coordinates of each atom, followed by the bond information.
+
+\begin{figure}[htbp]
+  \centering
+  \lstset{
+    basicstyle=\ttfamily,
+    breaklines=true,
+    columns=fullflexible
+    }
+    \lstinputlisting[firstline=1, lastline=10]{phenols.sdf}
+    \caption{First ten lines of a SDF file containing the structure of a phenol.}
+    \label{fig:sdf}
+  \end{figure}
 
 \subsection{MOL2}
 \label{subsection:mol2}
 
-The Mol2 file format is another text-based format for storing molecular structures and their associated properties. It can store multiple conformations of a molecule and is commonly used in molecular modeling and cheminformatics applications. The Mol2 format provides more flexibility and additional features compared to the SDF format, such as support for multiple substructures and atom types.
+The Mol2 file format is another text-based format for storing small molecular structures and their associated properties. It can store multiple conformations of a molecule and is commonly used in molecular modeling and cheminformatics applications. The Mol2 format provides more flexibility and additional features compared to the SDF format, such as support for multiple substructures and atom types.
+
+\begin{figure}[htbp]
+  \centering
+  \lstset{
+    basicstyle=\ttfamily,
+    breaklines=true,
+    columns=fullflexible
+    }
+    \lstinputlisting[firstline=1, lastline=10]{phenols.mol2}
+    \caption{First ten lines of a MOL2 file containing the structure of a phenol.}
+    \label{fig:mol2}
+  \end{figure}
+
 
 \subsection{PDB}
 \label{subsection:pdb}
@@ -259,6 +310,20 @@ In contrast to other formats, the mmCIF format does not impose limits on column 
 % Color interpolation works by calculating the intermediate colors between two or more given colors. This is typically done by taking a weighted average of the red, green, and blue values of the colors being interpolated.
 
 % TODO: add math equation + image of red,white and white,blue interpolation
+
+\section {Color interpolation}
+\label{section:color_interpolation}
+
+Color interpolation refers to the process of determining intermediate colors between two or more given colors. It is a common technique used in computer graphics and digital image processing to smoothly transition between colors or to generate new colors based on existing ones. \cite{zucconi2016secrets}
+
+Color interpolation works by calculating the intermediate colors between two or more given colors. This is typically done by taking a weighted average of the red, green, and blue values of the colors being interpolated. The following Equation \ref{eq:color_interpolation} shows how to calculate the intermediate color between two colors, $c_1$ and $c_2$. The parameter $t$ is a value between 0 and 1, representing the percentage of the first color in the final color. For example, $t = 0.5$ would result in a color that is halfway between the two colors. The parameter $1 - t$ represents the percentage of the second color in the final color.
+
+\begin{equation}
+  c = a + (b - a) \cdot t
+\end{equation}
+\label{eq:color_interpolation}
+
+An example of color interpolation is the creation of color gradients, which are used to create smooth transitions between colors, such as red to white or white to blue as shown in Figure \ref{eq:color_interpolation}. Color gradients are commonly used in data visualization to represent continuous data, such as the charge of atoms in a molecule.
 
 \newpage
 \chapter{Visualizing molecular data}
@@ -321,14 +386,14 @@ Equally important as the type of visualization is the coloring scheme used to re
 
 % TODO: describe the web based \\
 
-There are numerous software tools available for visualizing molecular data, with varying levels of complexity, customization, and features. Some of the most popular tools include MolScript \cite{kraulis1991molscript}, PyMOL \cite{delano2002pymol}, VMD \cite{humphrey1996vmd}, and ChimeraX \cite{goddard2018ucsf}. More recently, web-based tools, such as NGL Viewer \cite{rose2015ngl}, LiteMol \cite{sehnal2017litemol}, and Mol* \cite{sehnal2021molstar}, have become increasingly popular due to their accessibility and ease of use. Furthermore, these web-based tools are especially useful for visualizing large macromolecular complexes, which are becoming increasingly common due to advances in structural biology techniques such as crystallography and electron microscopy. \cite{sehnal2021molstar}
+There are numerous software tools available for visualizing molecular data, with varying levels of complexity, customization, and features. Some of the most popular tools include MolScript \cite{kraulis1991molscript}, PyMOL \cite{delano2002pymol}, VMD \cite{humphrey1996vmd}, and ChimeraX \cite{goddard2018ucsf}. More recently, web-based visualization tools, such as NGL Viewer \cite{rose2015ngl}, LiteMol \cite{sehnal2017litemol}, and Mol* \cite{sehnal2021molstar}, have become increasingly popular due to their accessibility and ease of use. Furthermore, modern web-based tools take advantage of modern browser capabilities such as  are especially useful for visualizing large macromolecular complexes, which are becoming increasingly common due to advances in structural biology techniques such as crystallography and electron microscopy. \cite{sehnal2021molstar}
 
 In the following sections, we will discuss the two web-based molecular visualization tools used in this work: LiteMol and Mol*.
 
 \subsection{Litemol}
 \label{subsection:litemol}
 
-LiteMol is an open-source, web-native molecular visualization tool that supports various file formats and offers a user-friendly interface for creating visualizations. LiteMol provides essential visualization types, including ball and stick, surface, and cartoon representations, as well as options for customizing colors, lighting, and other display settings. The web-based nature of LiteMol makes it easily accessible and platform-independent.
+LiteMol is an open-source tool for molecular data visualization. It supports various file formats and offers a user-friendly interface for creating visualizations. LiteMol provides essential visualization types, including ball and stick, surface, and cartoon representations, as well as options for customizing colors, lighting, and other display settings. The web-based nature of LiteMol makes it easily accessible and platform-independent.
 
 The LiteMol suite is a freely available tool for visualizing large macromolecular structure datasets, which consists of three components: data delivery services, a compression format, and a lightweight 3D molecular viewer. It enables fast delivery and visualization of large datasets and is compatible with modern web browsers and mobile devices, making it accessible to users with and without structural biology expertise. The tool addresses the challenges of delivering and visualizing large structural data sets, which are becoming increasingly available due to advances in electron microscopy and other techniques. \cite{sehnal2017litemol}
 
@@ -533,7 +598,7 @@ The plugin is designed as a Typescript class. The structure of the class is depi
   \begin{center}
     \includegraphics[width=\textwidth]{out/figures/uml/viewer/viewer.png}
   \end{center}
-  \caption{Diagram of the custom Mol* viewer class .}
+  \caption{Diagram of the custom Mol* viewer class.}
   \label{fig:plugin_structure}
 \end{figure}
 
@@ -786,7 +851,9 @@ Additionally, when the user clicks on an atom in the list, the Mol* viewer is fo
 \markright{\textsc{Conclusion}}
 \addcontentsline{toc}{chapter}{Conclusion}
 
-The goal of this thesis was to extend the capabilities of the Mol* viewer to include the visualization of partial atomic charges and to incorporate the Mol* viewer into the Atomic Charge Calculator II and αCharges web applications. We have achieved this goal by implementing a new coloring scheme for the Mol* viewer that allows the coloring of molecular structures by partial atomic charges
+The goal of this thesis was to extend the capabilities of the Mol* viewer to include the visualization of partial atomic charges and to incorporate the Mol* viewer into the Atomic Charge Calculator II and αCharges web applications.
+
+We have achieved this goal by implementing a new coloring scheme for the Mol* viewer that allows the coloring of molecular structures by partial atomic charges
 . Additionally, we developed an extension for the Atomic Charge Calculator II that expands the compatibility of the calculator to support multiple molecular file formats and multicharge support. The integration of the Atomic Charge Calculator II with the Mol* viewer creates a seamless workflow for analyzing and visualizing molecular structures with partial atomic charges.
 
 In this thesis, we have explored the theory, techniques, and tools for visualizing and analyzing molecular structures with modern molecular visualization software. Our research focused on extending the capabilities of the Mol* viewer to support the visualization of partial atomic charges. 
