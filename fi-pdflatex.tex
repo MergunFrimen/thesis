@@ -61,10 +61,10 @@
         AlphaFold,
         SB NCBR,
         molecular visualization,
-        molecular structures,
         partial atomic charges,
         structural biology,
-        chemical file formats
+        chemical file formats,
+        Typescript
     },
     TeXkeywords = {%
         Mol*,
@@ -73,10 +73,10 @@
         AlphaFold,
         SB NCBR,
         molecular visualization,
-        molecular structures,
         partial atomic charges,
         structural biology,
-        chemical file formats
+        chemical file formats,
+        Typescript
     },
     abstract    = {%
         TODO
@@ -153,16 +153,14 @@ By providing a comprehensive overview of these theoretical concepts, this chapte
 \section{Molecular structure}
 \label{section:molecular_structure}
 
-% TODO: the section is not split into many subsections to allow for better reading flow; first i describe small molecules (micromolecules) which are just described by their atoms and bonds, these are usually drug molecules (think ligands, ions etc); for macromolecules explain the hierarchy of chain-residue-atom, in this work we used carbohydrates and proteins - describe those as well; explain somehow that this separation is done on purpose; add a schematic image that shows a small protein with 2 chains, then zoom in on one chain and show the residues, lastly zoom on one of the residues to show the atoms and bonds \\
-
-% TODO: don't focus too much on explaining things that aren't relevant further in the thesis \\
-
 Molecules are the fundamental building blocks of matter, consisting of two or more atoms connected by chemical bonds. Molecules can vary widely in size and complexity, ranging from simple diatomic molecules like oxygen (O2) to highly complex organic compounds like proteins and DNA
 Molecules are composed of atoms, which are connected through chemical bonds. Molecules can be divided into two main categories: micromolecules and macromolecules.
 
 In this thesis work, we focus on two types of molecules: micromolecules and macromolecules. Micromolecules are relatively small in size and typically consist of a limited number of atoms. They are characterized by their low molecular weight and simple structure. Micromolecules play crucial roles in various biological processes and are involved in numerous chemical reactions in living organisms. Examples of micromolecules include water, glucose, or ethanol.
 
 The reason for this separation is that micromolecules are usually drug molecules (think ligands, ions, etc.), while macromolecules are usually proteins or carbohydrates. The structure of micromolecules is typically represented by their constituent atoms and bonds. The atoms are represented by their chemical symbols, while the bonds are represented by lines connecting the atoms. The atoms and bonds are arranged in a two-dimensional (2D) or three-dimensional (3D) space, depending on the molecule's structure. Figure \ref{fig:micromolecule} shows the 2D structure of ethanol, a micromolecule consisting of two carbon atoms, six hydrogen atoms, and one oxygen atom. 
+
+Molecules can be divided into two main categories based on their size and complexity: micromolecules and macromolecules.
 
 \subsection{Micromolecules}
 
@@ -221,17 +219,25 @@ A chain is a linear sequence of residues within a macromolecule. It represents t
 \section{Partial atomic charges}
 \label{section:partial_atomic_charges}
 
-When two atoms of a molecule form a chemical bond, they share electrons. However, the electrons are not evenly shared between the two atoms due to differences in their electronegativities \footnote[1]{Electronegativity is a measure of an atom's ability to attract electrons towards itself. \cite{racek2022thesis}}. Atoms with higher electronegativities attract electrons more strongly than atoms with lower electronegativities. This uneven distribution of electron density influences the physical properties of the molecule and determines how it interacts with other molecules or substances. One way of representing this uneven distribution of electron density is by assigning partial atomic charges to individual atoms within the molecule. 
+When two atoms of a molecule form a chemical bond, they share electrons. However, the electrons are not evenly shared between the two atoms due to differences in their electronegativities \footnote[1]{Electronegativity is a measure of an atom's ability to attract electrons towards itself. \cite{racek2022thesis}}. Atoms with higher electronegativities attract electrons more strongly than atoms with lower electronegativities. This uneven distribution of electron density influences the physical properties of the molecule and determines how it interacts with other molecules or substances. One way of representing this uneven distribution of electron density is by assigning partial atomic charges to individual atoms within the molecule. \cite{racek2022thesis,schindler2019thesis}
 
-Partial atomic charges are numerical values assigned to individual atoms within a molecule, representing their contribution to the distribution of electron density. Atoms with higher electronegativities have a partial negative charge, while atoms with lower electronegativities have a partial positive charge. Figure \ref{fig:partial_atomic_charges} shows the partial atomic charges of water (H2O). The partial atomic charges are represented by the red and blue spheres, with the red spheres representing the partial negative charges and the blue spheres representing the partial positive charges. 
+Partial atomic charges are numerical values assigned to individual atoms within a molecule, representing their contribution to the distribution of electron density. Atoms with higher electronegativities have a partial negative charge (denoted as $\delta-$), while atoms with lower electronegativities have a partial positive charge (denoted as $\delta+$). \cite{racek2022thesis} 
+
+Figure \ref{fig:psilocybine} demonstrates the unequal distribution of electron density in psilocybine, a psychedelic compound found in certain species of mushrooms. The figure shows the partial atomic charges of psilocybine colored by their values. The partial negative charges are colored red, while the partial positive charges are colored blue.
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=10cm]{figures/psilocybine.png}
+  \end{center}
+  \caption{Partial atomic charges of psilocybine.}
+  \label{fig:psilocybine}
+\end{figure}
 
 There are several applications for partial atomic charges in computational chemistry, such as molecular dynamics, molecular docking, and pharmacophore design. \cite{racek2022thesis}
 
-% TODO: maybe break it up here into a subsection about calculation methods
-
 \subsection{Calculating partial atomic charges}
 
-It is important to note that partial charges are simplify a theoretical concept and cannot be directly measured or observed; they can only be calculated using computational methods. One approach for calculating partial atomic charges is by quantum mechanical methods. However, these methods are computationally expensive and require a lot of computational resources. Another approach is by empirical methods, which are less accurate but faster and more efficient than quantum mechanical methods. \cite{schindler2019thesis}
+It is important to note that partial charges are simply a theoretical concept and cannot be directly measured or observed; they can only be calculated using computational methods. \cite{schindler2019thesis} One approach for calculating partial atomic charges is by quantum mechanical methods. However, these methods are computationally expensive and require a lot of computational resources. Another approach is by empirical methods, which are less accurate but faster and more efficient than quantum mechanical methods. \cite{racek2022thesis}
 
 Empirical methods are an efficient alternative to quantum mechanical methods, which operate at the atomic level rather than directly considering individual electrons or molecular orbitals. These methods aim to produce charges that are comparable to those obtained through quantum mechanical methods while keeping the computational complexity manageable. \cite{racek2022thesis}
 
