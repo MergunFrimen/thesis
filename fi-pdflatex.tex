@@ -343,9 +343,9 @@ There are several methods for representing molecular data, each serving a differ
 \subsection{Ball and stick}
 \label{subsection:ball_and_stick}
 
-The ball and stick model represents atoms as spheres and bonds as cylindrical connections between these spheres. This model provides a simple and intuitive visualization of a molecule's atomic structure. It highlights individual atoms and their bonds, including their bond types. However, it may not accurately represent the spatial relationships between atoms in larger molecules or macromolecular complexes.
+The ball and stick model represents atoms as spheres and bonds as cylindrical connections between these spheres. This model provides a simple and intuitive visualization of a molecule's atomic structure. It highlights individual atoms and their bonds, including their bond types. However, it is not suitable for visualizing larger molecules due to the large number of atoms and bonds that would need to be displayed.
 
-Examples of ball and stick models are shown in Figures \ref{TODO} and \ref{fig:partial_charges_color_theme-surface}.
+Examples of ball and stick models are shown in Figures \ref{fig:element_symbol} and \ref{fig:partial_charges_color_theme-bas}.
 
 \subsection{Surface}
 \label{subsection:surface}
@@ -353,12 +353,12 @@ Examples of ball and stick models are shown in Figures \ref{TODO} and \ref{fig:p
 Surface representations depict the three-dimensional shape of a molecule by displaying its solvent-accessible surface. This model provides a more accurate representation of the molecule's overall shape and size, making it especially useful for studying macromolecular interactions and the binding of small molecules.
 For example, surface visualization can be used to identify potential binding sites on a protein surface, which can then be targeted by drug molecules. \ref{}
 
-Examples of surface models are shown in Figures \ref{TODO} and \ref{fig:partial_charges_color_theme-surface}.
+Examples of surface models are shown in Figures \ref{fig:psilocybin} and \ref{fig:partial_charges_color_theme-surface}.
 
 \subsection{Cartoon}
 \label{subsection:cartoon}
 
-Cartoon representations simplify the molecular structure by focusing on the secondary structure elements of proteins and nucleic acids, such as alpha helices and beta sheets. Alpha helices are often depicted as a spiral-like structures, whereas beta sheets as arrows.
+Cartoon representations simplify the molecular structure by focusing on the secondary structure elements of proteins and nucleic acids, such as alpha helices and beta sheets. Alpha helices are often depicted as a spiral-like structures, whereas beta sheets as arrows. \ref{}
 
 This type of visualization is particularly useful for visualizing large macromolecular complexes, as it highlights the overall organization and topology of the molecule without the clutter of atomic details. The simplification of the structure also makes it easier to understand the folding and dynamics of the molecule. \cite{tsai2003introduction}
 
@@ -851,12 +851,17 @@ Additionally, when the user clicks on an atom in the list, the Mol* viewer is fo
 \markright{\textsc{Conclusion}}
 \addcontentsline{toc}{chapter}{Conclusion}
 
-The goal of this thesis was to extend the capabilities of the Mol* viewer to include the visualization of partial atomic charges and to incorporate the Mol* viewer into the Atomic Charge Calculator II and αCharges web applications.
+This thesis aimed to advance the field of computational chemistry by providing researchers with a modern visualization of partial atomic charges in Mol* and by expanding the capabilities of the Atomic Charge Calculator II and αCharges web applications.
 
-We have achieved this goal by implementing a new coloring scheme for the Mol* viewer that allows the coloring of molecular structures by partial atomic charges
-. Additionally, we developed an extension for the Atomic Charge Calculator II that expands the compatibility of the calculator to support multiple molecular file formats and multicharge support. The integration of the Atomic Charge Calculator II with the Mol* viewer creates a seamless workflow for analyzing and visualizing molecular structures with partial atomic charges.
+We successfully extended the capabilities of the Mol* viewer to include the visualization of partial atomic charges. We incorporated the extended Mol* viewer into the Atomic Charge Calculator II and αCharges web applications.
 
-The source code for the Mol* viewer plugin and the Atomic Charge Calculator II is available on GitHub. The source code for the αCharges application is available in the attachments and on GitHub. Links to the GitHub repositories can be found in Appendix \ref{appendix:source-code}.
+We further enhanced the Atomic Charge Calculator II application with support for multiple calculations for a single request and implemented a new page for the αCharges web application for visualizing problematic atoms.
+
+We believe these advancements will help researchers in their work by allowing for more complex visualization capabilities of partial atomic charges in Mol* and by providing enhanced user interfaces for the Atomic Charge Calculator II and αCharges web applications.
+
+Furthermore, this work contributed to the publication \textit{αCharges: A web application for calculating and visualizing protein partial atomic charges} \cite{schindler2023alphacharges}. The publication was published in the Nucleic Acids Research journal and is included in Appendix \ref{appendix:alpha-charges}.
+
+All source code developed in this work is available in the attachments and on GitHub. Links to the GitHub repositories can be found in Appendix \ref{appendix:source-code}. The extension to the Mol* viewer is also available in the official Mol* repository. 
 
 \printbibliography[heading=bibintoc]
 
