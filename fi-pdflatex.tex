@@ -137,7 +137,7 @@
 \markright{\textsc{Introduction}}
 \addcontentsline{toc}{chapter}{Introduction}
 
-Partial atomic charges are real numbers that describe a molecule's electron density. They are used in various fields of computational chemistry, such as molecular dynamics, molecular docking, and pharmacophore design. \cite{racek2022thesis} While partial atomic charges cannot be directly measured experimentally, they can be calculated using computational methods based on quantum mechanics. \cite{gupta2015principles} However, these methods pose significant computational challenges, particularly for larger molecules, leading researchers to employ faster, albeit less accurate, empirical methods. \cite{schindler2019thesis}
+Partial atomic charges are real numbers that describe a molecule's electron density. They are used in various fields of computational chemistry, such as molecular dynamics, molecular docking, and pharmacophore design. \cite{racek2022thesis} While partial atomic charges cannot be measured experimentally, they can be calculated using computational methods based on quantum mechanics. \cite{gupta2015principles} However, these methods pose significant computational challenges, particularly for larger molecules, leading researchers to employ faster, albeit less accurate, empirical methods. \cite{schindler2019thesis}
 
 Atomic Charge Calculator II \cite{racek2020acc2} and αCharges \cite{schindler2023alphacharges} are two web-based applications that allow rapid calculations of partial atomic charges by empirical methods. The Atomic Charge Calculator II application incorporates the Litemol viewer \cite{sehnal2017litemol} to enable users to visualize the calculated charges. However, the Litemol viewer is no longer maintained, and its replacement, the Mol* viewer \cite{sehnal2021molstar}, does not currently support the visualization of partial atomic charges.
 
@@ -151,52 +151,55 @@ Through these efforts, this thesis seeks to advance the field of computational c
 \chapter{Theory}
 \label{chapter:theory}
 
-Theoretical concepts are fundamental to the study of computational chemistry, providing a framework for analyzing molecular structures and properties. This chapter focuses on four key areas of theory, beginning with an overview of molecular structures in Section \ref{section:molecular_structure}. Section \ref{section:partial_atomic_charges} explores partial atomic charges and their importance in computational chemistry. Section \ref{section:chemical_file_formats} provides an examination of chemical file formats, including the advantages and disadvantages of different file formats for storing molecular data. Finally, Section \ref{section:color_interpolation} describes color interpolation, a critical technique for visualizing partial atomic charges in molecular structures.
-
-By providing a comprehensive overview of these theoretical concepts, this chapter provides a strong foundation for the subsequent chapters, focusing on the implementation and analysis of the Mol* extension for visualizing partial atomic charges in molecular structures.
+Theoretical concepts are fundamental to the study of computational chemistry, providing a framework for analyzing molecular structures and properties. This chapter focuses on four key areas of theory, beginning with an overview of molecular structures in Section \ref{section:molecular_structure}. Section \ref{section:partial_atomic_charges} explores partial atomic charges and their importance in computational chemistry. Section \ref{section:chemical_file_formats} provides an examination of chemical file formats utilized in this work. Lastly, Section \ref{section:color_interpolation} describes color interpolation, a critical technique for visualizing partial atomic charges in molecular structures.
 
 \section{Molecular structure}
 \label{section:molecular_structure}
 
-Molecules are the fundamental building blocks of matter, consisting of two or more atoms connected by chemical bonds. Molecules can vary widely in size and complexity, ranging from simple diatomic molecules like oxygen (O2) to highly complex organic compounds like proteins and DNA
-Molecules are composed of atoms, which are connected through chemical bonds. Molecules can be divided into two main categories: micromolecules and macromolecules.
-
-In this thesis work, we focus on two types of molecules: micromolecules and macromolecules. Micromolecules are relatively small in size and typically consist of a limited number of atoms. They are characterized by their low molecular weight and simple structure. Micromolecules play crucial roles in various biological processes and are involved in numerous chemical reactions in living organisms. Examples of micromolecules include water, glucose, or ethanol.
-
-The reason for this separation is that micromolecules are usually drug molecules (think ligands, ions, etc.), while macromolecules are usually proteins or carbohydrates. The structure of micromolecules is typically represented by their constituent atoms and bonds. The atoms are represented by their chemical symbols, while the bonds are represented by lines connecting the atoms. The atoms and bonds are arranged in a two-dimensional (2D) or three-dimensional (3D) space, depending on the molecule's structure. Figure \ref{fig:micromolecule} shows the 2D structure of ethanol, a micromolecule consisting of two carbon atoms, six hydrogen atoms, and one oxygen atom. 
-
-Molecules can be divided into two main categories based on their size and complexity: micromolecules and macromolecules.
+Molecules are the fundamental building blocks of matter, consisting of two or more atoms connected by chemical bonds. Molecules can vary widely in size and complexity, ranging from simple diatomic molecules like oxygen to highly complex organic compounds like proteins and DNA. In this thesis work, we work with two main categories of molecules: micromolecules and macromolecules. The following sections provide an overview of these two categories, along with an explanation of the structure of polymers, and finally explain alternative conformations of molecular structures.
 
 \subsection{Micromolecules}
 
-Micromolecules, also known as small molecules, are relatively small in size and typically consist of a limited number of atoms. They are characterized by their low molecular weight and simple structure. Micromolecules play crucial roles in various biological processes and are involved in numerous chemical reactions in living organisms. Examples of micromolecules include water, glucose, or ethanol.
+Micromolecules, also known as small molecules, are relatively compact in size and are typically composed of a low number of atoms. Their small size allows to describe them simply by their atoms and bonds. Micromolecules play crucial roles in various biological processes and are involved in numerous chemical reactions in living organisms. 
 
-The structure of micromolecules is typically represented by their constituent atoms and bonds. The atoms are represented by their chemical symbols, while the bonds are represented by lines connecting the atoms. Figure \ref{fig:micromolecule} shows the 3D structure of ethanol, a micromolecule consisting of two carbon atoms, six hydrogen atoms, and one oxygen atom.
+Examples of micromolecules include water, glucose, or ethanol. Additionally, many drugs are small molecules. Figure \ref{fig:aspirin} shows the structure of aspirin, a micromolecule used to treat pain, fever, or inflammation.
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=7cm]{figures/aspirin.png}
+  \end{center}
+  \caption{Aspirin.}
+  \label{fig:aspirin}
+\end{figure}
 
 \subsection{Macromolecules}
 
-Macromolecules are large molecules composed of a high number of atoms, often thousands or even millions. They are typically formed through polymerization, where smaller subunits, called monomers, combine to form larger chain-like structures. Macromolecules are crucial for the structure, function, and regulation of cells and organisms. Their large size allows for complex interactions and the ability to carry out specialized tasks within living systems.
+On the other hand, macromolecules are large and complex molecules composed of a high number of atoms, often thousands or even millions. They are typically formed through polymerization, where smaller subunits, called monomers, combine to form larger chain-like structures, called polymers.
 
-Proteins are composed of amino acid residues (monomers), proteins play crucial roles in cell structure, enzyme catalysis, immune response, and cell signaling.
+Macromolecules are crucial for the structure, function, and regulation of cells and organisms. Their large size allows for complex interactions and the ability to carry out specialized tasks within living systems. Examples of macromolecules include proteins, nucleic acids, and carbohydrates.
 
-There are three major classes of biological macromolecules: proteins, nucleic acids, and carbohydrates.
+Figure \ref{fig:hemoglobin} shows the structure of hemoglobin, a protein found in red blood cells that transports oxygen throughout the body.
 
-The structure of macromolecules is hierarchical, consisting of chains, residues, and atoms. Figure \ref{fig:macromolecule} shows the hierarchical structure of the protein 1A1U, which consists of 2 chains, 153 residues and 1,224 atoms.
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=7cm]{figures/hemoglobin.png}
+  \end{center}
+  \caption{Hemoglobin.}
+  \label{fig:hemoglobin}
+\end{figure}
 
+\subsection{Polymer structure}
+\label{section:polymer_structure}
 
+Describing macromolecules solely by their atoms and bonds becomes impractical due to the large number of atoms involved. Instead, macromolecules are characterized by their residues and chains.
 
-Nucleic Acids: DNA (deoxyribonucleic acid) and RNA (ribonucleic acid) are nucleic acids, which are polymers of nucleotide monomers. They store and transmit genetic information and are involved in protein synthesis.
+A residue refers to a specific monomer or building block within a macromolecule. In the case of proteins, each residue corresponds to an amino acid. For nucleic acids, each residue corresponds to a nucleotide. An example of a residue is shown in Figure \ref{fig:structure2}.
 
-Carbohydrates are composed of sugar monomers, carbohydrates include simple sugars (monosaccharides), double sugars (disaccharides), and complex carbohydrates (polysaccharides). They provide energy and serve as structural components in cells.
+Residues are linked together by chemical bonds to form chains. When a macromolecule consists of multiple chains, each chain is assigned a unique identifier, usually described by letters, starting with the letter A. Residues inside a chain are identified by a number, starting with the number 1.
 
-Lipids are a diverse group of molecules that include fats, oils, phospholipids, and steroids. Lipids are hydrophobic and serve as energy storage, insulation, and structural components of cell membranes.
+The structure of a macromolecule can be described at different levels. The primary structure refers to the sequence of monomers in the polymer chain. The secondary structure involves local folding patterns within the polymer chain, such as alpha helices and beta sheets in proteins. The tertiary structure encompasses the overall 3D shape of the macromolecule. Finally, the quaternary structure describes the interactions between multiple macromolecules.
 
-
-A residue refers to a specific monomer or building block within a macromolecule. In the case of proteins, each residue corresponds to an amino acid. For nucleic acids, each residue corresponds to a nucleotide. Residues are linked together by chemical bonds to form chains.
-
-A chain is a linear sequence of residues within a macromolecule. It represents the backbone of the molecule, with each residue connected to the next one. In proteins, the chain is often referred to as a polypeptide chain.
-
-Alternative conformations, also referred to as conformational isomerism, are different conformations of the same molecule. They can be used to represent different states of a molecule, such as different protonation states or different ligand binding modes. Alternative conformations are important for understanding the structure and function of biomolecules, as they provide insight into how they interact with other molecules.
+Figure \ref{fig:structure1} attempts to visually explain the hierarchy of a protein consisting of two chains, A and B. Chain B is highlighted and colored to emphasize its residues. For instance, one of the residues in chain B is ARG 19, which corresponds to the 19th residue in chain B and represents the amino acid arginine. Figure \ref{fig:structure2} depicts the atoms of the selected residue, ARG 19.
 
 \begin{figure}[htbp]
   \centering
@@ -204,6 +207,21 @@ Alternative conformations, also referred to as conformational isomerism, are dif
   \subfigure[Atoms of residue ARG 19.]{\label{fig:structure2}\includegraphics[height=4.5cm,]{figures/structure2.png}}
   \caption{Hierarchy of structure 1A1U.}
   \label{fig:structure}
+\end{figure}
+
+\subsection{Alternative conformations}
+\label{section:alternative_conformations}
+
+Alternative conformations, or conformational isomerism, are different conformations of the same molecule. They can be used to represent different states of a molecule, such as different protonation states or different ligand binding modes. 
+
+Figure \ref{fig:alternative_conformations} shows two conformations of adenosine triphosphate. One conformation is colored in yellow, while the other is colored in blue.
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=7cm]{figures/alt_conformations.png}
+  \end{center}
+  \caption{Alternative conformations of ATP.}
+  \label{fig:alternative_conformations}
 \end{figure}
 
 
@@ -214,13 +232,13 @@ When two atoms of a molecule form a chemical bond, they share electrons. However
 
 Partial atomic charges are numerical values assigned to individual atoms within a molecule, representing their contribution to the distribution of electron density. Atoms with higher electronegativities have a partial negative charge (denoted as $\delta-$), while atoms with lower electronegativities have a partial positive charge (denoted as $\delta+$). \cite{racek2022thesis} 
 
-Figure \ref{fig:psilocybin} demonstrates the unequal distribution of electron density in psilocybin, a psychedelic compound found in certain species of mushrooms. \cite{tysl2014psilocybin} The figure shows the partial atomic charges of psilocybin colored by their values. The partial negative charges are colored red, while the partial positive charges are colored blue.
+Figure \ref{fig:psilocybin} demonstrates the unequal distribution of electron density in 4-PO-DMT, a psychedelic compound found in certain species of mushrooms. \cite{tysl2014psilocybin} The figure shows the partial atomic charges colored by their values. The partial negative charges are colored red, while the partial positive charges are colored blue.
 
 \begin{figure}[htbp]
   \begin{center}
     \includegraphics[width=10cm]{figures/psilocybine.png}
   \end{center}
-  \caption{Partial atomic charges of psilocybin.}
+  \caption{Partial atomic charges of 4-PO-DMT.}
   \label{fig:psilocybin}
 \end{figure}
 
@@ -240,7 +258,7 @@ There are several empirical methods for calculating partial atomic charges, such
 \subsection{ChargeFW2}
 \label{section:chargfw2}
 
-ChargeFW2 is a C++ program that calculates partial atomic charges by empirical methods. The program supports over 20 empirical methods, including the aforementioned SQE, EEM, and EQeq. It provides a command-line interface for running calculations and supports several file formats for input and output. \cite{racek2022thesis}
+ChargeFW2 is a C++ program that calculates partial atomic charges by empirical methods. The program supports 20 empirical methods, including the aforementioned SQE, EEM, and EQeq. It provides a command-line interface for running calculations and supports several file formats for input and output. \cite{racek2022thesis}
 
 \section{Chemical file formats}
 \label{section:chemical_file_formats}
@@ -308,19 +326,6 @@ One of the most important features of the mmCIF format is its support for data d
 This allows users to define new data items and integrate additional information.
 In contrast to other formats, the mmCIF format does not impose limits on column width and entry count, making it more flexible and accommodating for storing large amounts of data.
 
-% TODO: add example image + better explanation
-
-% \section{Color interpolation}
-% \label{section:color_interpolation}
-
-% % TODO: this section will briefly describe color interpolation, add math equation so that it looks pro, add example of interpolations used in the partial charges color theme \\
-
-% Color interpolation is the process of creating new colors by mixing two or more colors together. It is a common technique used in computer graphics and digital image processing to create smooth transitions between colors.
-
-% Color interpolation works by calculating the intermediate colors between two or more given colors. This is typically done by taking a weighted average of the red, green, and blue values of the colors being interpolated.
-
-% TODO: add math equation + image of red,white and white,blue interpolation
-
 \section {Color interpolation}
 \label{section:color_interpolation}
 
@@ -368,7 +373,7 @@ Cartoon representations simplify the molecular structure by focusing on the seco
 
 This type of visualization is particularly useful for visualizing large macromolecular complexes, as it highlights the overall organization and topology of the molecule without the clutter of atomic details. The simplification of the structure also makes it easier to understand the folding and dynamics of the molecule. \cite{tsai2003introduction}
 
-Examples of cartoon models are shown in Figures \ref{fig:partial_charges_color_theme-cartoon} and \ref{TODO}.
+Examples of cartoon models are shown in Figures \ref{fig:partial_charges_color_theme-cartoon} and \ref{fig:hemoglobin}.
 
 \section{Coloring of molecular visualizations}
 \label{subsection:coloring_of_molecular_visualizations}
