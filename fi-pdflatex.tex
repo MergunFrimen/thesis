@@ -270,48 +270,46 @@ ChargeFW2 is a C++ program that calculates partial atomic charges by empirical m
 \section{Chemical file formats}
 \label{section:chemical_file_formats}
 
-Chemical file formats are used to store molecular data in a computer-readable format. There are several file formats for storing molecular data, each suited to a specific purpose. In this section we look at the SDF and MOL2 file formats, which are commonly used for storing small molecules, and the PDB and mmCIF file formats, which are commonly used for storing macromolecules, such as proteins.
+Chemical file formats are used to store molecular data in a computer-readable format. There are several file formats for storing molecular data, each suited to a specific purpose. In this section, we will explore the SDF and MOL2 file formats, commonly used for storing small molecules, as well as the PDB and mmCIF file formats, commonly used for storing macromolecules such as proteins.
 
 \subsection{SDF}
 \label{subsection:sdf}
 
-Structure-data file (SDF) is a widely used text-based chemical file format for describing the atoms, bonds, and atomic coordinates of small molecules. It is a container for the MOL V2000 and V3000 file formats enabling the storage of multiple molecules in a single file. The MOL V2000 format is a fixed-width format, which allows the storage of up to 999 atoms and bonds, whereas the MOL V3000 removes this limitation enabling the storage of larger molecules. \cite{wikipedia_ctfile,mdl_ctfile}
+The Structure-Data File (SDF) is a widely used text-based chemical file format used to describe the atoms, bonds, and atomic coordinates of small molecules. It acts as a container for the MOL V2000 and V3000 file formats, allowing the storage of multiple molecules in a single file. The MOL V2000 format is a fixed-width format that can store up to 999 atoms and bonds, while the MOL V3000 format removes this limitation, enabling the storage of larger molecules \cite{wikipedia_ctfile,mdl_ctfile}.
 
-Figure \ref{fig:sdf} depicts an SDF file containing the structure of ethanol in the MOL V2000 format. This format has a header section, an atom section, and a bond section. The header section contains the name of the molecule and the number of atoms and bonds. The atom and bond sections contain the atom and bond information, respectively. \cite{belford2017anatomy}
+Figure \ref{fig:sdf} depicts an SDF file containing the structure of ethanol in the MOL V2000 format. This format consists of a header section, an atom section, and a bond section. The header section contains the molecule's name, as well as the number of atoms and bonds. The atom and bond sections provide the corresponding atom and bond information, respectively \cite{belford2017anatomy}.
 
 \begin{figure}[htbp]
   \begin{center}
     \includegraphics[width=11cm]{figures/sdf_file_format.png}
   \end{center}
-  \caption{SDF file containing the structure of a ethanol. \cite{belford2017anatomy}}
+  \caption{SDF file containing the structure of ethanol. \cite{belford2017anatomy}}
   \label{fig:sdf}
 \end{figure}
 
 \subsection{MOL2}
 \label{subsection:mol2}
 
-The Mol2 file format is another text-based format for storing small molecular structures and their associated properties. It can store multiple conformations of a molecule and is commonly used in molecular modeling and cheminformatics applications. The Mol2 format provides more flexibility and additional features compared to the SDF format by providing support for many record types. \cite{manish}
+The Mol2 file format is another text-based format used for storing small molecular structures and their associated properties. It supports multiple conformations of a molecule and is commonly utilized in molecular modeling and cheminformatics applications. Compared to the SDF format, Mol2 provides more flexibility and additional features by supporting various record types \cite{manish}.
 
-Figure \ref{fig:mol2} depicts the contents of an MOL2 file containing the structure of ethanol. Notice the similarity between the MOL2 and SDF formats. Both formats contain the same information about the atoms and bonds, however, the MOL2 format is more flexible in its structure.
+Figure \ref{fig:mol2} illustrates the contents of an MOL2 file containing the structure of ethanol. You may observe the similarity between the MOL2 and SDF formats. Both formats contain the same information about atoms and bonds. However, the MOL2 format offers greater flexibility in its structure.
 
 \begin{figure}[htbp]
   \begin{center}
     \includegraphics[width=11cm]{figures/mol2_file_format.png}
   \end{center}
-  \caption{MOL2 file containing the structure of a ethanol.}
+  \caption{MOL2 file containing the structure of ethanol.}
   \label{fig:mol2}
 \end{figure}
 
 \subsection{PDB}
 \label{subsection:pdb}
 
-\cite{gu2009structural}
+The Protein Data Bank (PDB) file format is widely employed for storing three-dimensional structures of proteins, nucleic acids, and other macromolecules. PDB files contain vital information such as atomic coordinates, secondary structure, and other essential details required for understanding macromolecular structures. The PDB format has found extensive use in structural biology, bioinformatics, and related fields \cite{pdb101}.
 
-The Protein Data Bank (PDB) file format is a widely used format for storing three-dimensional structures of proteins, nucleic acids, and other macromolecules. PDB files contain information about the atomic coordinates, secondary structure, and other important details required for understanding macromolecular structures. The PDB format has been widely adopted in structural biology, bioinformatics, and related fields. \cite{pdb101}
+The PDB file format utilizes a fixed-width format capable of storing up to 99,999 atoms. \cite{} However, this format is not suitable for large macromolecules like proteins, as it imposes limitations on the number of atoms and bonds it can accommodate. Consequently, the PDB file format is no longer maintained and has been superseded by the mmCIF format \cite{pdb101}.
 
-The PDB file format has a fixed-width format, which allows the storage of up to 99,999 atoms. This format is therefore not suitable for storing large macromolecules, such as proteins, since it imposes limits on the number of atoms and bonds. Therefore the PDB file format is no longer maintained and has been superseded by the mmCIF format. \cite{pdb101}
-
-Figure \ref{fig:pdb} depicts the contents of a PDB file containing the structure of a the hemoglobin protein.
+Figure \ref{fig:pdb} displays the contents of a PDB file containing the structure of the hemoglobin protein.
 
 \begin{figure}[htbp]
   \begin{center}
@@ -324,13 +322,13 @@ Figure \ref{fig:pdb} depicts the contents of a PDB file containing the structure
 \subsection{mmCIF}
 \label{subsection:mmcif}
 
-The mmCIF format, also known as PDBx/mmCIF, offers an enhanced and flexible representation of macromolecular crystallography data compared to the PDB format. One of the most important advantages of the mmCIF format is its utilization of data dictionaries, which allow users to define new data items and integrate additional information. \cite{pdb101} Unlike other formats, the mmCIF format does not impose limitations on column width and entry count, making it more flexible and accommodating for storing large amounts of data. \cite{pdb101}
+The mmCIF format, also known as PDBx/mmCIF, offers an enhanced and flexible representation of macromolecular crystallography data compared to the PDB format. \cite{} One of its most significant advantages is the utilization of data dictionaries, allowing users to define new data items and incorporate additional information into the file. \cite{pdb101}. Unlike other formats, mmCIF does not impose limitations on column width and entry count, making it more flexible and accommodating for storing large amounts of data \cite{pdb101}.
 
-In mmCIF, all data items are stored in a relational database format. This means that each data item is stored in a separate table, and the tables are linked together using unique identifiers (pointers). Additionally, each data item in the file is identified and referenced by a unique token. A token is composed of a category name and an attribute name, separated by a dot. For example, the token \texttt{\_atom\_site.id} refers to the \texttt{id} data item in the \texttt{\_atom\_site} category. \cite{pdb101}
+In the mmCIF file format, all data items are stored in a relational database format. Each data item is stored in a separate table, and the tables are linked together through unique identifiers (pointers). Furthermore, each data item in the file is identified and referenced by a unique token. A token consists of a category name and an attribute name separated by a dot. For example, the token \texttt{\_atom\_site.id} refers to the \texttt{id} data item in the \texttt{\_atom\_site} category \cite{pdb101}.
 
-The mmCIF format supports two forms of storing data items: key-value and tabular. Key-value data items contain a single value, whereas tabular data items contain multiple values. Multi-valued data items are represented as a list of values separated by a newline character. \cite{pdb101}
+The mmCIF format supports two forms of storing data items: key-value and tabular. Key-value data items contain a single value, while tabular data items contain multiple values. Multi-valued data items are represented as a list of values separated by a newline character. \cite{pdb101}
 
-Figure \ref{fig:mmcif} depicts the \texttt{\_atom\_site} category in the mmCIF file for hemoglobin. This category is represented in tabular form, (indicated by the \texttt{\_loop} token), where each row corresponds to an atom in the structure. The \texttt{\_atom\_site} category contains the following data items \cite{mmcif_dictionary}:
+Figure \ref{fig:mmcif} depicts the \texttt{\_atom\_site} category in the mmCIF file containing hemoglobin. This category is represented in tabular form, indicated by the \texttt{\_loop} token on the first row. Each row of the table corresponds to an atom in the structure. The \texttt{\_atom\_site} category contains several data items, including the following \cite{mmcif_dictionary}:
 
 \begin{itemize}
   \item \texttt{\_atom\_site.id}: a unique identifier for each atom in the structure
@@ -343,7 +341,7 @@ Figure \ref{fig:mmcif} depicts the \texttt{\_atom\_site} category in the mmCIF f
   \item 
 \end{itemize}
 
-The mmCIF format is the preferred format for storing macromolecular structures. It is more flexible and extensible than the PDB format, and it is also more suitable for storing large amounts of data. \cite{pdb101}
+The mmCIF format is the preferred format for storing macromolecular structures. It offers more flexibility and extensibility than the PDB format, and it is particularly suitable for storing large amounts of data \cite{}.
 
 \begin{figure}[htbp]
   \begin{center}
