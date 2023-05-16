@@ -270,28 +270,24 @@ ChargeFW2 is a C++ program that calculates partial atomic charges by empirical m
 \section{Chemical file formats}
 \label{section:chemical_file_formats}
 
-Chemical file formats are used to store molecular data in a computer-readable format. There are several file formats for storing molecular data, each suited to a specific purpose. This section provides an overview of the most common file formats used in computational chemistry: SDF, MOL2, PDB, and mmCIF.
+Chemical file formats are used to store molecular data in a computer-readable format. There are several file formats for storing molecular data, each suited to a specific purpose. Some file formats are more suitable for storing small molecules, while others are more suitable for storing macromolecules such as proteins. In this section we look at the SDF and MOL2 file formats, which are commonly used for storing small molecules, and the PDB and mmCIF file format, which is commonly used for storing macromolecules such as proteins.
 
 \subsection{SDF}
 \label{subsection:sdf}
 
-% https://chem.libretexts.org/Courses/University_of_Arkansas_Little_Rock/ChemInformatics_(2017)%3A_Chem_4399_5399/2.2%3A_Chemical_Representations_on_Computer%3A_Part_II/2.2.2%3A_Anatomy_of_a_MOL_file
+Structure-data file (SDF) is a widely used text-based chemical file format for describing the atoms, bonds, and atomic coordinates of small molecules. It is a container for the MOL V2000 and V3000 file formats enabling the storage of multiple molecules in a single file. The MOL V2000 format is a fixed-width format, which allows to store up to 999 atoms and bonds. MOL V3000 removes this limitation enabling the storage of larger molecules. \cite{wikipedia_ctfile}
 
-Structure-data file (SDF) is a widely used text-based chemical file format for describing the atoms, bonds, and atomic coordinates of small molecules. It is a container for the MOL V2000 and V3000 file formats. The MOL V2000 format is a fixed-width format, which allows to store up to 999 atoms and bonds. MOL V3000 removes this limitation enabling the storage of larger molecules. The SDF format is commonly used in cheminformatics applications, such as molecular modeling and drug discovery.
+The SDF format is commonly used in cheminformatics applications for storing small molecules, such drug molecules, and for sharing them between different applications. \cite{wikipedia_ctfile}
 
-Figure \ref{fig:sdf } depicts the contents of an SDF file containing the structure of phenol in the MOL V2000 format.
+Figure \ref{fig:sdf} depicts the contents of an SDF file containing the structure of ethanol in the MOL V2000 format. This format consists of a header section, atom section and bond section. The header section contains the name of the molecule and the number of atoms and bonds. The body section contains the atomic coordinates and the bond information. The footer section contains the partial atomic charges and the 2D coordinates of the molecule. \cite{belford2017anatomy}
 
 \begin{figure}[htbp]
-  \centering
-  \lstset{
-    basicstyle=\ttfamily,
-    breaklines=true,
-    columns=fullflexible
-    }
-    \lstinputlisting[firstline=1, lastline=10]{figures/ethanol.sdf}
-    \caption{SDF file containing the structure of a ethanol.}
-    \label{fig:sdf}
-  \end{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{figures/sdf_file_format.png}
+  \end{center}
+  \caption{SDF file containing the structure of a ethanol. \cite{belford2017anatomy}}
+  \label{fig:sdf}
+\end{figure}
 
 \subsection{MOL2}
 \label{subsection:mol2}
@@ -300,18 +296,15 @@ Figure \ref{fig:sdf } depicts the contents of an SDF file containing the structu
 
 The Mol2 file format is another text-based format for storing small molecular structures and their associated properties. It can store multiple conformations of a molecule and is commonly used in molecular modeling and cheminformatics applications. The Mol2 format provides more flexibility and additional features compared to the SDF format, such as support for multiple substructures and atom types.
 
-\begin{figure}[htbp]
-  \centering
-  \lstset{
-    basicstyle=\ttfamily,
-    breaklines=true,
-    columns=fullflexible
-    }
-    \lstinputlisting[firstline=1, lastline=10]{figures/ethanol.mol2}
-    \caption{MOL2 file containing the structure of a ethanol.}
-    \label{fig:mol2}
-  \end{figure}
+Figure \ref{fig:mol2} depicts the contents of an MOL2 file containing the structure of ethanol. Notice the similarity between the MOL2 and SDF formats. Both formats contain the same information, however, the MOL2 format provides a clearer structure and additional features.
 
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=\textwidth]{figures/mol2_file_format.png}
+  \end{center}
+  \caption{MOL2 file containing the structure of a ethanol.}
+  \label{fig:mol2}
+\end{figure}
 
 \subsection{PDB}
 \label{subsection:pdb}
@@ -889,7 +882,7 @@ We successfully extended the capabilities of the Mol* viewer to include the visu
 
 We further enhanced the Atomic Charge Calculator II application with support for multiple calculations for a single request and implemented a new page for the αCharges web application for visualizing problematic atoms.
 
-These advancements provide researchers with enhanced visualization capabilities and user interfaces for calculating and analyzing partial atomic charges. The significance of these improvements to the field of computational chemistry is substantiated by their contribution to a publication in the Nucleic Acids Research journal
+These advancements provide researchers with enhanced visualization capabilities and user interfaces for calculating and analyzing partial atomic charges. The significance of these improvements to the field of computational chemistry is substantiated by their contribution to a publication in the Nucleic Acids Research journal.
 
 All source code developed in this work is available in the attachments and on GitHub. Links to the GitHub repositories can be found in Appendix \ref{appendix:source-code}. The extension to the Mol* viewer is also available in the official Mol* repository. 
 
