@@ -322,7 +322,7 @@ Figure \ref{fig:pdb} displays the ATOM record section of a PDB file containing t
 \subsection{PQR}
 \label{subsection:pqr}
 
-The PQR format is a non-standard variant of the PDB format that enables users to include partial atomic charges and radii parameters in the existing PDB data. It does this by replacing the occupancy and temperature factor fields and replacing them with fields for partial atomic charges and radii. \cite{pqrfile,apbs_pqrfile} The PQR format is non-standard; despite this, the PQR format is still used in some applications, such as the Atomic Charge Calculator II, for storing partial atomic charges. \cite{racek2020acc2}.
+The PQR format is a non-standard variant of the PDB format that enables users to include partial atomic charges and radii parameters in the existing PDB data. It does this by replacing the Occupancy and B-factor fields (see Figure \ref{fig:pdb}) with fields for partial atomic charges and radii. \cite{pqrfile,apbs_pqrfile} The PQR format is non-standard; despite this, the PQR format is still used in some applications, such as the Atomic Charge Calculator II, for storing partial atomic charges. \cite{racek2020acc2}.
 
 \subsection{mmCIF}
 \label{subsection:mmcif}
@@ -869,7 +869,7 @@ To incorporate this coloring into αCharges, the backend of the application was 
 
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=\textwidth]{figures/alphafold_coloring.png}
+    \includegraphics[width=11cm]{figures/alphafold_coloring.png}
   \end{center}
   \caption{Coloring of the structure by the pLDDT confidence score.}
   \label{fig:alphafold-coloring}
@@ -886,7 +886,7 @@ Additionally, when the user clicks on an atom in the list, the Mol* viewer is fo
 
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=\textwidth]{figures/wrong_structure_text.png}
+    \includegraphics[width=11cm]{figures/wrong_structure_text.png}
   \end{center}
   \caption{Explanation of error for atom \textit{GLN 33 CD}.}
   \label{fig:wrong_structure_text}
