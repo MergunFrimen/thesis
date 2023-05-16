@@ -1,3 +1,33 @@
+% racek doctoral thesis
+@misc{racek2022thesis,
+  author = {Raček, Tomáš},
+  title  = {Algorithms for calculating atomic charges [online]},
+  year   = {2016 [cit. 2023-05-16]},
+  type   = {Advanced Master's thesis},
+  school = {Masaryk University, Faculty of Informatics, Brno},
+  url    = {https://is.muni.cz/th/syz2d/}
+}
+
+% textbook on quantum chemistry
+@book{gupta2015principles,
+  title     = {Principles and applications of quantum chemistry},
+  author    = {Gupta, VP},
+  year      = {2015},
+  publisher = {Academic Press}
+}
+
+% schindler master thesis
+@mastersthesis{schindler2019thesis,
+  author = {Schindler, Ondřej},
+  title  = {Empirické metody pro výpočet parciálních atomových nábojů [online]},
+  year   = {2019 [cit. 2023-05-16]},
+  type   = {Master's thesis},
+  school = {Masaryk University, Faculty of Science, Brno},
+  note   = {SUPERVISOR : Tomáš Raček, Radka Svobodová},
+  url    = {https://is.muni.cz/th/ts2kg/}
+}
+
+% acc2 paper
 @article{racek2020acc2,
   author   = {Raček, Tomáš and Schindler, Ondřej and Toušek, Dominik and Horský, Vladimír and Berka, Karel and Koča, Jaroslav and Svobodová, Radka},
   title    = {{Atomic Charge Calculator II: web-based tool for the calculation of partial atomic charges}},
@@ -14,23 +44,23 @@
   eprint   = {https://academic.oup.com/nar/article-pdf/48/W1/W591/33433185/gkaa367.pdf}
 }
 
-@article{sehnal2021molstar,
-  author   = {Sehnal, David and Bittrich, Sebastian and Deshpande, Mandar and Svobodová, Radka and Berka, Karel and Bazgier, Václav and Velankar, Sameer and Burley, Stephen K and Koča, Jaroslav and Rose, Alexander S},
-  title    = {{Mol* Viewer: modern web app for 3D visualization and analysis of large biomolecular structures}},
+% alphacharges paper
+@article{schindler2023alphacharges,
+  author   = {Schindler, Ondřej and Berka, Karel and Cantara, Alessio and Křenek, Aleš and Tichý, Dominik and Raček, Tomáš and Svobodová, Radka},
+  title    = {{αCharges: partial atomic charges for AlphaFold structures in high quality}},
   journal  = {Nucleic Acids Research},
-  volume   = {49},
-  number   = {W1},
-  pages    = {W431-W437},
-  year     = {2021},
+  year     = {2023},
   month    = {05},
-  abstract = {{Large biomolecular structures are being determined experimentally on a daily basis using established techniques such as crystallography and electron microscopy. In addition, emerging integrative or hybrid methods (I/HM) are producing structural models of huge macromolecular machines and assemblies, sometimes containing 100s of millions of non-hydrogen atoms. The performance requirements for visualization and analysis tools delivering these data are increasing rapidly. Significant progress in developing online, web-native three-dimensional (3D) visualization tools was previously accomplished with the introduction of the LiteMol suite and NGL Viewers. Thereafter, Mol* development was jointly initiated by PDBe and RCSB PDB to combine and build on the strengths of LiteMol (developed by PDBe) and NGL (developed by RCSB PDB). The web-native Mol* Viewer enables 3D visualization and streaming of macromolecular coordinate and experimental data, together with capabilities for displaying structure quality, functional, or biological context annotations. High-performance graphics and data management allows users to simultaneously visualise up to hundreds of (superimposed) protein structures, stream molecular dynamics simulation trajectories, render cell-level models, or display huge I/HM structures. It is the primary 3D structure viewer used by PDBe and RCSB PDB. It can be easily integrated into third-party services. Mol* Viewer is open source and freely available at https://molstar.org/.}},
+  abstract = {{The AlphaFold2 prediction algorithm opened up the possibility of exploring proteins’ structural space at an unprecedented scale. Currently, \\&gt;200 million protein structures predicted by this approach are deposited in AlphaFoldDB, covering entire proteomes of multiple organisms, including humans. Predicted structures are, however, stored without detailed functional annotations describing their chemical behaviour. Partial atomic charges, which map electron distribution over a molecule and provide a clue to its chemical reactivity, are an important example of such data. We introduce the web application αCharges: a tool for the quick calculation of partial atomic charges for protein structures from AlphaFoldDB. The charges are calculated by the recent empirical method SQE+qp, parameterised for this class of molecules using robust quantum mechanics charges (B3LYP/6-31G*/NPA) on PROPKA3 protonated structures. The computed partial atomic charges can be downloaded in common data formats or visualised via the powerful Mol* viewer. The αCharges application is freely available at https://alphacharges.ncbr.muni.cz with no login requirement.}},
   issn     = {0305-1048},
-  doi      = {10.1093/nar/gkab314},
-  url      = {https://doi.org/10.1093/nar/gkab314},
-  eprint   = {https://academic.oup.com/nar/article-pdf/49/W1/W431/38842088/gkab314.pdf}
+  doi      = {10.1093/nar/gkad349},
+  url      = {https://doi.org/10.1093/nar/gkad349},
+  note     = {gkad349},
+  eprint   = {https://academic.oup.com/nar/advance-article-pdf/doi/10.1093/nar/gkad349/50252244/gkad349.pdf}
 }
 
-﻿@article{sehnal2017litemol,
+% litemol paper
+@article{sehnal2017litemol,
   author  = {Sehnal, David
              and Deshpande, Mandar
              and Va{\v{r}}ekov{\'a}, Radka Svobodov{\'a}
@@ -53,15 +83,25 @@
   url     = {https://doi.org/10.1038/nmeth.4499}
 }
 
-@mastersthesis{schindler2019thesis,
-  author = {Schindler, Ondřej},
-  title  = {Empirické metody pro výpočet parciálních atomových nábojů [online]},
-  year   = {2019 [cit. 2023-05-15]},
-  type   = {Master's thesis},
-  school = {Masaryk University, Faculty of Science, Brno},
-  note   = {SUPERVISOR : Tomáš Raček, Radka Svobodová},
-  url    = {https://is.muni.cz/th/ts2kg/}
+% molstar paper
+@article{sehnal2021molstar,
+  author   = {Sehnal, David and Bittrich, Sebastian and Deshpande, Mandar and Svobodová, Radka and Berka, Karel and Bazgier, Václav and Velankar, Sameer and Burley, Stephen K and Koča, Jaroslav and Rose, Alexander S},
+  title    = {{Mol* Viewer: modern web app for 3D visualization and analysis of large biomolecular structures}},
+  journal  = {Nucleic Acids Research},
+  volume   = {49},
+  number   = {W1},
+  pages    = {W431-W437},
+  year     = {2021},
+  month    = {05},
+  abstract = {{Large biomolecular structures are being determined experimentally on a daily basis using established techniques such as crystallography and electron microscopy. In addition, emerging integrative or hybrid methods (I/HM) are producing structural models of huge macromolecular machines and assemblies, sometimes containing 100s of millions of non-hydrogen atoms. The performance requirements for visualization and analysis tools delivering these data are increasing rapidly. Significant progress in developing online, web-native three-dimensional (3D) visualization tools was previously accomplished with the introduction of the LiteMol suite and NGL Viewers. Thereafter, Mol* development was jointly initiated by PDBe and RCSB PDB to combine and build on the strengths of LiteMol (developed by PDBe) and NGL (developed by RCSB PDB). The web-native Mol* Viewer enables 3D visualization and streaming of macromolecular coordinate and experimental data, together with capabilities for displaying structure quality, functional, or biological context annotations. High-performance graphics and data management allows users to simultaneously visualise up to hundreds of (superimposed) protein structures, stream molecular dynamics simulation trajectories, render cell-level models, or display huge I/HM structures. It is the primary 3D structure viewer used by PDBe and RCSB PDB. It can be easily integrated into third-party services. Mol* Viewer is open source and freely available at https://molstar.org/.}},
+  issn     = {0305-1048},
+  doi      = {10.1093/nar/gkab314},
+  url      = {https://doi.org/10.1093/nar/gkab314},
+  eprint   = {https://academic.oup.com/nar/article-pdf/49/W1/W431/38842088/gkab314.pdf}
 }
+
+
+
 
 @misc{schindler2021thesis,
   author = {Schindler, Ondřej},
@@ -84,20 +124,6 @@
   title     = {GEMMI: A library for structural biology},
   journal   = {Journal of Open Source Software}
 } 
-
-@article{schindler2023alphacharges,
-  author   = {Schindler, Ondřej and Berka, Karel and Cantara, Alessio and Křenek, Aleš and Tichý, Dominik and Raček, Tomáš and Svobodová, Radka},
-  title    = {{αCharges: partial atomic charges for AlphaFold structures in high quality}},
-  journal  = {Nucleic Acids Research},
-  year     = {2023},
-  month    = {05},
-  abstract = {{The AlphaFold2 prediction algorithm opened up the possibility of exploring proteins’ structural space at an unprecedented scale. Currently, \\&gt;200 million protein structures predicted by this approach are deposited in AlphaFoldDB, covering entire proteomes of multiple organisms, including humans. Predicted structures are, however, stored without detailed functional annotations describing their chemical behaviour. Partial atomic charges, which map electron distribution over a molecule and provide a clue to its chemical reactivity, are an important example of such data. We introduce the web application αCharges: a tool for the quick calculation of partial atomic charges for protein structures from AlphaFoldDB. The charges are calculated by the recent empirical method SQE+qp, parameterised for this class of molecules using robust quantum mechanics charges (B3LYP/6-31G*/NPA) on PROPKA3 protonated structures. The computed partial atomic charges can be downloaded in common data formats or visualised via the powerful Mol* viewer. The αCharges application is freely available at https://alphacharges.ncbr.muni.cz with no login requirement.}},
-  issn     = {0305-1048},
-  doi      = {10.1093/nar/gkad349},
-  url      = {https://doi.org/10.1093/nar/gkad349},
-  note     = {gkad349},
-  eprint   = {https://academic.oup.com/nar/advance-article-pdf/doi/10.1093/nar/gkad349/50252244/gkad349.pdf}
-}
 
 @article{jumper2021alphafold,
   author   = {Jumper, John
@@ -292,23 +318,6 @@
   volume    = {44},
   year      = {2009},
   publisher = {John Wiley \& Sons}
-}
-
-@book{gupta2015principles,
-  title     = {Principles and applications of quantum chemistry},
-  author    = {Gupta, VP},
-  year      = {2015},
-  publisher = {Academic Press}
-}
-
-@phdthesis{racek2022thesis,
-  author = {Raček, Tomáš},
-  title  = {Empirical methods for calculating partial atomic charges [online]},
-  year   = {2022 [cit. 2023-05-15]},
-  type   = {Doctoral theses, Dissertations},
-  school = {Masaryk University, Faculty of Informatics, Brno},
-  note   = {SUPERVISOR : Luděk Matyska},
-  url    = {https://is.muni.cz/th/gy8gf/}
 }
 
 @article{pernaa2017introduction,
