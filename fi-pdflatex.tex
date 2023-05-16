@@ -85,7 +85,7 @@
       
       This thesis addresses this gap in functionality by extending the Mol* viewer to support the visualization of partial atomic charges. The extended Mol* viewer is subsequently integrated into the Atomic Charge Calculator II and αCharges web applications. In addition, we have upgraded the functionality of the Atomic Charge Calculator II application to permit multiple calculations within a single request.
       
-      These advancements provide researchers with enhanced visualization capabilities and user interfaces for calculating and analyzing partial atomic charges. The significance of these improvements to the field of computational chemistry is underscored by their contribution to a publication in the Nucleic Acids Research journal
+      These advancements provide researchers with enhanced visualization capabilities and user interfaces for calculating and analyzing partial atomic charges.
     },
     thanks      = {%
         TODO
@@ -136,6 +136,7 @@
 \chapter*{Introduction}
 \markright{\textsc{Introduction}}
 \addcontentsline{toc}{chapter}{Introduction}
+\label{chap:introduction}
 
 Partial atomic charges are real numbers that describe a molecule's electron density. They are used in various fields of computational chemistry, such as molecular dynamics, molecular docking, and pharmacophore design. \cite{racek2022thesis} While partial atomic charges cannot be measured experimentally, they can be calculated using computational methods based on quantum mechanics. \cite{gupta2015principles} However, these methods pose significant computational challenges, particularly for larger molecules, leading researchers to employ faster, albeit less accurate, empirical methods. \cite{schindler2019thesis}
 
@@ -144,8 +145,6 @@ Atomic Charge Calculator II \cite{racek2020acc2} and αCharges \cite{schindler20
 The absence of this functionality in the Mol* viewer presents a significant limitation for researchers in computational chemistry. Therefore, this thesis aims to address this limitation by extending the Mol* viewer to support the visualization of partial atomic charges and, subsequently, incorporating the enhanced Mol* viewer into the Atomic Charge Calculator II and αCharges web applications.
 
 Chapter \ref{chapter:theory} introduces the theoretical concepts of molecular structures and partial atomic charges, along with the chemical file formats utilized in this work. Building on this foundation, Chapter \ref{chapter:visualizing_molecular_data} discusses the various visualization methods and software tools for visualizing molecular structures. Chapter \ref{chapter:molstar_partial_charges_extension} then describes the implementation of the Mol* viewer extension for visualizing partial atomic charges. Finally, the extended Mol* viewer is integrated into the Atomic Charge Calculator II and αCharges web applications, as detailed in Chapters \ref{chapter:atomic_charge_calculator_ii} and \ref{chapter:alphacharges}.
-
-Through these efforts, this thesis seeks to advance the field of computational chemistry by providing researchers with a modern visualization of partial atomic charges in Mol*.
 
 \newpage
 \chapter{Theory}
@@ -156,9 +155,13 @@ Theoretical concepts are fundamental to the study of computational chemistry, pr
 \section{Molecular structure}
 \label{section:molecular_structure}
 
+% TODO: citation for molecule definition
+
 Molecules are the fundamental building blocks of matter, consisting of two or more atoms connected by chemical bonds. Molecules can vary widely in size and complexity, ranging from simple diatomic molecules like oxygen to highly complex organic compounds like proteins and DNA. In this thesis work, we work with two main categories of molecules: micromolecules and macromolecules. The following sections provide an overview of these two categories, along with an explanation of the structure of polymers, and finally explain alternative conformations of molecular structures.
 
 \subsection{Micromolecules}
+
+% TODO: citations
 
 Micromolecules, also known as small molecules, are relatively compact in size and are typically composed of a low number of atoms. Their small size allows to describe them simply by their atoms and bonds. Micromolecules play crucial roles in various biological processes and are involved in numerous chemical reactions in living organisms. 
 
@@ -173,6 +176,8 @@ Examples of micromolecules include water, glucose, or ethanol. Additionally, man
 \end{figure}
 
 \subsection{Macromolecules}
+
+% TODO: citations
 
 On the other hand, macromolecules are large and complex molecules composed of a high number of atoms, often thousands or even millions. They are typically formed through polymerization, where smaller subunits, called monomers, combine to form larger chain-like structures, called polymers.
 
@@ -191,13 +196,15 @@ Figure \ref{fig:hemoglobin} shows the structure of hemoglobin, a protein found i
 \subsection{Polymer structure}
 \label{section:polymer_structure}
 
+% TODO: citations
+
 Describing macromolecules solely by their atoms and bonds becomes impractical due to the large number of atoms involved. Instead, macromolecules are characterized by their residues and chains.
 
-A residue refers to a specific monomer or building block within a macromolecule. In the case of proteins, each residue corresponds to an amino acid. For nucleic acids, each residue corresponds to a nucleotide. An example of a residue is shown in Figure \ref{fig:structure2}.
-
-Residues are linked together by chemical bonds to form chains. When a macromolecule consists of multiple chains, each chain is assigned a unique identifier, usually described by letters, starting with the letter A. Residues inside a chain are identified by a number, starting with the number 1.
+A residue refers to a specific monomer or building block within a macromolecule. In the case of proteins, each residue corresponds to an amino acid. For nucleic acids, each residue corresponds to a nucleotide. Residues are linked together by chemical bonds to form chains. When a macromolecule consists of multiple chains, each chain is assigned a unique identifier, usually described by letters, starting with the letter A. Residues inside a chain are identified by a number, starting with the number 1.
 
 The structure of a macromolecule can be described at different levels. The primary structure refers to the sequence of monomers in the polymer chain. The secondary structure involves local folding patterns within the polymer chain, such as alpha helices and beta sheets in proteins. The tertiary structure encompasses the overall 3D shape of the macromolecule. Finally, the quaternary structure describes the interactions between multiple macromolecules.
+
+% TODO: add mentions of the different levels of structure in the figures
 
 Figure \ref{fig:structure1} attempts to visually explain the hierarchy of a protein consisting of two chains, A and B. Chain B is highlighted and colored to emphasize its residues. For instance, one of the residues in chain B is ARG 19, which corresponds to the 19th residue in chain B and represents the amino acid arginine. Figure \ref{fig:structure2} depicts the atoms of the selected residue, ARG 19.
 
@@ -205,7 +212,7 @@ Figure \ref{fig:structure1} attempts to visually explain the hierarchy of a prot
   \centering
   \subfigure[Residues of chain B.]{\label{fig:structure1}\includegraphics[height=4.5cm]{figures/structure1.png}}
   \subfigure[Atoms of residue ARG 19.]{\label{fig:structure2}\includegraphics[height=4.5cm,]{figures/structure2.png}}
-  \caption{Hierarchy of structure 1A1U.}
+  \caption{Hierarchy of a protein structure.}
   \label{fig:structure}
 \end{figure}
 
@@ -228,17 +235,17 @@ Figure \ref{fig:alternative_conformations} shows two conformations of adenosine 
 \section{Partial atomic charges}
 \label{section:partial_atomic_charges}
 
-When two atoms of a molecule form a chemical bond, they share electrons. However, the electrons are not evenly shared between the two atoms due to differences in their electronegativities \footnote[1]{Electronegativity is a measure of an atom's ability to attract electrons towards itself. \cite{racek2022thesis}}. Atoms with higher electronegativities attract electrons more strongly than atoms with lower electronegativities. This uneven distribution of electron density influences the physical properties of the molecule and determines how it interacts with other molecules or substances. One way of representing this uneven distribution of electron density is by assigning partial atomic charges to individual atoms within the molecule. \cite{racek2022thesis,schindler2019thesis}
+When two atoms form a chemical bond, they share electrons. The electrons are not evenly shared between the two atoms due to differences in their electronegativities \footnote[1]{Electronegativity is a measure of an atom's ability to attract electrons towards itself. \cite{racek2022thesis}}. Atoms with higher electronegativities attract electrons more strongly than atoms with lower electronegativities. This uneven distribution of electron density influences the physical properties of the molecule and determines how it interacts with other molecules or substances. One way of representing this uneven distribution of electron density is by assigning partial atomic charges to individual atoms within the molecule. \cite{racek2022thesis,schindler2019thesis}
 
 Partial atomic charges are numerical values assigned to individual atoms within a molecule, representing their contribution to the distribution of electron density. Atoms with higher electronegativities have a partial negative charge (denoted as $\delta-$), while atoms with lower electronegativities have a partial positive charge (denoted as $\delta+$). \cite{racek2022thesis} 
 
-Figure \ref{fig:psilocybin} demonstrates the unequal distribution of electron density in 4-PO-DMT, a psychedelic compound found in certain species of mushrooms. \cite{tysl2014psilocybin} The figure shows the partial atomic charges colored by their values. The partial negative charges are colored red, while the partial positive charges are colored blue.
+Figure \ref{fig:psilocybin} demonstrates the unequal distribution of electron density in psilocybin, a psychedelic compound found in certain species of mushrooms. \cite{tysl2014psilocybin} The figure shows the partial atomic charges colored by their values. The partial negative charges are colored red, while the partial positive charges are colored blue.
 
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=10cm]{figures/psilocybine.png}
+    \includegraphics[width=7cm]{figures/psilocybine.png}
   \end{center}
-  \caption{Partial atomic charges of 4-PO-DMT.}
+  \caption{Partial atomic charges of psilocybin.}
   \label{fig:psilocybin}
 \end{figure}
 
@@ -329,16 +336,19 @@ In contrast to other formats, the mmCIF format does not impose limits on column 
 \section {Color interpolation}
 \label{section:color_interpolation}
 
+% TODO: citations
+% TODO: maybe reduce to first paragraph and skip the equation
+
 Color interpolation refers to the process of determining intermediate colors between two or more given colors. It is a common technique used in computer graphics and digital image processing to smoothly transition between colors or to generate new colors based on existing ones. \cite{zucconi2016secrets}
 
-Color interpolation works by calculating the intermediate colors between two or more given colors. This is typically done by taking a weighted average of the red, green, and blue values of the colors being interpolated. The following Equation \ref{eq:color_interpolation} shows how to calculate the intermediate color between two colors, $c_1$ and $c_2$. The parameter $t$ is a value between 0 and 1, representing the percentage of the first color in the final color. For example, $t = 0.5$ would result in a color that is halfway between the two colors. The parameter $1 - t$ represents the percentage of the second color in the final color.
+Color interpolation works by calculating the intermediate colors between two or more given colors. This is typically done by taking a weighted average of the red, green, and blue values of the colors being interpolated. The following Equation \ref{eq:color_interpolation} shows how to calculate the intermediate color between two colors, $a$ and $b$. The parameter $t$ is a value between 0 and 1, representing the percentage of the first color in the final color. For example, $t = 0.5$ would result in a color that is halfway between the two colors. The parameter $1 - t$ represents the percentage of the second color in the final color.
 
 \begin{equation}
   c = a + (b - a) \cdot t
 \end{equation}
 \label{eq:color_interpolation}
 
-An example of color interpolation is the creation of color gradients, which are used to create smooth transitions between colors, such as red to white or white to blue as shown in Figure \ref{eq:color_interpolation}. Color gradients are commonly used in data visualization to represent continuous data, such as the charge of atoms in a molecule.
+An example of color interpolation is the creation of color gradients, which are used to create smooth transitions between colors, such as red-to-white or white-to-blue as shown in Figure \ref{fig:color_gradients}. Color gradients are commonly used in data visualization to represent continuous data, such as the charge of atoms in a molecule or the temperature of a region on a map.
 
 \newpage
 \chapter{Visualizing molecular data}
@@ -399,9 +409,9 @@ Equally important as the type of visualization is the coloring scheme used to re
 
 % TODO: describe the web based \\
 
-There are numerous software tools available for visualizing molecular data, with varying levels of complexity, customization, and features. Some of the most popular tools include MolScript \cite{kraulis1991molscript}, PyMOL \cite{delano2002pymol}, VMD \cite{humphrey1996vmd}, and ChimeraX \cite{goddard2018ucsf}. More recently, web-based visualization tools, such as NGL Viewer \cite{rose2015ngl}, LiteMol \cite{sehnal2017litemol}, and Mol* \cite{sehnal2021molstar}, have become increasingly popular due to their accessibility and ease of use. Furthermore, modern web-based tools take advantage of modern browser capabilities such as  are especially useful for visualizing large macromolecular complexes, which are becoming increasingly common due to advances in structural biology techniques such as crystallography and electron microscopy. \cite{sehnal2021molstar}
+There are numerous software tools available for visualizing molecular data, with varying levels of complexity, customization, and features. Some of the most popular tools include MolScript \cite{kraulis1991molscript}, PyMOL \cite{delano2002pymol}, VMD \cite{humphrey1996vmd}, and ChimeraX \cite{goddard2018ucsf}. More recently, web-based visualization tools, such as NGL Viewer \cite{rose2015ngl}, LiteMol \cite{sehnal2017litemol}, and Mol* \cite{sehnal2021molstar}, have become increasingly popular due to their accessibility and ease of use.
 
-In the following sections, we will discuss two web-based molecular visualization tools used in this work: LiteMol and Mol*.
+In the following sections, we will discuss the two web-based molecular visualization tools used in this work, LiteMol and Mol*, focusing on the latter.
 
 \subsection{Litemol}
 \label{subsection:litemol}
@@ -415,6 +425,20 @@ Mol* (/'molstar/) is another web-native molecular visualization tool, developed 
 
 Mol* emphasizes interactivity and offers various tools for manipulating and analyzing the molecular structure, such as distance and angle measurements, selection and display of specific residues, and custom coloring schemes. Additionally, Mol* provides integration with external databases and services, such as UniProt, PDBe, and RCSB PDB, enabling users to quickly access related information and resources.
 
+\subsubsection{Mol* state tree}
+
+To store information about the molecular structure and its visualization, the Mol* library uses a state tree. The state tree is a tree data structure consisting of several layers, each of which contains information about a specific aspect of the structure. The layers are organized in a hierarchical manner, with each layer containing information about the layer below it. The state tree is a key component of the Mol* library, as it allows for easy access to the data and facilitates the implementation of various features. \cite{sehnal2021molstar}
+
+% Figure \ref{fig:state_tree} shows the state tree of a molecular structure. The state tree consists of several layers. The top layer contains information about the molecular structure itself, such as the atoms and residues it contains. The layer below that contains information about the model, which represents a single state of the molecular structure. The layer below it contains information about the assembly, which organizes of multiple molecular components - such as chains, ligands, and water molecules - into a single structure. The layer below that contains information about the representation, which defines how the molecular structure is visualized. Finally, the bottom layer contains information about the color theme, which defines how the molecular structure is colored.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{figures/state_tree.png}
+  \end{center}
+  \caption{Mol* state tree.}
+  \label{fig:state_tree}
+\end{figure}
+
 \newpage
 \chapter{Mol* partial charges extension}
 \label{chapter:molstar_partial_charges_extension}
@@ -422,7 +446,7 @@ Mol* emphasizes interactivity and offers various tools for manipulating and anal
 Visualizing partial atomic charges in molecules is an essential aspect of computational chemistry research, aiding in analyzing complex molecular structures. Mol* provides an extensive range of features for users to explore molecular structures. However, the tool lacks the functionality to color and label atoms and residues based on their partial atomic charges.
 This can be a considerable limitation for researchers. In response to this need, we have created an extension to Mol* that addresses this limitation.
 
-It should be noted that the Mol* viewer predecessor, Litemol, supported this functionality. However, since Litemol is no longer supported, we saw the need to bring this functionality to Mol*.
+As mentioned in the Introduction (Section \ref{chap:introduction}), the Mol* viewer predecessor, Litemol, supported this functionality. However, since Litemol is no longer supported, we saw the need to bring this functionality to Mol*.
 
 This chapter describes the requirements for the extension, the custom mmCIF categories necessary for storing the partial atomic charges, and the implementation of the extension itself.
 
@@ -433,18 +457,6 @@ This chapter describes the requirements for the extension, the custom mmCIF cate
 % TODO: describe what each representation should visualize when colored using partial charges coloring \\
 
 Firstly, the extension should enable the coloring of atoms and residues based on their partial atomic charges. Secondly, it should describe the charge values of the atoms and residues. Thirdly, the extension should allow the user to provide multiple charge sets for a single structure and select which one to display. Finally, the extension should be seamlessly integrated into the Mol* library, facilitating access to its features and functionality.
-
-\section{Mol* state tree}
-
-To store information about the molecular structure and its visualization, the Mol* library uses a state tree. The state tree is a hierarchical data structure, which consists of several layers, each of which contains information about a specific aspect of the structure. The layers are organized in a hierarchical manner, with each layer containing information about the layer below it. This
-
-\begin{figure}
-  \begin{center}
-    \includegraphics[width=\textwidth]{figures/state_tree.png}
-  \end{center}
-  \caption{Mol* state tree.}
-  \label{fig:state_tree}
-\end{figure}
 
 \section{Custom mmCIF categories}
 \label{section:custom_mmcif_categories}
@@ -544,7 +556,15 @@ This provider serves as the central component of the extension, with its primary
 
 For the purposes of this extension, it was necessary to color two structural elements - atoms and residues. For both of these structural elements the charges were retrieved from the provider described in the previous section \ref{subsection:charges_provider}, which provided charges for atoms and residues.
 
-To establish the color for a given charge, two color interpolations are employed: one for negative charges and another for positive charges. Atoms with positive charges receive a color from a white-to-blue color interpolation, while atoms with negative charges are assigned a color from a white-to-red color interpolation. These color interpolations are highlighted in Figure \ref{}. 
+To establish the color for a given charge, two color interpolations are employed: one for negative charges and another for positive charges. Atoms with positive charges receive a color from a white-to-blue color interpolation, while atoms with negative charges are assigned a color from a white-to-red color interpolation. These color interpolations are highlighted in Figure \ref{fig:color_gradients}. 
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=10cm]{figures/color_gradients.png}
+  \end{center}
+  \caption{Color gradients visualizing }
+  \label{fig:color_gradients}
+\end{figure}
 
 \begin{figure}[htbp]
   \centering
@@ -868,9 +888,7 @@ We successfully extended the capabilities of the Mol* viewer to include the visu
 
 We further enhanced the Atomic Charge Calculator II application with support for multiple calculations for a single request and implemented a new page for the αCharges web application for visualizing problematic atoms.
 
-We believe these advancements will help researchers in their work by allowing for more complex visualization capabilities of partial atomic charges in Mol* and by providing enhanced user interfaces for the Atomic Charge Calculator II and αCharges web applications.
-
-Furthermore, this work contributed to the publication \textit{αCharges: A web application for calculating and visualizing protein partial atomic charges} \cite{schindler2023alphacharges}. The publication was published in the Nucleic Acids Research journal and is included in Appendix \ref{appendix:alpha-charges}.
+These advancements provide researchers with enhanced visualization capabilities and user interfaces for calculating and analyzing partial atomic charges. The significance of these improvements to the field of computational chemistry is substantiated by their contribution to a publication in the Nucleic Acids Research journal
 
 All source code developed in this work is available in the attachments and on GitHub. Links to the GitHub repositories can be found in Appendix \ref{appendix:source-code}. The extension to the Mol* viewer is also available in the official Mol* repository. 
 
@@ -883,7 +901,7 @@ All source code developed in this work is available in the attachments and on Gi
 \begin{appendices}
   \chapter{Source code}
   \label{appendix:source-code}
-  All source code can be found in the attachments. Additionally, the source code can be found on GitHub. Below are the links to the GitHub repositories:
+  All source code can be found in the attachments and on GitHub. Below are the links to the GitHub repositories:
   \begin{itemize}
     \item αCharges: \\
     \url{https://github.com/sb-ncbr/AlphaCharges}
