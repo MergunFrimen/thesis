@@ -338,7 +338,6 @@ Figure \ref{fig:mmcif} depicts the \texttt{\_atom\_site} category in the mmCIF f
   \item \texttt{\_atom\_site.label\_seq\_id}: the sequence number of the residue containing the atom
   \item \texttt{\_atom\_site.label\_comp\_id}: the name of the chain containing the atom
   \item \texttt{\_atom\_site.label\_alt\_id}: the alternate conformation indicator for the atom
-  \item 
 \end{itemize}
 
 The mmCIF format is the preferred format for storing macromolecular structures. It offers more flexibility and extensibility than the PDB format, and it is particularly suitable for storing large amounts of data \cite{}.
@@ -350,6 +349,11 @@ The mmCIF format is the preferred format for storing macromolecular structures. 
   \caption{Tabular representation of the \texttt{\_atom\_site} data items in the mmCIF format for hemoglobin.}
   \label{fig:mmcif}
 \end{figure}
+
+\subsection{PQR}
+\label{subsection:pqr}
+
+The PQR format is a non-standard variant of the PDB format that enables users to include partial atomic charges and radii parameters in the existing PDB data. It does this by replacing the occupancy and B-factor fields and replacing them with fields for partial atomic charges and radii. \cite{pqrfile} The PQR format is non-standard; despite this, the PQR format is still used in some applications, such as the Atomic Charge Calculator II, for storing partial atomic charges. \cite{racek2020acc2}.
 
 \section {Color interpolation}
 \label{section:color_interpolation}
