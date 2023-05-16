@@ -44,6 +44,7 @@
 %%
 %% The following section sets up the metadata of the thesis.
 \thesissetup{
+  % * ✅
     date        = \the\year/\the\month/\the\day,
     university  = mu,
     faculty     = fi,
@@ -54,17 +55,17 @@
     advisor     = {RNDr. Tomáš Raček, Ph.D.},
     title       = {Modern visualization of partial atomic charges in Mol*},
     TeXtitle    = {Modern visualization of partial atomic charges in Mol*},
+    % * ✅
     keywords    = {%
         Mol*,
         ACC~II,
         αCharges,
         AlphaFold,
         SB NCBR,
-        molecular visualization,
         partial atomic charges,
-        structural biology,
+        molecular visualization,
         chemical file formats,
-        Typescript
+        structural biology
     },
     TeXkeywords = {%
         Mol*,
@@ -72,12 +73,12 @@
         αCharges,
         AlphaFold,
         SB NCBR,
-        molecular visualization,
         partial atomic charges,
-        structural biology,
+        molecular visualization,
         chemical file formats,
-        Typescript
+        structural biology
     },
+    % * ✅
     abstract    = {%
       Partial atomic charges play a crucial role in computational chemistry as they help describe a molecule's electron density, providing essential insights into its properties.
       
@@ -87,9 +88,11 @@
       
       These advancements provide researchers with enhanced visualization capabilities and user interfaces for calculating and analyzing partial atomic charges.
     },
+    % * ✅
     thanks      = {%
       I would like to thank my advisor RNDr. Tomáš Raček, Ph.D. for his advice and guidance throughout the writing of this thesis. I would also like to thank my family and friends for their love and support.
     },
+    % * ✅
     bib         = {%
         main.bib,
     },
@@ -132,6 +135,7 @@
 
 \begin{document}
 
+% * ✅
 \newpage
 \chapter*{Introduction}
 \markright{\textsc{Introduction}}
@@ -146,18 +150,20 @@ The absence of this functionality in the Mol* viewer presents a significant limi
 
 Chapter \ref{chapter:theory} introduces the theoretical concepts of molecular structures and partial atomic charges, along with the chemical file formats utilized in this work. Building on this foundation, Chapter \ref{chapter:visualizing_molecular_data} discusses the various visualization methods and software tools for visualizing molecular structures. Chapter \ref{chapter:molstar_partial_charges_extension} then describes the implementation of the Mol* viewer extension for visualizing partial atomic charges. Finally, the extended Mol* viewer is integrated into the Atomic Charge Calculator II and αCharges web applications, as detailed in Chapters \ref{chapter:atomic_charge_calculator_ii} and \ref{chapter:alphacharges}.
 
+% * ✅
 \newpage
 \chapter{Theory}
 \label{chapter:theory}
 
-Theoretical concepts are fundamental to the study of computational chemistry, providing a framework for analyzing molecular structures and properties. This chapter focuses on four key areas of theory, beginning with an overview of molecular structures in Section \ref{section:molecular_structure}. Section \ref{section:partial_atomic_charges} explores partial atomic charges and their importance in computational chemistry. Section \ref{section:chemical_file_formats} provides an examination of chemical file formats utilized in this work. Lastly, Section \ref{section:color_interpolation} describes color interpolation, a critical technique for visualizing partial atomic charges in molecular structures.
+Theoretical concepts are fundamental to the study of computational chemistry, providing a framework for analyzing molecular structures and properties. This chapter focuses on four key areas of theory, beginning with an overview of molecular structures in Section \ref{section:molecular_structure}. Section \ref{section:partial_atomic_charges} explores partial atomic charges and their importance in computational chemistry. Section \ref{section:chemical_file_formats} examines chemical file formats utilized in this work. Lastly, Section \ref{section:color_interpolation} describes color interpolation, a critical technique for visualizing partial atomic charges in molecular structures.
 
+% * ✅
 \section{Molecular structure}
 \label{section:molecular_structure}
 
-% TODO: citation for molecule definition
+Molecules are the smallest units of a chemical compound that retain the compound's chemical properties. They consist of two or more atoms connected by chemical bonds. Molecules vary widely in size and complexity, ranging from simple molecules such as oxygen to complex molecules such as proteins and DNA. \cite{britannica_molecule}
 
-Molecules are the fundamental building blocks of matter, consisting of two or more atoms connected by chemical bonds. Molecules can vary widely in size and complexity, ranging from simple diatomic molecules like oxygen to highly complex organic compounds like proteins and DNA. \cite{britannica_molecule} In this thesis work, we work with two main categories of molecules: micromolecules and macromolecules. The following sections provide an overview of these two categories, along with an explanation of the structure of polymers, and finally explain alternative conformations of molecular structures.
+This thesis works with two main categories of molecules: micromolecules and macromolecules. The following sections provide an overview of these two categories, along with an explanation of the structure of polymers, and finally, explain conformation isomerism of molecular structures.
 
 \subsection{Micromolecules}
 
@@ -216,10 +222,10 @@ Figure \ref{fig:structure1} attempts to visually explain the hierarchy of a prot
   \label{fig:structure}
 \end{figure}
 
-\subsection{Alternative conformations}
+\subsection{conformational isomerism}
 \label{section:alternative_conformations}
 
-Alternative conformations, or conformational isomerism, are different conformations of the same molecule. They can be used to represent different states of a molecule, such as different protonation states or different ligand binding modes. 
+Conformational isomers, or alternative conformations, are different conformations of the same molecule. They can be used to represent different states of a molecule, such as different protonation states or different ligand binding modes. 
 
 Figure \ref{fig:alternative_conformations} shows two conformations of adenosine triphosphate. One conformation is colored in yellow, while the other is colored in blue.
 
