@@ -345,8 +345,8 @@ Color interpolation works by calculating the intermediate colors between two or 
 
 \begin{equation}
   c = a + (b - a) \cdot t
+  \label{eq:color_interpolation}
 \end{equation}
-\label{eq:color_interpolation}
 
 An example of color interpolation is the creation of color gradients, which are used to create smooth transitions between colors, such as red-to-white or white-to-blue as shown in Figure \ref{fig:color_gradients}. Color gradients are commonly used in data visualization to represent continuous data, such as the charge of atoms in a molecule or the temperature of a region on a map.
 
@@ -431,7 +431,7 @@ To store information about the molecular structure and its visualization, the Mo
 
 % Figure \ref{fig:state_tree} shows the state tree of a molecular structure. The state tree consists of several layers. The top layer contains information about the molecular structure itself, such as the atoms and residues it contains. The layer below that contains information about the model, which represents a single state of the molecular structure. The layer below it contains information about the assembly, which organizes of multiple molecular components - such as chains, ligands, and water molecules - into a single structure. The layer below that contains information about the representation, which defines how the molecular structure is visualized. Finally, the bottom layer contains information about the color theme, which defines how the molecular structure is colored.
 
-\begin{figure}
+\begin{figure}[htbp]
   \begin{center}
     \includegraphics[width=\textwidth]{figures/state_tree.png}
   \end{center}
@@ -446,7 +446,7 @@ To store information about the molecular structure and its visualization, the Mo
 Visualizing partial atomic charges in molecules is an essential aspect of computational chemistry research, aiding in analyzing complex molecular structures. Mol* provides an extensive range of features for users to explore molecular structures. However, the tool lacks the functionality to color and label atoms and residues based on their partial atomic charges.
 This can be a considerable limitation for researchers. In response to this need, we have created an extension to Mol* that addresses this limitation.
 
-As mentioned in the Introduction (Section \ref{chap:introduction}), the Mol* viewer predecessor, Litemol, supported this functionality. However, since Litemol is no longer supported, we saw the need to bring this functionality to Mol*.
+As mentioned in the \nameref{chap:introduction}, the Mol* viewer predecessor, Litemol, supported this functionality. However, since Litemol is no longer supported, we saw the need to bring this functionality to Mol*.
 
 This chapter describes the requirements for the extension, the custom mmCIF categories necessary for storing the partial atomic charges, and the implementation of the extension itself.
 
@@ -508,7 +508,8 @@ The atom charges are stored in the \texttt{typeIdToAtomIdToCharge} map. The map 
 
 The residue charges are calculated by summing the charges of the atoms that make up the residue. The residue charge is then stored in the \texttt{typeIdToResidueIdToCharge} map.
 
-The maximum absolute charge values of the atoms and residues are calculated and stored in the \texttt{maxAbsoluteAtomCharges} and \texttt{maxAbsoluteResidueCharges} maps. These maps are used in the color theme provider to normalize the charges to the range of 0 to 1. Additionally, the maximum absolute charge values are used to calculate the color interpolations in the color theme provider. Additionally, the maximum absolute charge of both atoms and residues is calculated and stored in the \texttt{maxAbsoluteChargesAll} map.
+The maximum absolute charge values of the atoms and residues are calculated and stored in the \texttt{maxAbsoluteAtomCharges} and \\
+\texttt{maxAbsoluteResidueCharges} maps. These maps are used in the color theme provider to normalize the charges to the range of 0 to 1. Additionally, the maximum absolute charge values are used to calculate the color interpolations in the color theme provider. Additionally, the maximum absolute charge of both atoms and residues is calculated and stored in the \texttt{maxAbsoluteChargesAll} map.
 
 Lastly, the method name used to calculate the charges of a given charge set is stored in the \texttt{typeIdToMethod} map. This map is used to display the method name in the UIs.
 
@@ -896,7 +897,6 @@ All source code developed in this work is available in the attachments and on Gi
 
 \renewcommand\appendixname{Appendix}
 \newpage
-\pagenumbering{roman}
 
 \begin{appendices}
   \chapter{Source code}
