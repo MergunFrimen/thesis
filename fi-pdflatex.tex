@@ -202,7 +202,7 @@ Describing macromolecules solely by their atoms and bonds becomes impractical du
 
 A residue refers to a specific monomer or building block within a macromolecule. In the case of proteins, each residue corresponds to an amino acid. For nucleic acids, each residue corresponds to a nucleotide. Residues are linked together by chemical bonds to form chains. When a macromolecule consists of multiple chains, each chain is assigned a unique identifier, usually described by letters, starting with the letter A. Residues inside a chain are identified by a number, starting with the number 1.
 
-The structure of a macromolecule can be described at different levels, each providing a different perspective and abstraction of the macromolecule. The primary structure refers to the sequence of monomers in the polymer chain. The secondary structure involves local folding patterns within the polymer chain, such as alpha helices and beta sheets in proteins. The tertiary structure encompasses the overall 3D shape of the macromolecule. Finally, the quaternary structure describes the interactions between multiple macromolecules.
+The structure of a macromolecule can be described at different levels, each providing a different perspective and abstraction of the macromolecule. The primary structure refers to the sequence of monomers in the polymer chain. The secondary structure involves local folding patterns within the polymer chain, such as alpha helices and beta sheets in proteins. The tertiary structure encompasses the overall 3D shape of the macromolecule. Finally, the quaternary structure describes the interactions between multiple macromolecules. \cite{pdb101_hierarchical}
 
 % TODO: add mentions of the different levels of structure in the figures
 
@@ -305,19 +305,24 @@ Figure \ref{fig:mol2} illustrates the contents of an MOL2 file containing the st
 \subsection{PDB}
 \label{subsection:pdb}
 
-The Protein Data Bank (PDB) file format is widely employed for storing three-dimensional structures of proteins, nucleic acids, and other macromolecules. PDB files contain vital information such as atomic coordinates, secondary structure, and other essential details required for understanding macromolecular structures. The PDB format has found extensive use in structural biology, bioinformatics, and related fields \cite{pdb101}.
+The Protein Data Bank (PDB) file format is widely employed for storing three-dimensional structures of proteins, nucleic acids, and other macromolecules. PDB files contain vital information such as atomic coordinates, secondary structure, and other essential details required for understanding macromolecular structures. The PDB format has found extensive use in structural biology, bioinformatics, and related fields \cite{wikipedia_pdbfile}.
 
-The PDB file format utilizes a fixed-width format capable of storing up to 99,999 atoms. \cite{} However, this format is not suitable for large macromolecules like proteins, as it imposes limitations on the number of atoms and bonds it can accommodate. Consequently, the PDB file format is no longer maintained and has been superseded by the mmCIF format \cite{pdb101}.
+The PDB format consists of rows of records. Each record begins with a keyword that identifies the type of record, such as ATOM, HETATM, or CONECT. The ATOM and HETATM records contain the atomic coordinates of the atoms in the molecule, while the CONECT record contains the connectivity information of the atoms. \cite{wikipedia_pdbfile}
 
-Figure \ref{fig:pdb} displays the contents of a PDB file containing the structure of the hemoglobin protein.
+Figure \ref{fig:pdb} displays the ATOM record section of a PDB file containing the structure of a hemoglobin protein. This section contains the atomic coordinates of the protein's atoms, as well as other information such as the atom's name, residue name, and residue number. \cite{wikipedia_pdbfile}
 
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=11cm]{figures/3bj1_pdb.png}
+    \includegraphics[width=11cm]{figures/pdb_format.png}
   \end{center}
   \caption{The ATOM record section of a PDB file containing the structure of a hemoglobin protein}
   \label{fig:pdb}
 \end{figure}
+
+\subsection{PQR}
+\label{subsection:pqr}
+
+The PQR format is a non-standard variant of the PDB format that enables users to include partial atomic charges and radii parameters in the existing PDB data. It does this by replacing the occupancy and temperature factor fields and replacing them with fields for partial atomic charges and radii. \cite{pqrfile,apbs_pqrfile} The PQR format is non-standard; despite this, the PQR format is still used in some applications, such as the Atomic Charge Calculator II, for storing partial atomic charges. \cite{racek2020acc2}.
 
 \subsection{mmCIF}
 \label{subsection:mmcif}
@@ -349,11 +354,6 @@ The mmCIF format is the preferred format for storing macromolecular structures. 
   \caption{Tabular representation of the \texttt{\_atom\_site} data items in the mmCIF format for hemoglobin.}
   \label{fig:mmcif}
 \end{figure}
-
-\subsection{PQR}
-\label{subsection:pqr}
-
-The PQR format is a non-standard variant of the PDB format that enables users to include partial atomic charges and radii parameters in the existing PDB data. It does this by replacing the occupancy and B-factor fields and replacing them with fields for partial atomic charges and radii. \cite{pqrfile} The PQR format is non-standard; despite this, the PQR format is still used in some applications, such as the Atomic Charge Calculator II, for storing partial atomic charges. \cite{racek2020acc2}.
 
 \section {Color interpolation}
 \label{section:color_interpolation}
