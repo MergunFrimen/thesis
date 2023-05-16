@@ -202,7 +202,7 @@ Describing macromolecules solely by their atoms and bonds becomes impractical du
 
 A residue refers to a specific monomer or building block within a macromolecule. In the case of proteins, each residue corresponds to an amino acid. For nucleic acids, each residue corresponds to a nucleotide. Residues are linked together by chemical bonds to form chains. When a macromolecule consists of multiple chains, each chain is assigned a unique identifier, usually described by letters, starting with the letter A. Residues inside a chain are identified by a number, starting with the number 1.
 
-The structure of a macromolecule can be described at different levels. The primary structure refers to the sequence of monomers in the polymer chain. The secondary structure involves local folding patterns within the polymer chain, such as alpha helices and beta sheets in proteins. The tertiary structure encompasses the overall 3D shape of the macromolecule. Finally, the quaternary structure describes the interactions between multiple macromolecules.
+The structure of a macromolecule can be described at different levels, each providing a different perspective and abstraction of the macromolecule. The primary structure refers to the sequence of monomers in the polymer chain. The secondary structure involves local folding patterns within the polymer chain, such as alpha helices and beta sheets in proteins. The tertiary structure encompasses the overall 3D shape of the macromolecule. Finally, the quaternary structure describes the interactions between multiple macromolecules.
 
 % TODO: add mentions of the different levels of structure in the figures
 
@@ -281,7 +281,7 @@ Figure \ref{fig:sdf} depicts an SDF file containing the structure of ethanol in 
 
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=\textwidth]{figures/sdf_file_format.png}
+    \includegraphics[width=11cm]{figures/sdf_file_format.png}
   \end{center}
   \caption{SDF file containing the structure of a ethanol. \cite{belford2017anatomy}}
   \label{fig:sdf}
@@ -296,7 +296,7 @@ Figure \ref{fig:mol2} depicts the contents of an MOL2 file containing the struct
 
 \begin{figure}[htbp]
   \begin{center}
-    \includegraphics[width=\textwidth]{figures/mol2_file_format.png}
+    \includegraphics[width=11cm]{figures/mol2_file_format.png}
   \end{center}
   \caption{MOL2 file containing the structure of a ethanol.}
   \label{fig:mol2}
@@ -309,12 +309,49 @@ Figure \ref{fig:mol2} depicts the contents of an MOL2 file containing the struct
 
 The Protein Data Bank (PDB) file format is a widely used format for storing three-dimensional structures of proteins, nucleic acids, and other macromolecules. PDB files contain information about the atomic coordinates, secondary structure, and other important details required for understanding macromolecular structures. The PDB format has been widely adopted in structural biology, bioinformatics, and related fields. \cite{pdb101}
 
+The PDB file format has a fixed-width format, which allows the storage of up to 99,999 atoms. This format is therefore not suitable for storing large macromolecules, such as proteins, since it imposes limits on the number of atoms and bonds. Therefore the PDB file format is no longer maintained and has been superseded by the mmCIF format. \cite{pdb101}
+
+Figure \ref{fig:pdb} depicts the contents of a PDB file containing the structure of a the hemoglobin protein.
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=11cm]{figures/3bj1_pdb.png}
+  \end{center}
+  \caption{The ATOM record section of a PDB file containing the structure of a hemoglobin protein}
+  \label{fig:pdb}
+\end{figure}
+
 \subsection{mmCIF}
 \label{subsection:mmcif}
 
-\cite{gu2009structural}
+The mmCIF format, also known as PDBx/mmCIF, offers an enhanced and flexible representation of macromolecular crystallography data compared to the PDB format. One of the most important advantages of the mmCIF format is its utilization of data dictionaries, which allow users to define new data items and integrate additional information. \cite{pdb101} Unlike other formats, the mmCIF format does not impose limitations on column width and entry count, making it more flexible and accommodating for storing large amounts of data. \cite{pdb101}
 
-The macromolecular Crystallographic Information File (mmCIF) format is an extension of the CIF format, specifically designed for macromolecular structures. It is a text-based format that provides a more comprehensive and flexible representation of macromolecular crystallography data compared to the PDB format. One of the most important features of the mmCIF format is its support for data dictionaries. This allows users to define new data items and integrate additional information. In contrast to other formats, the mmCIF format does not impose limits on column width and entry count, making it more flexible and accommodating for storing large amounts of data. \cite{mmcif}
+In mmCIF, all data items are stored in a relational database format. This means that each data item is stored in a separate table, and the tables are linked together using unique identifiers (pointers). Additionally, each data item in the file is identified and referenced by a unique token. A token is composed of a category name and an attribute name, separated by a dot. For example, the token \texttt{\_atom\_site.id} refers to the \texttt{id} data item in the \texttt{\_atom\_site} category. \cite{pdb101}
+
+The mmCIF format supports two forms of storing data items: key-value and tabular. Key-value data items contain a single value, whereas tabular data items contain multiple values. Multi-valued data items are represented as a list of values separated by a newline character. \cite{pdb101}
+
+Figure \ref{fig:mmcif} depicts the \texttt{\_atom\_site} category in the mmCIF file for hemoglobin. This category is represented in tabular form, (indicated by the \texttt{\_loop} token), where each row corresponds to an atom in the structure. The \texttt{\_atom\_site} category contains the following data items \cite{mmcif_dictionary}:
+
+\begin{itemize}
+  \item \texttt{\_atom\_site.id}: a unique identifier for each atom in the structure
+  \item \texttt{\_atom\_site.label\_atom\_id}: the name of the atom (unique \\
+  within the residue)
+  \item \texttt{\_atom\_site.label\_comp\_id}: the name the residue containing the atom
+  \item \texttt{\_atom\_site.label\_seq\_id}: the sequence number of the residue containing the atom
+  \item \texttt{\_atom\_site.label\_comp\_id}: the name of the chain containing the atom
+  \item \texttt{\_atom\_site.label\_alt\_id}: the alternate conformation indicator for the atom
+  \item 
+\end{itemize}
+
+The mmCIF format is the preferred format for storing macromolecular structures. It is more flexible and extensible than the PDB format, and it is also more suitable for storing large amounts of data. \cite{pdb101}
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=11cm]{figures/3bj1_mmcif.png}
+  \end{center}
+  \caption{Tabular representation of the \texttt{\_atom\_site} data items in the mmCIF format for hemoglobin.}
+  \label{fig:mmcif}
+\end{figure}
 
 \section {Color interpolation}
 \label{section:color_interpolation}
@@ -700,7 +737,7 @@ For mmCIF input files, the program simply appends the custom categories to the i
 
 \subsection{PDB}
 
-The PDB input files are first converted to mmCIF format using the GEMMI library. To achieve this, the PDB file is first parsed into a \texttt{Structure} object, which is then converted into a \texttt{Block} object. After converting the PDB file to mmCIF, it was necessary to remove the \texttt{\_chem\_comp} category from the \texttt{Block} object. This category is generated by GEMMI by default, however, it is not necessary for the Mol* viewer and its presence causes the viewer to visualize the structure incorrectly. The program then proceeds in the same way as for the mmCIF input files.
+The PDB input files are first converted to mmCIF format using the GEMMI library. To achieve this, the PDB file is first parsed into a \texttt{Structure} object, which is then converted into a \texttt{Block} object. After converting the PDB file to mmCIF, it was necessary to remove the \texttt{\_chem\_comp} category from the \texttt{Block} object. This category is generated by GEMMI by default. However, it is not necessary for the Mol* viewer and its presence causes the viewer to visualize the structure incorrectly. The program then proceeds in the same way as for the mmCIF input files.
 
 \subsection{SDF and MOL2}
 
