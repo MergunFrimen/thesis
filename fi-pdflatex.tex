@@ -270,16 +270,14 @@ ChargeFW2 is a C++ program that calculates partial atomic charges by empirical m
 \section{Chemical file formats}
 \label{section:chemical_file_formats}
 
-Chemical file formats are used to store molecular data in a computer-readable format. There are several file formats for storing molecular data, each suited to a specific purpose. Some file formats are more suitable for storing small molecules, while others are more suitable for storing macromolecules such as proteins. In this section we look at the SDF and MOL2 file formats, which are commonly used for storing small molecules, and the PDB and mmCIF file format, which is commonly used for storing macromolecules such as proteins.
+Chemical file formats are used to store molecular data in a computer-readable format. There are several file formats for storing molecular data, each suited to a specific purpose. In this section we look at the SDF and MOL2 file formats, which are commonly used for storing small molecules, and the PDB and mmCIF file formats, which are commonly used for storing macromolecules, such as proteins.
 
 \subsection{SDF}
 \label{subsection:sdf}
 
-Structure-data file (SDF) is a widely used text-based chemical file format for describing the atoms, bonds, and atomic coordinates of small molecules. It is a container for the MOL V2000 and V3000 file formats enabling the storage of multiple molecules in a single file. The MOL V2000 format is a fixed-width format, which allows to store up to 999 atoms and bonds. MOL V3000 removes this limitation enabling the storage of larger molecules. \cite{wikipedia_ctfile}
+Structure-data file (SDF) is a widely used text-based chemical file format for describing the atoms, bonds, and atomic coordinates of small molecules. It is a container for the MOL V2000 and V3000 file formats enabling the storage of multiple molecules in a single file. The MOL V2000 format is a fixed-width format, which allows the storage of up to 999 atoms and bonds, whereas the MOL V3000 removes this limitation enabling the storage of larger molecules. \cite{wikipedia_ctfile,mdl_ctfile}
 
-The SDF format is commonly used in cheminformatics applications for storing small molecules, such drug molecules, and for sharing them between different applications. \cite{wikipedia_ctfile}
-
-Figure \ref{fig:sdf} depicts the contents of an SDF file containing the structure of ethanol in the MOL V2000 format. This format consists of a header section, atom section and bond section. The header section contains the name of the molecule and the number of atoms and bonds. The body section contains the atomic coordinates and the bond information. The footer section contains the partial atomic charges and the 2D coordinates of the molecule. \cite{belford2017anatomy}
+Figure \ref{fig:sdf} depicts an SDF file containing the structure of ethanol in the MOL V2000 format. This format has a header section, an atom section, and a bond section. The header section contains the name of the molecule and the number of atoms and bonds. The atom and bond sections contain the atom and bond information, respectively. \cite{belford2017anatomy}
 
 \begin{figure}[htbp]
   \begin{center}
@@ -292,11 +290,9 @@ Figure \ref{fig:sdf} depicts the contents of an SDF file containing the structur
 \subsection{MOL2}
 \label{subsection:mol2}
 
-% https://chemicbook.com/2021/02/20/mol2-file-format-explained-for-beginners-part-2.html
+The Mol2 file format is another text-based format for storing small molecular structures and their associated properties. It can store multiple conformations of a molecule and is commonly used in molecular modeling and cheminformatics applications. The Mol2 format provides more flexibility and additional features compared to the SDF format by providing support for many record types. \cite{manish}
 
-The Mol2 file format is another text-based format for storing small molecular structures and their associated properties. It can store multiple conformations of a molecule and is commonly used in molecular modeling and cheminformatics applications. The Mol2 format provides more flexibility and additional features compared to the SDF format, such as support for multiple substructures and atom types.
-
-Figure \ref{fig:mol2} depicts the contents of an MOL2 file containing the structure of ethanol. Notice the similarity between the MOL2 and SDF formats. Both formats contain the same information, however, the MOL2 format provides a clearer structure and additional features.
+Figure \ref{fig:mol2} depicts the contents of an MOL2 file containing the structure of ethanol. Notice the similarity between the MOL2 and SDF formats. Both formats contain the same information about the atoms and bonds, however, the MOL2 format is more flexible in its structure.
 
 \begin{figure}[htbp]
   \begin{center}
@@ -311,20 +307,14 @@ Figure \ref{fig:mol2} depicts the contents of an MOL2 file containing the struct
 
 \cite{gu2009structural}
 
-The Protein Data Bank (PDB) file format is a widely used format for storing three-dimensional structures of proteins, nucleic acids, and other macromolecules. PDB files contain information about the atomic coordinates, secondary structure, and other important details required for understanding macromolecular structures. The PDB format has been widely adopted in structural biology, bioinformatics, and related fields.
+The Protein Data Bank (PDB) file format is a widely used format for storing three-dimensional structures of proteins, nucleic acids, and other macromolecules. PDB files contain information about the atomic coordinates, secondary structure, and other important details required for understanding macromolecular structures. The PDB format has been widely adopted in structural biology, bioinformatics, and related fields. \cite{pdb101}
 
 \subsection{mmCIF}
 \label{subsection:mmcif}
 
-% TODO: explain the need for creating the mmCIF file format, why isn't the PDB format enough (limited amount of rows, poor support for extending the format to add custom data)? describe the mmcif file format; make sure to explain the core data dictionaries, can mention binary cif \\
-
 \cite{gu2009structural}
 
-The macromolecular Crystallographic Information File (mmCIF) format is an extension of the CIF format, specifically designed for macromolecular structures.
-It is a text-based format that provides a more comprehensive and flexible representation of macromolecular crystallography data compared to the PDB format.
-One of the most important features of the mmCIF format is its support for data dictionaries.
-This allows users to define new data items and integrate additional information.
-In contrast to other formats, the mmCIF format does not impose limits on column width and entry count, making it more flexible and accommodating for storing large amounts of data.
+The macromolecular Crystallographic Information File (mmCIF) format is an extension of the CIF format, specifically designed for macromolecular structures. It is a text-based format that provides a more comprehensive and flexible representation of macromolecular crystallography data compared to the PDB format. One of the most important features of the mmCIF format is its support for data dictionaries. This allows users to define new data items and integrate additional information. In contrast to other formats, the mmCIF format does not impose limits on column width and entry count, making it more flexible and accommodating for storing large amounts of data. \cite{mmcif}
 
 \section {Color interpolation}
 \label{section:color_interpolation}
