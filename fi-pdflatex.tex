@@ -493,17 +493,15 @@ To store information about the molecular structure and its visualization, the Mo
 \chapter{Mol* partial charges extension}
 \label{chapter:molstar_partial_charges_extension}
 
-Visualizing partial atomic charges in molecules is an essential aspect of computational chemistry research, aiding in analyzing complex molecular structures. Mol* provides an extensive range of features for exploring molecular structures. However, the tool lacks the functionality to color and label atoms and residues based on their partial atomic charges. As mentioned in the \nameref{chap:introduction}, the Mol* viewer predecessor, Litemol, supported this functionality. Nevertheless, since Litemol is no longer supported, we saw the need to bring this functionality to Mol*.
+Visualizing partial atomic charges in molecules is an essential aspect of computational chemistry research, aiding in analyzing complex molecular structures. Mol* provides an extensive range of features for exploring molecular structures. However, the tool lacks the functionality to color and label atoms and residues based on their partial atomic charges. As mentioned in the \nameref{chap:introduction}, the Mol* viewer’s predecessor, Litemol, supported this functionality. Nevertheless, since Litemol is no longer supported, we saw the need to bring this functionality to Mol*.
 
 This chapter describes the requirements for the extension, the custom mmCIF categories necessary for storing the partial atomic charges, and the implementation of the extension itself.
 
+% * ✅
 \section{Requirements}
 \label{section:requirements}
 
-% TODO: describe what residue charges are \\
-% TODO: describe what each representation should visualize when colored using partial charges coloring \\
-
-Firstly, the Mol* extension should enable coloring atoms and residues according to their corresponding atom or residue partial atomic charges. By residue charges, we mean the sum of the partial atomic charges of all atoms within a residue. The extension should also support the ball and stick, surface, and cartoon representations.
+Firstly, the Mol* extension should enable coloring atoms and residues according to their corresponding atom or residue partial atomic charges. By residue charges, it is meant the sum of the partial atomic charges of all atoms within a residue. The extension should also support the ball and stick, surface, and cartoon representations.
 
 Secondly, it should describe the charge values of the atoms and residues.
 
@@ -512,10 +510,11 @@ Thirdly, the extension should allow the user to provide multiple charge sets for
 \section{Custom mmCIF categories}
 \label{section:custom_mmcif_categories}
 
-To store partial atomic charges within a single file, we developed custom categories within the mmCIF format. The mmCIF format was chosen because it is widely used in the field of structural biology and offers several advantages over other formats, as discussed in \ref{subsection:mmcif}. The custom categories allow us to store information about the partial atomic charges separately from the other structural data while still being able to access it within the same file. Storing all data in one file was important as it allowed for easier management and distribution of the data. If the charges were stored separately, we would have to provide the charge data to Mol* differently, e.g., through custom Mol* import controls.
+Storing the structure and partial atomic charges in a single file was a crucial aspect of the extension. It provides a smoother process of loading the input structure file into the Mol* viewer. If the charges were stored separately, it would have been necessary to provide the charge data to Mol* by different means, e.g., through custom Mol* import controls.
 
+For this purpose, we designed two custom mmCIF categories, one for storing the partial charge values for each atom in the structure and another for storing metadata about the charge sets.
 
-We used two categories for this purpose: one to store the partial charge values for each atom in the structure and another to store metadata about the charge sets.
+The mmCIF format was chosen because it is widely used in the field of structural biology and offers several advantages over other formats, as discussed in \ref{subsection:mmcif}. The custom categories allow us to store information about the partial atomic charges separately from the other structural data while still being able to access it within the same file.
 
 The category \texttt{\_sb\_ncbr\_partial\_atomic\_charges} maps together the atoms of the structure and their charges. The category has three attributes:
 
@@ -529,8 +528,8 @@ The category \texttt{\_sb\_ncbr\_partial\_atomic\_charges\_meta} is dedicated to
 
 \begin{itemize}
   \item \texttt{id} - unique identifier for the charge set
-  \item \texttt{type} - type of the calculation method (e.g. 'empirical', 'quantum')
-  \item \texttt{method} - computation method used to calculate the charge set (e.g. 'EQeq', 'EEM/Racek 2016 (ccd2016\_npa)')
+  \item \texttt{type} - type of the calculation method (e.g., 'empirical', 'quantum')
+  \item \texttt{method} - computation method used to calculate the charge set (e.g., 'EQeq', 'EEM/Racek 2016 (ccd2016\_npa)')
 \end{itemize}
 
 Figure \ref{fig:mmcif_erd} provides a detailed illustration of the custom mmCIF categories and their relationships.
