@@ -456,7 +456,7 @@ Mol* (/'molstar/) is another web-based visualization tool. It is built upon the 
 
 \subsubsection{Mol* state tree}
 
-For storing information about the molecular structure and its visualization, the Mol* library uses a state tree. The state tree is a tree data structure consisting of several layers, each containing information about a specific aspect of the structure. The state tree is a key component of the Mol* library, as it allows for easy access to the data and facilitates the implementation of various features. \cite{sehnal2021molstar}
+For storing information about the molecular structure and its visualization, the Mol* library uses a state tree. The state tree is a tree data structure consisting of several layers, each containing information about a specific aspect of the structure. The state tree is a key component of the Mol* library, as it allows for easy access to the structure data and facilitates the implementation of various features. \cite{sehnal2021molstar}
 
 Figure \ref{fig:state_tree} shows the Mol* state tree. The blue nodes of the tree correspond to representations of the underlying structural elements. The figure shows the correspondence between the state tree and the canvas on which the structure is rendered.
 
@@ -549,6 +549,8 @@ Figure \ref{fig:mmcif_erd} provides a detailed illustration of the custom mmCIF 
   \label{fig:mmcif_erd}
 \end{figure}
 
+\clearpage
+
 \section{Implementation}
 \label{section:implementation}
 
@@ -556,16 +558,14 @@ Figure \ref{fig:mmcif_erd} provides a detailed illustration of the custom mmCIF 
 
 The Mol* library works modularly, where representations, color themes, and other visualization features are implemented as separate providers. Depending on the users' needs, these providers can be registered or unregistered on demand, providing a flexible and extensible framework for visualizing molecular structures. This modular design allows for straightforward customization and extension to the library to support collaborative development.
 
-This section covers the implementation of the partial atomic charge extension for the Mol* viewer. The extension consists of multiple providers, each serving a specific functionality, such as supplying the partial charge data and coloring the structural elements based on their charges. 
+This section covers the implementation of the partial atomic charge extension for the Mol* viewer. The extension consists of multiple providers, each serving a specific functionality, such as supplying the partial charge data and coloring the structural elements based on their partial atomic charges. 
 
 The extension was created using TypeScript, a superset of JavaScript that adds static typing and other features to the language. The Mol* library is also written in TypeScript, so the extension was written in the same language to ensure compatibility.
 
 \subsection{Property provider}
 \label{subsection:property_provider}
 
-% TODO: wrong references
-
-In order to retrieve the charges from the mmCIF file, it is necessary to parse the file. This is done by the Mol* library, which parses the mmCIF file and provides the parsed mmCIF file data in the form of a \texttt{MmcifFormat} object. The purpose of this provider is to process the charge data from this object and supply the charge data to the rest of the extension providers through a custom property. The interface of this property is depicted in Figure \ref{figure:charge_data_structure}.
+In order to retrieve the charges from the mmCIF file, it is necessary to parse the file. This is done by the Mol* library, which parses the mmCIF file and provides the parsed mmCIF file data in the form of a \texttt{MmcifFormat} object. The purpose of this provider is to process the charge data from this object and supply the charge data to the rest of the extension providers through a custom property. The interface of this property is depicted in Figure \ref{fig:property_provider_interface}.
 
 The atom charges are stored in the \texttt{typeIdToAtomIdToCharge} map. The map is indexed by the charge set (typeId) and the atom id. The atom id is a pointer to the atom\_site.id. item in the mmCIF file. The atom charges are retrieved from the mmCIF file by iterating over the atom\_site.id category and retrieving the charge values for each atom. The charge values are then stored in the \texttt{typeIdToAtomIdToCharge} map.
 
