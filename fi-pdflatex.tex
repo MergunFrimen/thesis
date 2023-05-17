@@ -516,29 +516,53 @@ For this purpose, we designed two custom mmCIF categories, one for storing the p
 
 The mmCIF format was chosen because it is widely used in the field of structural biology and offers several advantages over other formats, as discussed in \ref{subsection:mmcif}. The custom categories allow us to store information about the partial atomic charges separately from the other structural data while still being able to access it within the same file.
 
-The category \texttt{\_sb\_ncbr\_partial\_atomic\_charges} maps together the atoms of the structure and their charges. The category has three attributes:
+The category \texttt{\_sb\_ncbr\_partial\_atomic\_charges\_meta} stores \\ metadata about the charge sets, such as the method used to calculate the charges and the type of the calculation method. The attributes of the category are listed in Table \ref{table:partial_atomic_charges_meta}.
 
-\begin{itemize}
-  \item \texttt{type\_id} - pointer to the \\ \texttt{\_sb\_ncbr\_partial\_atomic\_charges\_meta.id} item
-  \item \texttt{atom\_id} - pointer to the \texttt{\_atom\_site.id} item described in \ref{subsection:mmcif}
-  \item \texttt{charge} - partial charge value for the atom
-\end{itemize}
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{|p{0.3\linewidth} | p{0.6\linewidth}|}
+    \hline
+    \textbf{Attribute name} & \textbf{Description} \\
+    \hline
+    id & unique identifier of the charge set (e.g., '1') \\
+    \hline
+    type & type of the calculation method (e.g., 'empirical', 'quantum') \\
+    \hline
+    method & computation method used to calculate the charge set (e.g., 'EQeq', 'EEM/Racek 2016 (ccd2016\_npa)') \\
+    \hline
+  \end{tabular}
+  \caption{Attributes of the \texttt{\_sb\_ncbr\_partial\_atomic\_charges\_meta} mmCIF category.}
+  \label{table:partial_atomic_charges_meta}
+\end{table}
 
-The category \texttt{\_sb\_ncbr\_partial\_atomic\_charges\_meta} is dedicated to storing metadata about the charge sets. The metadata category has the following attributes:
+The category \texttt{\_sb\_ncbr\_partial\_atomic\_charges} maps together the atoms of the structure and their corresponding charges. The attributes of the category are listed in Table \ref{table:partial_atomic_charges}.
 
-\begin{itemize}
-  \item \texttt{id} - unique identifier for the charge set
-  \item \texttt{type} - type of the calculation method (e.g., 'empirical', 'quantum')
-  \item \texttt{method} - computation method used to calculate the charge set (e.g., 'EQeq', 'EEM/Racek 2016 (ccd2016\_npa)')
-\end{itemize}
+\begin{table}[htbp]
+  \centering
+  \begin{tabular}{|p{0.3\linewidth} | p{0.6\linewidth}|}
+    \hline
+    \textbf{Attribute name} & \textbf{Description} \\
+    \hline
+    type\_id & pointer to the \texttt{id} attribute in the metadata category \\
+    \hline
+    atom\_id & pointer to the \texttt{\_atom\_site.id} item described in \ref{subsection:mmcif} \\
+    \hline
+    charge & partial charge value for the atom (float value) \\
+    \hline
+  \end{tabular}
+  \caption{Attributes of the \texttt{\_sb\_ncbr\_partial\_atomic\_charges} mmCIF category.}
+  \label{table:partial_atomic_charges}
+\end{table}
 
 Figure \ref{fig:mmcif_erd} provides a detailed illustration of the custom mmCIF categories and their relationships.
+
+% TODO: check if the figure is ok
 
 \begin{figure}
   \begin{center}
     \includegraphics[width=\textwidth]{figures/mmcif_erd.png}
   \end{center}
-  \caption{Diagram of custom mmCIF categories.}
+  \caption{Diagram of the custom mmCIF categories for storing partial atomic charges.}
   \label{fig:mmcif_erd}
 \end{figure}
 
