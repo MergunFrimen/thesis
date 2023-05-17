@@ -512,7 +512,7 @@ Thirdly, the extension should allow the user to provide multiple charge sets for
 
 Storing the structure and partial atomic charges in a single file was a crucial aspect of the extension. It provides a smoother process of loading the input structure file into the Mol* viewer. If the charges were stored separately, it would have been necessary to provide the charge data to Mol* by different means, e.g., through custom Mol* import controls.
 
-For this purpose, we designed two custom mmCIF categories, one for storing the partial charge values for each atom in the structure and another for storing metadata about the charge sets.
+For this purpose, we have chosen the mmCIF file format and designed two custom mmCIF categories, one for storing the partial charge values for each atom in the structure and another for storing metadata about the charge sets.
 
 The mmCIF format was chosen because it is widely used in the field of structural biology and offers several advantages over other formats, as discussed in \ref{subsection:mmcif}. The custom categories allow us to store information about the partial atomic charges separately from the other structural data while still being able to access it within the same file.
 
@@ -543,7 +543,7 @@ The category \texttt{\_sb\_ncbr\_partial\_atomic\_charges} maps together the ato
     \hline
     \textbf{Attribute name} & \textbf{Description} \\
     \hline
-    type\_id & pointer to the \texttt{id} attribute in the metadata category \\
+    type\_id & pointer to the \texttt{id} item in the metadata category \\
     \hline
     atom\_id & pointer to the \texttt{\_atom\_site.id} item described in \ref{subsection:mmcif} \\
     \hline
@@ -562,7 +562,7 @@ Figure \ref{fig:mmcif_erd} provides a detailed illustration of the custom mmCIF 
   \begin{center}
     \includegraphics[width=\textwidth]{figures/mmcif_erd.png}
   \end{center}
-  \caption{Diagram of the custom mmCIF categories for storing partial atomic charges.}
+  \caption{Diagram of the relationship of the custom mmCIF categories for storing partial atomic charges.}
   \label{fig:mmcif_erd}
 \end{figure}
 
