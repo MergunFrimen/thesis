@@ -250,7 +250,7 @@ Figure \ref{fig:psilocybin} demonstrates the unequal distribution of electron de
 
 % TODO: maybe remove the citations here?
 
-There are several applications for partial atomic charges in computational chemistry, such as molecular dynamics \cite{nejad2018insulin}, molecular docking \cite{park2006critical}, and pharmacophore design \cite{stalke2011meaningful}. \cite{racek2022thesis,schindler2021thesis}
+There are several applications for partial atomic charges in computational chemistry, such as molecular dynamics \cite{nejad2018insulin}, molecular docking \cite{docking}, and pharmacophore design \cite{stalke2011meaningful}. \cite{racek2022thesis,schindler2021thesis}
 
 It is important to note that partial charges are a theoretical concept and cannot be directly measured or observed; they can only be calculated using computational methods. \cite{schindler2019thesis} 
 
@@ -332,16 +332,13 @@ The PDB format consists of rows of records. Each record begins with a keyword id
 
 The PQR format is a non-standard variant of the PDB format that enables users to include partial atomic charges and radii parameters in the existing PDB data. It replaces the Occupancy and B-factor fields (see Figure \ref{fig:pdb}) with fields for partial atomic charges and radii. \cite{pqrfile,apbs_pqrfile} Despite the PQR format being non-standard, it is still used in some applications, such as the Atomic Charge Calculator II, for storing partial atomic charges. \cite{racek2020acc2}.
 
+% * ✅
 \subsection{mmCIF}
 \label{subsection:mmcif}
 
-% TODO: cite something other than pdb101 (use 'qtpie')
+The mmCIF format, also known as PDBx/mmCIF, offers an enhanced and flexible representation of macromolecular crystallography data compared to the PDB format. One of its most significant advantages is the utilization of data dictionaries, allowing users to define new data items and incorporate additional information into the file. Unlike other formats, mmCIF does not limit column width and entry count, making it more flexible and accommodating for storing large amounts of data \cite{qtpie}.
 
-The mmCIF format, also known as PDBx/mmCIF, offers an enhanced and flexible representation of macromolecular crystallography data compared to the PDB format. One of its most significant advantages is the utilization of data dictionaries, allowing users to define new data items and incorporate additional information into the file. Unlike other formats, mmCIF does not limit column width and entry count, making it more flexible and accommodating for storing large amounts of data \cite{pdb101}.
-
-The mmCIF file format stores all data items in a relational database format. Each data item is stored in a separate table, and the tables are linked together through unique identifiers (pointers). Furthermore, a unique token identifies and references each data item in the file. A token comprises a category name and an attribute name separated by a dot. For example, the token \texttt{\_atom\_site.id} refers to the \texttt{id} data item in the \texttt{\_atom\_site} category \cite{pdb101}.
-
-The mmCIF format supports two forms of storing data items: key-value and tabular. Key-value data items contain a single value, while tabular data items contain multiple values. Multi-valued data items are represented as a list of values separated by a newline character. \cite{pdb101}
+The mmCIF file format stores all data items in a relational database format. Data items are stored in separate tables. The tables are linked together with unique identifiers (pointers). Furthermore, a unique token identifies and references each data item in the file. A token comprises a category name and an attribute name separated by a dot. For example, the token \texttt{\_atom\_site.id} refers to the \texttt{id} data item in the \texttt{\_atom\_site} category. Furthermore, the mmCIF format supports two forms of storing data items: key-value and tabular. Key-value data items contain a single value, while tabular data items contain multiple values. Multi-valued data items are represented as a list of values separated by a newline character. \cite{pdb101}
 
 Figure \ref{fig:mmcif} depicts the \texttt{\_atom\_site} category in the mmCIF file containing hemoglobin. This category is represented in tabular form, indicated by the \texttt{\_loop} token on the first row. Each row of the table corresponds to an atom in the structure. The \texttt{\_atom\_site} category contains several data items, including the following \cite{mmcif_dictionary}:
 
@@ -354,8 +351,6 @@ Figure \ref{fig:mmcif} depicts the \texttt{\_atom\_site} category in the mmCIF f
   \item \texttt{\_atom\_site.label\_comp\_id}: the name of the chain containing the atom
   \item \texttt{\_atom\_site.label\_alt\_id}: the alternate conformation indicator for the atom
 \end{itemize}
-
-The mmCIF format is the preferred format for storing macromolecular structures. It offers more flexibility and extensibility than the PDB format, and it is particularly suitable for storing large amounts of data \cite{}.
 
 \begin{figure}[htbp]
   \begin{center}
@@ -370,16 +365,22 @@ The mmCIF format is the preferred format for storing macromolecular structures. 
 
 % TODO: this is a bit too short, maybe add more details
 
+% TODO: plagiarism
+
 Color interpolation refers to the process of determining intermediate colors between two or more given colors. This is typically done by taking a weighted average of the red, green, and blue values of the interpolated colors. It is a common technique used in computer graphics to smoothly transition between colors or to generate new colors based on existing ones. \cite{zucconi2016secrets}
 
 \newpage
 \chapter{Visualizing molecular data}
 \label{chapter:visualizing_molecular_data}
 
+% TODO: plagiarism
+
 Visualizing molecular data is a challenging task due to the complexity of the data and the large number of possible representations. This chapter describes the different types of visualizations used in molecular visualization and their applications.
 
 \section{Types of visualizations}
 \label{section:types_of_visualizations}
+
+% TODO: plagiarism
 
 There are several methods for representing molecular data, each serving a different purpose and providing a different level of detail. The methods most relevant to this work are the following three types: ball and stick, surface, and cartoon. The following sections describe these methods in more detail.
 
@@ -394,7 +395,7 @@ Examples of ball and stick models are shown in Figures \ref{fig:element_symbol} 
 \label{subsection:surface}
 
 Surface representations depict the three-dimensional shape of a molecule by displaying its solvent-accessible surface. This model provides a more accurate representation of the molecule's overall shape and size, making it especially useful for studying macromolecular interactions and the binding of small molecules.
-For example, surface visualization can be used to identify potential binding sites on a protein surface, which can then be targeted by drug molecules. \ref{}
+For example, surface visualization can be used to identify potential binding sites on a protein surface, which can then be targeted by drug molecules. \ref{docking}
 
 Examples of surface models are shown in Figures \ref{fig:psilocybin} and \ref{fig:partial_charges_color_theme-surface}.
 
