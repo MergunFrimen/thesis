@@ -539,8 +539,6 @@ The category \texttt{\_sb\_ncbr\_partial\_atomic\_charges} maps together the ato
 
 Figure \ref{fig:mmcif_erd} provides a detailed illustration of the custom mmCIF categories and their relationships.
 
-% TODO: check if the figure is ok
-
 \begin{figure}
   \begin{center}
     \includegraphics[width=\textwidth]{figures/mmcif_erd.png}
@@ -554,8 +552,6 @@ Figure \ref{fig:mmcif_erd} provides a detailed illustration of the custom mmCIF 
 \section{Implementation}
 \label{section:implementation}
 
-% TODO: rewrite plagiat
-
 The Mol* library works modularly, where representations, color themes, and other visualization features are implemented as separate providers. Depending on the users' needs, these providers can be registered or unregistered on demand, providing a flexible and extensible framework for visualizing molecular structures. This modular design allows for straightforward customization and extension to the library to support collaborative development.
 
 This section covers the implementation of the partial atomic charge extension for the Mol* viewer. The extension consists of multiple providers, each serving a specific functionality, such as supplying the partial charge data and coloring the structural elements based on their partial atomic charges. 
@@ -565,14 +561,18 @@ The extension was created using TypeScript, a superset of JavaScript that adds s
 \subsection{Property provider}
 \label{subsection:property_provider}
 
-In order to retrieve the charges from the mmCIF file, it is necessary to parse the file. This is done by the Mol* library, which parses the mmCIF file and provides the parsed mmCIF file data in the form of a \texttt{MmcifFormat} object. The purpose of this provider is to process the charge data from this object and supply the charge data to the rest of the extension providers through a custom property. The interface of this property is depicted in Figure \ref{fig:property_provider_interface}.
+The property providers are used to store custom information inside the Mol* state tree. The purpose of this provider is to process the charge data that is read from the mmCIF file and supply the charge data through a custom property to the rest of the extensions providers.
 
-The atom charges are stored in the \texttt{typeIdToAtomIdToCharge} map. The map is indexed by the charge set (typeId) and the atom id. The atom id is a pointer to the atom\_site.id. item in the mmCIF file. The atom charges are retrieved from the mmCIF file by iterating over the atom\_site.id category and retrieving the charge values for each atom. The charge values are then stored in the \texttt{typeIdToAtomIdToCharge} map.
+The charges are retrieved from the mmCIF file by the Mol* library, which parses the mmCIF file and provides the parsed mmCIF file data in the form of a \texttt{MmcifFormat} object. The property provider then iterates over the \texttt{\_sb\_ncbr\_partial\_atomic\_charges} category of the \texttt{MmcifFormat} object and stores the charge values in a custom model property.
+
+The interface of this custom property is depicted in Figure \ref{fig:property_provider_interface}. The atom charges are stored in the \texttt{typeIdToAtomIdToCharge} map. The map is indexed by the charge set (typeId) and the atom id. The atom id is a pointer to the \texttt{\_atom\_site.id} item in the mmCIF file. The atom charges are retrieved from the mmCIF file by iterating over the \texttt{\_atom\_site.id} category and retrieving the charge values for each atom. The charge values are then stored in the \texttt{typeIdToAtomIdToCharge} map.
 
 The residue charges are calculated by summing the charges of the atoms that make up the residue. The residue charge is then stored in the \texttt{typeIdToResidueIdToCharge} map.
 
 The maximum absolute charge values of the atoms and residues are calculated and stored in the \texttt{maxAbsoluteAtomCharges} and \\
-\texttt{maxAbsoluteResidueCharges} maps. These maps are used in the color theme provider to normalize the charges to the range of 0 to 1. Additionally, the maximum absolute charge values are used to calculate the color interpolations in the color theme provider. Furthermore, the maximum absolute charge of both atoms and residues is calculated and stored in the \texttt{maxAbsoluteChargesAll} map.
+\texttt{maxAbsoluteResidueCharges} maps. These maps are used in the color theme provider to normalize the charges to the range of 0 to 1.
+
+Additionally, the maximum absolute charge values are used to calculate the color interpolations in the color theme provider. Furthermore, the maximum absolute charge of both atoms and residues is calculated and stored in the \texttt{maxAbsoluteChargesAll} map.
 
 Lastly, the method name used to calculate the charges of a given charge set is stored in the \texttt{typeIdToMethod} map. This map is used to display the method name in the UIs.
 
@@ -584,37 +584,8 @@ Lastly, the method name used to calculate the charges of a given charge set is s
   \label{fig:property_provider_interface}
 \end{figure}
 
-
-% \begin{figure}[htbp]
-%   \caption{Interface of the custom model property for storing partial atomic charges.}
-%   \label{fig:custom_model_property}
-%   \definecolor{LightGray}{gray}{0.95}
-%   \begin{minted}[
-%   frame=lines,
-%   framesep=2mm,
-%   baselinestretch=1.2,
-%   bgcolor=LightGray,
-%   fontsize=\footnotesize,
-%   % linenos
-%   ]{Typescript}
-%     type TypeId = number;
-%     type IdToCharge = Map<number, number>;
-%     export interface SBNcbrPartialChargeData {
-%         typeIdToMethod: Map<TypeId, string>;
-%         typeIdToAtomIdToCharge: Map<TypeId, IdToCharge>;
-%         typeIdToResidueToCharge: Map<TypeId, IdToCharge>;
-%         maxAbsoluteAtomCharges: IdToCharge;
-%         maxAbsoluteResidueCharges: IdToCharge;
-%         maxAbsoluteAtomChargeAll: number;
-%         params: PartialChargesPropertyParams;
-%     }
-%   \end{minted}
-% \end{figure}
-
 \subsection{Color theme provider}
 \label{subsection:color_theme_provider}
-
-% TODO: mention the color parameters \\
 
 This provider serves as the central component of the extension, with its primary function being to assign colors to atoms and residues based on their charges. It achieves this by using the ColorTheme API provided by Mol*. The ColorTheme API is a mechanism for assigning colors to structural elements of a molecule. These structural elements can be atoms, residues, bonds, and so on. The API is based on the concept of a ColorTheme object, which is a collection of color assignments for structural elements. The ColorTheme object is then used by the Mol* library to color the structural elements of the molecule.
 
@@ -634,23 +605,28 @@ To establish the color for a given charge, two color interpolations are employed
 \subsection{Label provider}
 \label{subsection:label_provider}
 
-% TODO: cite the Mol* documentation where the Loci object is described \\
-% TODO: empty reference
+Having colored the structural elements, it was also necessary to create a label provider, which would display labels that describe the charges of the structural elements. Mol* uses the \textit{Loci} object to determine which element is highlighted. A \textit{Loci} object is utilized for general selections and highlights. \cite{molstar_docs}
 
-Having colored the structural elements, it was also necessary to create a label provider, which would assign labels that describe the charge of the structural element. In order to determine which element is highlighted, Mol* uses the object Loci. A Loci object is utilized for general selections and highlights. Consequently, it is essential to first extract the location from the Loci object in order to obtain the atom ID. The charge is acquired from the property provider, and the label is an HTML string that conveys the charge of the atom or residue. An example of the label can be seen in in the right-hand corner in figure \ref{}.
+Once the user selects a structural element, the provider fetches the partial atomic charge from the property provider. The label is then displayed as a HTML string that conveys the charge of the atom or residue. An example of the label can be seen in the right-hand corner of Figure \ref{fig:labels}.
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=\textwidth]{figures/labels.png}
+  \end{center}
+  \caption[Label of partial atomic charges.]{Label describing the partial atomic charge of a residue.}
+  \label{fig:labels}
+\end{figure}
 
 \subsection{Controls}
 \label{subsection:controls}
 
-The controls are implemented automatically by the Mol* library based on the parameters of the providers. The user has access to controls of the charge set and the color theme. The charge set controls allow the user to select the charge set to display. The color theme controls allow the user to specify the following parameters:
+The controls are implemented automatically by the Mol* library based on the parameters of the property provider and the color theme provider. Users can access the charge set and color theme controls in the Mol* state tree user interface. The controls are depicted in Figure \ref{fig:controls-charge-set}. The charge set controls allow users to select which charge set to display. The color theme controls allow the user to specify the following parameters:
 
 \begin{itemize}
-  \item \textbf{Charge Range}: Sets the range of the color interpolation
-  \item \textbf{Use Range}: Toggles whether the range of the color interpolation is automatically calculated or manually specified.
-  \item \textbf{Charge Type}: Selects whether to display the partial atomic charges or the partial residue charges.
+  \item \textbf{Charge Range}: Sets the maximum absolute charge value of the atoms and residues. The range is used to normalize the charges to the range of 0 to 1 for the color interpolations.
+  \item \textbf{Use Range}: Toggles between using the user-specified range and the maximum absolute charge value of the atoms and residues.
+  \item \textbf{Charge Type}: Selects whether to display the charges of atoms or residues.
 \end{itemize}
-
-The controls are depicted in Figure \ref{fig:controls-charge-set}.
 
 \begin{figure}[htbp]
   \centering
