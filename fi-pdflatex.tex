@@ -180,7 +180,7 @@ Figure \ref{fig:aspirin} shows the structure of aspirin \cite{pubchem_aspirin}, 
   \begin{center}
     \includegraphics[width=7cm]{figures/aspirin.png}
   \end{center}
-  \caption{Aspirin.}{Aspirin, a drug used to treat pain, fever, or inflammation.}
+  \caption[Aspirin.]{Aspirin, a drug used to treat pain, fever, or inflammation.}
   \label{fig:aspirin}
 \end{figure}
 
@@ -387,7 +387,7 @@ There are several methods for representing molecular data, each serving a differ
 
 The ball and stick model represents atoms as spheres and bonds as cylindrical connections between these spheres. This ball and stick model provides a simple and intuitive visualization of a molecule's atomic structure. It highlights individual atoms and their bonds, including their bond types. \cite{tsai2003introduction} However, it is not suitable for visualizing larger molecules due to the large number of atoms and bonds that would need to be displayed.
 
-Examples of ball and stick representations are shown in Figures \ref{fig:structure2}, \ref{fig:element_symbol}, and \ref{fig:partial_charges_color_theme-bas}.
+Examples of ball and stick representations are shown in Figures \ref{fig:aspirin}, \ref{fig:element_symbol}, and \ref{fig:partial_charges_color_theme-bas}.
 
 \subsection{Surface}
 \label{subsection:surface}
@@ -469,8 +469,6 @@ The Mol* library works in a modular fashion, where each representation, color th
 \subsubsection{Mol* state tree}
 
 To store information about the molecular structure and its visualization, the Mol* library uses a state tree. The state tree is a tree data structure consisting of several layers, each of which contains information about a specific aspect of the structure. The layers are organized in a hierarchical manner, with each layer containing information about the layer below it. The state tree is a key component of the Mol* library, as it allows for easy access to the data and facilitates the implementation of various features. \cite{sehnal2021molstar}
-
-% Figure \ref{fig:state_tree} shows the state tree of a molecular structure. The state tree consists of several layers. The top layer contains information about the molecular structure itself, such as the atoms and residues it contains. The layer below that contains information about the model, which represents a single state of the molecular structure. The layer below it contains information about the assembly, which organizes of multiple molecular components - such as chains, ligands, and water molecules - into a single structure. The layer below that contains information about the representation, which defines how the molecular structure is visualized. Finally, the bottom layer contains information about the color theme, which defines how the molecular structure is colored.
 
 \begin{figure}[htbp]
   \begin{center}
