@@ -230,6 +230,7 @@ Conformational isomers, or alternative conformations, are different spatial arra
 \end{figure}
 
 
+% * ✅
 \section{Partial atomic charges}
 \label{section:partial_atomic_charges}
 
@@ -253,6 +254,7 @@ There are several applications for partial atomic charges in computational chemi
 
 It is important to note that partial charges are a theoretical concept and cannot be directly measured or observed; they can only be calculated using computational methods. \cite{schindler2019thesis} 
 
+% * ✅
 \subsection{Calculation methods}
 \label{section:calculating_partial_atomic_charges}
 
@@ -262,20 +264,25 @@ Empirical methods aim to produce charges comparable to those obtained through qu
 
 There are several empirical methods for calculating partial atomic charges, such as SQE \cite{nistor2006generalization}, EEM \cite{mortier1986electronegativity}, and QEq \cite{rappe1991charge}. These methods are implemented in the ChargeFW2 \cite{racek2020acc2} program, which is used in this thesis.
 
+% * ✅
 \subsection{ChargeFW2}
 \label{section:chargfw2}
 
 ChargeFW2 is a C++ program that calculates partial atomic charges by empirical methods. The program supports 20 empirical methods, including SQE, EEM, and QEq, which were mentioned previously. It provides a command-line interface for running calculations and supports several file formats for input and output. \cite{racek2020acc2}
 
+% * ✅
 \section{Chemical file formats}
 \label{section:chemical_file_formats}
 
-Chemical file formats are used to store molecular data in a computer-readable format. There are several file formats for storing molecular data, each suited to a specific purpose. This section explores the SDF and MOL2 file formats, commonly used for storing small molecules, and the PDB and mmCIF file formats, commonly used for storing macromolecules, such as proteins.
+Chemical file formats are used to store molecular data in a computer-readable format. There are several file formats for storing molecular data, each suited to a specific purpose.
 
+This section explores the SDF and MOL2 file formats, commonly used for storing small molecules, and the PDB and mmCIF file formats, commonly used for storing macromolecules, such as proteins.
+
+% * ✅
 \subsection{SDF}
 \label{subsection:sdf}
 
-The Structure-Data File (SDF) is a widely used text-based chemical file format used to describe the atoms, bonds, and atomic coordinates of small molecules. It acts as a container for the MOL V2000 and V3000 file formats, allowing the storage of multiple molecules in a single file. The MOL V2000 format is a fixed-width format that can store up to 999 atoms and bonds, while the MOL V3000 format removes this limitation, enabling the storage of larger molecules \cite{wikipedia_ctfile,mdl_ctfile}.
+The Structure-Data File (SDF) is a widely used text-based chemical file format used to describe the atoms, bonds, and atomic coordinates of small molecules. It acts as a container for the MOL V2000 and V3000 file formats, allowing the storage of multiple molecules in a single file. The MOL V2000 format is a fixed-width format that can store up to 999 atoms and bonds, while the MOL V3000 format removes this limitation, enabling the storage of larger molecules \cite{mdl_ctfile,wikipedia_ctfile}.
 
 Figure \ref{fig:sdf} depicts an SDF file containing the structure of ethanol in the MOL V2000 format. This format consists of a header section, an atom section, and a bond section. The header section contains the molecule's name, as well as the number of atoms and bonds. The atom and bond sections provide the corresponding atom and bond information, respectively \cite{belford2017anatomy}.
 
@@ -287,12 +294,13 @@ Figure \ref{fig:sdf} depicts an SDF file containing the structure of ethanol in 
   \label{fig:sdf}
 \end{figure}
 
+% * ✅
 \subsection{MOL2}
 \label{subsection:mol2}
 
-The Mol2 file format is another text-based format used for storing small molecular structures and their associated properties. It supports multiple conformations of a molecule and is commonly utilized in molecular modeling and cheminformatics applications. Compared to the SDF format, Mol2 provides more flexibility and additional features by supporting various record types \cite{manish}.
+The Mol2 file format is another text-based format used for storing small molecular structures and their associated properties. It supports multiple conformations of a molecule and is commonly utilized in molecular modeling and cheminformatics applications. Compared to the SDF format, Mol2 provides more flexibility and additional features by supporting various record types, including custom charge data. \cite{manish}
 
-Figure \ref{fig:mol2} illustrates the contents of an MOL2 file containing the structure of ethanol. You may observe the similarity between the MOL2 and SDF formats. Both formats contain the same information about atoms and bonds. However, the MOL2 format offers greater flexibility in its structure.
+Figure \ref{fig:mol2} illustrates the contents of an MOL2 file containing the structure of ethanol. Notice the similarity between the MOL2 and SDF formats. Both formats contain the same information about atoms and bonds. However, the MOL2 format offers greater flexibility in its structure.
 
 \begin{figure}[htbp]
   \begin{center}
@@ -302,20 +310,19 @@ Figure \ref{fig:mol2} illustrates the contents of an MOL2 file containing the st
   \label{fig:mol2}
 \end{figure}
 
+% * ✅
 \subsection{PDB}
 \label{subsection:pdb}
 
-The Protein Data Bank (PDB) file format is widely employed for storing three-dimensional structures of proteins, nucleic acids, and other macromolecules. PDB files contain vital information such as atomic coordinates, secondary structure, and other essential details required for understanding macromolecular structures. The PDB format has found extensive use in structural biology, bioinformatics, and related fields \cite{wikipedia_pdbfile}.
+The Protein Data Bank (PDB) file format is widely employed for storing three-dimensional structures of proteins, nucleic acids, and other macromolecules. PDB files contain vital information such as atomic coordinates, secondary structure, and other essential details required for understanding macromolecular structures. The PDB format has found extensive use in structural biology, bioinformatics, and related fields \cite{pdb101}.
 
-The PDB format consists of rows of records. Each record begins with a keyword that identifies the type of record, such as ATOM, HETATM, or CONECT. The ATOM and HETATM records contain the atomic coordinates of the atoms in the molecule, while the CONECT record contains the connectivity information of the atoms. \cite{wikipedia_pdbfile}
-
-Figure \ref{fig:pdb} displays the ATOM record section of a PDB file containing the structure of a hemoglobin protein. This section contains the atomic coordinates of the protein's atoms, as well as other information such as the atom's name, residue name, and residue number. \cite{wikipedia_pdbfile}
+The PDB format consists of rows of records. Each record begins with a keyword identifying the record type, such as ATOM, HETATM, or CONECT. Figure \ref{fig:pdb} displays the ATOM record section of a PDB file containing the structure of a hemoglobin protein. This record section contains the atomic coordinates of the protein's atoms and other information, such as the atom's name, residue name, and residue number.  \cite{chimera_pqrfile}
 
 \begin{figure}[htbp]
   \begin{center}
     \includegraphics[width=11cm]{figures/pdb_format.png}
   \end{center}
-  \caption{The ATOM record section of a PDB file containing the structure of a hemoglobin protein}
+  \caption{The ATOM record section of a PDB file containing the structure of a hemoglobin protein.}
   \label{fig:pdb}
 \end{figure}
 
