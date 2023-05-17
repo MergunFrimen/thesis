@@ -298,7 +298,7 @@ Figure \ref{fig:sdf} depicts an SDF file containing the structure of ethanol in 
 \subsection{MOL2}
 \label{subsection:mol2}
 
-The Mol2 file format is another text-based format used for storing small molecular structures and their associated properties. It supports multiple conformations of a molecule and is commonly utilized in molecular modeling and cheminformatics applications. Compared to the SDF format, Mol2 provides more flexibility and additional features by supporting various record types, including custom charge data. \cite{manish}
+The Mol2 file format is another text-based format used for storing small molecular structures and their associated properties. It supports multiple conformations of a molecule and is commonly utilized in molecular modeling and cheminformatics applications. Compared to the SDF format, Mol2 provides more flexibility and additional features by supporting various record types, including custom charge data.\cite{manish}
 
 Figure \ref{fig:mol2} illustrates the contents of an MOL2 file containing the structure of ethanol. Notice the similarity between the MOL2 and SDF formats. Both formats contain the same information about atoms and bonds. However, the MOL2 format offers greater flexibility in its structure.
 
@@ -314,9 +314,9 @@ Figure \ref{fig:mol2} illustrates the contents of an MOL2 file containing the st
 \subsection{PDB}
 \label{subsection:pdb}
 
-The Protein Data Bank (PDB) file format is widely employed for storing three-dimensional structures of proteins, nucleic acids, and other macromolecules. PDB files contain vital information such as atomic coordinates, secondary structure, and other essential details required for understanding macromolecular structures. The PDB format has found extensive use in structural biology, bioinformatics, and related fields \cite{pdb101}.
+The Protein Data Bank (PDB) file format is widely employed for storing three-dimensional structures of proteins, nucleic acids, and other macromolecules. PDB files contain vital information such as atomic coordinates, secondary structure, and other essential details required for understanding macromolecular structures. The PDB format has found extensive use in structural biology, bioinformatics, and related fields. \cite{pdb101}
 
-The PDB format consists of rows of records. Each record begins with a keyword identifying the record type, such as ATOM, HETATM, or CONECT. Figure \ref{fig:pdb} displays the ATOM record section of a PDB file containing the structure of a hemoglobin protein. This record section contains the atomic coordinates of the protein's atoms and other information, such as the atom's name, residue name, and residue number.  \cite{chimera_pqrfile}
+The PDB format consists of rows of records. Each record begins with a keyword identifying the record type, such as ATOM, HETATM, or CONECT. Figure \ref{fig:pdb} displays the ATOM record section of a PDB file containing the structure of a hemoglobin protein. This record section contains the atomic coordinates of the protein's atoms and other information, such as the atom's name, residue name, and residue number. \cite{chimera_pqrfile}
 
 \begin{figure}[htbp]
   \begin{center}
@@ -335,9 +335,11 @@ The PQR format is a non-standard variant of the PDB format that enables users to
 \subsection{mmCIF}
 \label{subsection:mmcif}
 
-The mmCIF format, also known as PDBx/mmCIF, offers an enhanced and flexible representation of macromolecular crystallography data compared to the PDB format. \cite{} One of its most significant advantages is the utilization of data dictionaries, allowing users to define new data items and incorporate additional information into the file. \cite{pdb101}. Unlike other formats, mmCIF does not impose limitations on column width and entry count, making it more flexible and accommodating for storing large amounts of data \cite{pdb101}.
+% TODO: cite something other than pdb101 (use 'qtpie')
 
-In the mmCIF file format, all data items are stored in a relational database format. Each data item is stored in a separate table, and the tables are linked together through unique identifiers (pointers). Furthermore, each data item in the file is identified and referenced by a unique token. A token consists of a category name and an attribute name separated by a dot. For example, the token \texttt{\_atom\_site.id} refers to the \texttt{id} data item in the \texttt{\_atom\_site} category \cite{pdb101}.
+The mmCIF format, also known as PDBx/mmCIF, offers an enhanced and flexible representation of macromolecular crystallography data compared to the PDB format. One of its most significant advantages is the utilization of data dictionaries, allowing users to define new data items and incorporate additional information into the file. Unlike other formats, mmCIF does not limit column width and entry count, making it more flexible and accommodating for storing large amounts of data \cite{pdb101}.
+
+The mmCIF file format stores all data items in a relational database format. Each data item is stored in a separate table, and the tables are linked together through unique identifiers (pointers). Furthermore, a unique token identifies and references each data item in the file. A token comprises a category name and an attribute name separated by a dot. For example, the token \texttt{\_atom\_site.id} refers to the \texttt{id} data item in the \texttt{\_atom\_site} category \cite{pdb101}.
 
 The mmCIF format supports two forms of storing data items: key-value and tabular. Key-value data items contain a single value, while tabular data items contain multiple values. Multi-valued data items are represented as a list of values separated by a newline character. \cite{pdb101}
 
@@ -366,19 +368,9 @@ The mmCIF format is the preferred format for storing macromolecular structures. 
 \section {Color interpolation}
 \label{section:color_interpolation}
 
-% TODO: citations
-% TODO: maybe reduce to first paragraph and skip the equation
+% TODO: this is a bit too short, maybe add more details
 
-Color interpolation refers to the process of determining intermediate colors between two or more given colors. It is a common technique used in computer graphics and digital image processing to smoothly transition between colors or to generate new colors based on existing ones. \cite{zucconi2016secrets}
-
-Color interpolation works by calculating the intermediate colors between two or more given colors. This is typically done by taking a weighted average of the red, green, and blue values of the colors being interpolated. The following Equation \ref{eq:color_interpolation} shows how to calculate the intermediate color between two colors, $a$ and $b$. The parameter $t$ is a value between 0 and 1, representing the percentage of the first color in the final color. For example, $t = 0.5$ would result in a color that is halfway between the two colors. The parameter $1 - t$ represents the percentage of the second color in the final color.
-
-\begin{equation}
-  c = a + (b - a) \cdot t
-  \label{eq:color_interpolation}
-\end{equation}
-
-An example of color interpolation is the creation of color gradients, which are used to create smooth transitions between colors, such as red-to-white or white-to-blue as shown in Figure \ref{fig:color_gradients}. Color gradients are commonly used in data visualization to represent continuous data, such as the charge of atoms in a molecule or the temperature of a region on a map.
+Color interpolation refers to the process of determining intermediate colors between two or more given colors. This is typically done by taking a weighted average of the red, green, and blue values of the interpolated colors. It is a common technique used in computer graphics to smoothly transition between colors or to generate new colors based on existing ones. \cite{zucconi2016secrets}
 
 \newpage
 \chapter{Visualizing molecular data}
