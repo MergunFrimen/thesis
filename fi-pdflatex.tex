@@ -195,7 +195,7 @@ Macromolecules are large molecules composed of many atoms, often thousands or ev
   \begin{center}
     \includegraphics[width=7cm]{figures/hemoglobin.png}
   \end{center}
-  \caption{Hemoglobin, a protein for transporting oxygen throughout the body.}
+  \caption[Hemoglobin protein.]{Hemoglobin, a protein for transporting oxygen throughout the body.}
   \label{fig:hemoglobin}
 \end{figure}
 
@@ -294,7 +294,7 @@ Figure \ref{fig:sdf} depicts an SDF file containing the structure of ethanol in 
   \begin{center}
     \includegraphics[width=11cm]{figures/sdf_file_format.png}
   \end{center}
-  \caption{SDF file containing the structure of ethanol. \cite{belford2017anatomy}}
+  \caption[SDF file containing the structure of ethanol.]{SDF file containing the structure of ethanol. \cite{belford2017anatomy}}
   \label{fig:sdf}
 \end{figure}
 
@@ -326,7 +326,7 @@ The PDB format consists of rows of records. Each record begins with a keyword id
   \begin{center}
     \includegraphics[width=11cm]{figures/pdb_format.png}
   \end{center}
-  \caption{The ATOM record section of a PDB file containing the structure of a hemoglobin protein.}
+  \caption[ATOM record of PDB file.]{The ATOM record section of a PDB file containing the structure of a hemoglobin protein.}
   \label{fig:pdb}
 \end{figure}
 
@@ -360,7 +360,7 @@ Figure \ref{fig:mmcif} depicts the \texttt{\_atom\_site} category in the mmCIF f
   \begin{center}
     \includegraphics[width=11cm]{figures/3bj1_mmcif.png}
   \end{center}
-  \caption{Tabular representation of the \texttt{\_atom\_site} data items in the mmCIF format for hemoglobin.}
+  \caption[Atom site mmCIF category.]{Tabular representation of the \texttt{\_atom\_site} data items in the mmCIF format for hemoglobin.}
   \label{fig:mmcif}
 \end{figure}
 
@@ -527,7 +527,7 @@ The category \texttt{\_sb\_ncbr\_partial\_atomic\_charges\_meta} stores \\ metad
     method & computation method used to calculate the charge set (e.g., 'EQeq', 'EEM/Racek 2016 (ccd2016\_npa)') \\
     \hline
   \end{tabular}
-  \caption{Attributes of the \texttt{\_sb\_ncbr\_partial\_atomic\_charges\_meta} mmCIF category.}
+  \caption[Custom charge set metadata category.]{Attributes of the \texttt{\_sb\_ncbr\_partial\_atomic\_charges\_meta} mmCIF category.}
   \label{table:partial_atomic_charges_meta}
 \end{table}
 
@@ -546,7 +546,7 @@ The category \texttt{\_sb\_ncbr\_partial\_atomic\_charges} maps together the ato
     charge & partial charge value for the atom (float value) \\
     \hline
   \end{tabular}
-  \caption{Attributes of the \texttt{\_sb\_ncbr\_partial\_atomic\_charges} mmCIF category.}
+  \caption[Custom charge category.]{Attributes of the \texttt{\_sb\_ncbr\_partial\_atomic\_charges} mmCIF category.}
   \label{table:partial_atomic_charges}
 \end{table}
 
@@ -558,7 +558,7 @@ Figure \ref{fig:mmcif_erd} provides a detailed illustration of the custom mmCIF 
   \begin{center}
     \includegraphics[width=\textwidth]{figures/mmcif_erd.png}
   \end{center}
-  \caption{Diagram of the relationship of the custom mmCIF categories for storing partial atomic charges.}
+  \caption[Custom mmCIF category relationships.]{Diagram of the relationship of the custom mmCIF categories for storing partial atomic charges.}
   \label{fig:mmcif_erd}
 \end{figure}
 
@@ -589,36 +589,36 @@ Lastly, the method name used to calculate the charges of a given charge set is s
   \begin{center}
     \includegraphics[width=\textwidth]{out/figures/uml/interface/custom model property interface.png}
   \end{center}
-  \caption{Interface of the custom model property for storing partial atomic charges.}
+  \caption[Interface of custom model property.]{Interface of the custom model property for storing partial atomic charges.}
   \label{fig:property_provider_interface}
 \end{figure}
 
 
-\begin{figure}[htbp]
-  \caption{Interface of the custom model property for storing partial atomic charges.}
-  \label{fig:custom_model_property}
-  \definecolor{LightGray}{gray}{0.95}
-  \begin{minted}[
-  frame=lines,
-  framesep=2mm,
-  baselinestretch=1.2,
-  bgcolor=LightGray,
-  fontsize=\footnotesize,
-  % linenos
-  ]{Typescript}
-    type TypeId = number;
-    type IdToCharge = Map<number, number>;
-    export interface SBNcbrPartialChargeData {
-        typeIdToMethod: Map<TypeId, string>;
-        typeIdToAtomIdToCharge: Map<TypeId, IdToCharge>;
-        typeIdToResidueToCharge: Map<TypeId, IdToCharge>;
-        maxAbsoluteAtomCharges: IdToCharge;
-        maxAbsoluteResidueCharges: IdToCharge;
-        maxAbsoluteAtomChargeAll: number;
-        params: PartialChargesPropertyParams;
-    }
-  \end{minted}
-\end{figure}
+% \begin{figure}[htbp]
+%   \caption{Interface of the custom model property for storing partial atomic charges.}
+%   \label{fig:custom_model_property}
+%   \definecolor{LightGray}{gray}{0.95}
+%   \begin{minted}[
+%   frame=lines,
+%   framesep=2mm,
+%   baselinestretch=1.2,
+%   bgcolor=LightGray,
+%   fontsize=\footnotesize,
+%   % linenos
+%   ]{Typescript}
+%     type TypeId = number;
+%     type IdToCharge = Map<number, number>;
+%     export interface SBNcbrPartialChargeData {
+%         typeIdToMethod: Map<TypeId, string>;
+%         typeIdToAtomIdToCharge: Map<TypeId, IdToCharge>;
+%         typeIdToResidueToCharge: Map<TypeId, IdToCharge>;
+%         maxAbsoluteAtomCharges: IdToCharge;
+%         maxAbsoluteResidueCharges: IdToCharge;
+%         maxAbsoluteAtomChargeAll: number;
+%         params: PartialChargesPropertyParams;
+%     }
+%   \end{minted}
+% \end{figure}
 
 \subsection{Color theme provider}
 \label{subsection:color_theme_provider}
@@ -927,7 +927,7 @@ The Mol* library supports coloring structures by the pLDDT confidence score. Fig
   \begin{center}
     \includegraphics[width=7cm]{figures/alphafold_coloring.png}
   \end{center}
-  \caption{Coloring of a protein structure by the pLDDT confidence score.}
+  \caption[Coloring by pLDDT confidence score.]{Coloring of a protein structure by the pLDDT confidence score.}
   \label{fig:alphafold-coloring}
 \end{figure}
 
