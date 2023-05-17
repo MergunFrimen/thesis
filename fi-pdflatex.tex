@@ -561,20 +561,16 @@ The extension was created using TypeScript, a superset of JavaScript that adds s
 \subsection{Property provider}
 \label{subsection:property_provider}
 
-The property providers are used to store custom information inside the Mol* state tree. The purpose of this provider is to process the charge data that is read from the mmCIF file and supply the charge data through a custom property to the rest of the extensions providers.
+The purpose of this provider is to process the charge data that is read from the mmCIF file and supply the charge data through a custom property to the rest of the extension providers. The charges are retrieved from the mmCIF file by the Mol* library, which parses the mmCIF file and provides the parsed mmCIF file data in the form of a \textit{MmcifFormat} object. The property provider then iterates over the \texttt{\_sb\_ncbr\_partial\_atomic\_charges} category of the \textit{MmcifFormat} object and stores the charge values in a custom property.
 
-The charges are retrieved from the mmCIF file by the Mol* library, which parses the mmCIF file and provides the parsed mmCIF file data in the form of a \texttt{MmcifFormat} object. The property provider then iterates over the \texttt{\_sb\_ncbr\_partial\_atomic\_charges} category of the \texttt{MmcifFormat} object and stores the charge values in a custom model property.
-
-The interface of this custom property is depicted in Figure \ref{fig:property_provider_interface}. The atom charges are stored in the \texttt{typeIdToAtomIdToCharge} map. The map is indexed by the charge set (typeId) and the atom id. The atom id is a pointer to the \texttt{\_atom\_site.id} item in the mmCIF file. The atom charges are retrieved from the mmCIF file by iterating over the \texttt{\_atom\_site.id} category and retrieving the charge values for each atom. The charge values are then stored in the \texttt{typeIdToAtomIdToCharge} map.
+The interface of this custom property is depicted in Figure \ref{fig:property_provider_interface}. The atom charges are stored in the \texttt{typeIdToAtomIdToCharge} map. The map is indexed by the charge set (typeId) and the atomId. The atomId is a pointer to the \texttt{\_atom\_site.id} item in the mmCIF file.
 
 The residue charges are calculated by summing the charges of the atoms that make up the residue. The residue charge is then stored in the \texttt{typeIdToResidueIdToCharge} map.
 
 The maximum absolute charge values of the atoms and residues are calculated and stored in the \texttt{maxAbsoluteAtomCharges} and \\
-\texttt{maxAbsoluteResidueCharges} maps. These maps are used in the color theme provider to normalize the charges to the range of 0 to 1.
+\texttt{maxAbsoluteResidueCharges} maps. Furthermore, the maximum absolute charge of both atoms and residues is calculated and stored in the \texttt{maxAbsoluteChargesAll} map. These maximum absolute charge values are used to calculate the color interpolations in the color theme provider.
 
-Additionally, the maximum absolute charge values are used to calculate the color interpolations in the color theme provider. Furthermore, the maximum absolute charge of both atoms and residues is calculated and stored in the \texttt{maxAbsoluteChargesAll} map.
-
-Lastly, the method name used to calculate the charges of a given charge set is stored in the \texttt{typeIdToMethod} map. This map is used to display the method name in the UIs.
+Lastly, the method name used to calculate the charges of a given charge set is stored in the \texttt{typeIdToMethod} map. This map is used to display the method name in the Mol* state tree controls.
 
 \begin{figure}[htbp]
   \begin{center}
