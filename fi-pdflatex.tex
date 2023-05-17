@@ -445,7 +445,7 @@ The following sections will discuss the two web-based molecular visualization to
 \subsection{Litemol}
 \label{subsection:litemol}
 
-LiteMol is an open-source tool suite for molecular data visualization. It supports various file formats and offers a user-friendly interface for creating visualizations. LiteMol provides essential visualization types, including ball and stick, surface, and cartoon representations, as well as options for customizing colors, lighting, and other display settings. \cite{sehnal2017litemol}
+LiteMol is an open-source tool suite for molecular data visualization. It supports various file formats and offers a user-friendly interface for creating visualizations. LiteMol provides essential visualization types, including ball and stick, surface, and cartoon representations, as well as options for customizing colors, lighting, and other display settings.\cite{sehnal2017litemol}
 
 Figure \ref{fig:litemol} shows an example of a LiteMol visualization of the 1CBS protein structure. 
 
@@ -768,8 +768,6 @@ For mmCIF input files, the program simply appends the custom categories to the i
 
 % * ✅
 \subsection{PDB}
-
-% TODO: explain why the chem_comp category is removed
 
 The PDB input files are first converted to mmCIF format using the GEMMI library. The PDB file is first parsed into a \texttt{Structure} object, then converted into a \texttt{Block} object. After converting the PDB file to mmCIF, it was necessary to remove the \texttt{\_chem\_comp} category from the \texttt{Block} object. GEMMI generates this category by default. However, it is unnecessary for the Mol* viewer, and its presence causes the viewer to visualize the structure incorrectly. The program then proceeds the same way as for the mmCIF input files.
 
