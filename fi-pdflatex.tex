@@ -439,14 +439,38 @@ In the following sections, we will discuss the two web-based molecular visualiza
 \subsection{Litemol}
 \label{subsection:litemol}
 
+% TODO: explain screenshot
+
 LiteMol is an open-source tool suite for molecular data visualization. It supports various file formats and offers a user-friendly interface for creating visualizations. LiteMol provides essential visualization types, including ball and stick, surface, and cartoon representations, as well as options for customizing colors, lighting, and other display settings. The web-based nature of LiteMol makes it easily accessible and platform-independent. \cite{sehnal2017litemol}
+
+Figure \ref{fig:litemol} shows an example of a LiteMol visualization of the 1CBS protein structure. 
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=\textwidth]{figures/litemol.png}
+  \end{center}
+  \caption{Litemol visualization of the 1CBS protein structure.}
+  \label{fig:litemol}
+\end{figure}
 
 \subsection{Mol*}
 \label{subsection:molstar}
 
+% TODO: explain screenshot
+
 Mol* (/'molstar/) is another web-native molecular visualization tool, developed as part of the wwPDB OneDep system for macromolecular structure deposition and validation. Mol* offers a wide range of visualization options, including advanced features such as electron density maps and validation reports. Mol* supports many file formats, including PDB, mmCIF, and PDBx/mmJSON. Like LiteMol, Mol* is platform-independent and can be accessed from any web browser. \cite{sehnal2021molstar}
 
 Mol* emphasizes interactivity and offers various tools for manipulating and analyzing the molecular structure, such as distance and angle measurements, selection and display of specific residues, and custom coloring schemes. Additionally, Mol* provides integration with external databases and services, such as UniProt, PDBe, and RCSB PDB, enabling users to quickly access related information and resources.
+
+The Mol* library works in a modular fashion, where each representation, color theme, and other feature is implemented as a separate provider. This modular design allows for easy customization and extension of the library. \cite{sehnal2021molstar}
+
+\begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=\textwidth]{figures/molstar.png}
+  \end{center}
+  \caption{Mol* visualization of the 1CBS protein structure.}
+  \label{fig:molstar}
+\end{figure}
 
 \subsubsection{Mol* state tree}
 
@@ -478,15 +502,19 @@ This chapter describes the requirements for the extension, the custom mmCIF cate
 % TODO: describe what residue charges are \\
 % TODO: describe what each representation should visualize when colored using partial charges coloring \\
 
-Firstly, the extension should enable the coloring of atoms and residues based on their partial atomic charges. Secondly, it should describe the charge values of the atoms and residues. Thirdly, the extension should allow the user to provide multiple charge sets for a single structure and select which one to display. Finally, the extension should be seamlessly integrated into the Mol* library, facilitating access to its features and functionality.
+Firstly, the Mol* extension should enable coloring atoms and residues according to their corresponding atom or residue partial atomic charges. By residue charges, we mean the sum of the partial atomic charges of all atoms within a residue. The extension should also support the ball and stick, surface, and cartoon representations.
+
+Secondly, it should describe the charge values of the atoms and residues.
+
+Thirdly, the extension should allow the user to provide multiple charge sets for a single structure and to select which one to display. Finally, the extension should be seamlessly integrated into the Mol* library, facilitating access to its features and functionality.
 
 \section{Custom mmCIF categories}
 \label{section:custom_mmcif_categories}
 
-To store partial atomic charges within a single file, we developed custom categories within the mmCIF format. The mmCIF format was chosen because it is widely used in the field of structural biology and offers several advantages over other formats, as discussed in \ref{subsection:mmcif}. The custom categories allow us to store information about the partial atomic charges separately from the other structural data, while still being able to access it within the same file. Storing all data in one file was important as it allowed for easier management and distribution of the data. If the charges were stored separately, we would have to provide the charge data to Mol* in a different way e.g. through custom import controls.
+To store partial atomic charges within a single file, we developed custom categories within the mmCIF format. The mmCIF format was chosen because it is widely used in the field of structural biology and offers several advantages over other formats, as discussed in \ref{subsection:mmcif}. The custom categories allow us to store information about the partial atomic charges separately from the other structural data while still being able to access it within the same file. Storing all data in one file was important as it allowed for easier management and distribution of the data. If the charges were stored separately, we would have to provide the charge data to Mol* differently, e.g., through custom Mol* import controls.
 
 
-We used two separate categories for this purpose: one to store the partial charge values for each atom in the structure, and another to store metadata about the charge sets.
+We used two categories for this purpose: one to store the partial charge values for each atom in the structure and another to store metadata about the charge sets.
 
 The category \texttt{\_sb\_ncbr\_partial\_atomic\_charges} maps together the atoms of the structure and their charges. The category has three attributes:
 
