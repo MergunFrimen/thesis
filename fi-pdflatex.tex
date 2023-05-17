@@ -233,11 +233,11 @@ Conformational isomers, or alternative conformations, are different spatial arra
 \section{Partial atomic charges}
 \label{section:partial_atomic_charges}
 
-When two atoms form a chemical bond, they share electrons. The electrons are not evenly shared between the two atoms due to differences in their electronegativities \footnote[1]{Electronegativity is a measure of an atom's ability to attract electrons towards itself. \cite{racek2022thesis}}. Atoms with higher electronegativities attract electrons more strongly than atoms with lower electronegativities. This uneven distribution of electron density influences the physical properties of the molecule and determines how it interacts with other molecules or substances. One way of representing this uneven distribution of electron density is by assigning partial atomic charges to individual atoms within the molecule. \cite{racek2022thesis,schindler2019thesis}
+When two atoms form a chemical bond, they share electrons. The electrons are not evenly shared between the two atoms due to differences in their electronegativities \footnote[1]{Electronegativity is a measure of an atom's ability to attract electrons towards itself. \cite{clark2018biology}}. Atoms with higher electronegativities attract electrons more strongly than atoms with lower electronegativities. This uneven distribution of electron density influences the physical properties of the molecule and determines how it interacts with other molecules or substances. One way of representing this uneven distribution of electron density is by assigning partial atomic charges to individual atoms within the molecule. \cite{schindler2019thesis}
 
-Partial atomic charges are numerical values assigned to individual atoms within a molecule, representing their contribution to the distribution of electron density. Atoms with higher electronegativities have a partial negative charge (denoted as $\delta-$), while atoms with lower electronegativities have a partial positive charge (denoted as $\delta+$). \cite{racek2022thesis} 
+Partial atomic charges are numerical values assigned to individual atoms within a molecule, representing their contribution to the distribution of electron density. Atoms with higher electronegativities have a partial negative charge (denoted as $\delta-$), while atoms with lower electronegativities have a partial positive charge (denoted as $\delta+$). \cite{racek2022thesis}
 
-Figure \ref{fig:psilocybin} demonstrates the unequal distribution of electron density in psilocybin, a psychedelic compound found in certain species of mushrooms. \cite{tysl2014psilocybin} The figure shows the partial atomic charges colored by their values. The partial negative charges are colored red, while the partial positive charges are colored blue.
+Figure \ref{fig:psilocybin} demonstrates the unequal distribution of electron density in psilocybin \cite{pubchem_psilocybine}, a psychedelic compound found in certain species of mushrooms. The figure shows the partial atomic charges colored by their values. The partial negative charges are colored red, while the partial positive charges are colored blue.
 
 \begin{figure}[htbp]
   \begin{center}
@@ -247,28 +247,30 @@ Figure \ref{fig:psilocybin} demonstrates the unequal distribution of electron de
   \label{fig:psilocybin}
 \end{figure}
 
-There are several applications for partial atomic charges in computational chemistry, such as molecular dynamics \cite{nejad2018insulin}, molecular docking \cite{park2006critical}, and pharmacophore design \cite{stalke2011meaningful}. \cite{schindler2021thesis}
+% TODO: maybe remove the citations here?
 
-It is important to note that partial charges are simply a theoretical concept and cannot be directly measured or observed; they can only be calculated using computational methods. \cite{schindler2019thesis} 
+There are several applications for partial atomic charges in computational chemistry, such as molecular dynamics \cite{nejad2018insulin}, molecular docking \cite{park2006critical}, and pharmacophore design \cite{stalke2011meaningful}. \cite{racek2022thesis,schindler2021thesis}
+
+It is important to note that partial charges are a theoretical concept and cannot be directly measured or observed; they can only be calculated using computational methods. \cite{schindler2019thesis} 
 
 \subsection{Calculation methods}
 \label{section:calculating_partial_atomic_charges}
 
-One approach for calculating partial atomic charges is by quantum mechanical methods \cite{gupta2015principles}. However, these methods are computationally expensive and require a lot of computational resources. Another approach is by empirical methods.
+One approach to calculating partial atomic charges is by quantum mechanical methods \cite{gupta2015principles}. However, these methods are computationally expensive and require a lot of computational resources. Another approach is by empirical methods.
 
-Empirical methods aim to produce charges that are comparable to those obtained through quantum mechanical methods while keeping the computational complexity manageable. Empirical methods can contain a variety of parameters. These parameters are typically derived from experimental data or quantum mechanical calculations. \cite{racek2022thesis}
+Empirical methods aim to produce charges comparable to those obtained through quantum mechanical methods while keeping the computational complexity manageable. Empirical methods can contain a variety of parameters. These parameters are typically derived from experimental data or quantum mechanical calculations. \cite{racek2022thesis}
 
-There are several empirical methods for calculating partial atomic charges, such as SQE, EEM, and EQeq. \cite{schindler2021sqe} These methods are implemented in the ChargeFW2 \cite{racek2022thesis} program, which is used in this thesis.
+There are several empirical methods for calculating partial atomic charges, such as SQE \cite{nistor2006generalization}, EEM \cite{mortier1986electronegativity}, and QEq \cite{rappe1991charge}. These methods are implemented in the ChargeFW2 \cite{racek2020acc2} program, which is used in this thesis.
 
 \subsection{ChargeFW2}
 \label{section:chargfw2}
 
-ChargeFW2 is a C++ program that calculates partial atomic charges by empirical methods. The program supports 20 empirical methods, including the aforementioned SQE, EEM, and EQeq. It provides a command-line interface for running calculations and supports several file formats for input and output. \cite{racek2022thesis}
+ChargeFW2 is a C++ program that calculates partial atomic charges by empirical methods. The program supports 20 empirical methods, including SQE, EEM, and QEq, which were mentioned previously. It provides a command-line interface for running calculations and supports several file formats for input and output. \cite{racek2020acc2}
 
 \section{Chemical file formats}
 \label{section:chemical_file_formats}
 
-Chemical file formats are used to store molecular data in a computer-readable format. There are several file formats for storing molecular data, each suited to a specific purpose. In this section, we will explore the SDF and MOL2 file formats, commonly used for storing small molecules, as well as the PDB and mmCIF file formats, commonly used for storing macromolecules such as proteins.
+Chemical file formats are used to store molecular data in a computer-readable format. There are several file formats for storing molecular data, each suited to a specific purpose. This section explores the SDF and MOL2 file formats, commonly used for storing small molecules, and the PDB and mmCIF file formats, commonly used for storing macromolecules, such as proteins.
 
 \subsection{SDF}
 \label{subsection:sdf}
