@@ -159,7 +159,7 @@ Chapter \ref{chapter:theory} introduces the theoretical concepts of molecular st
 \chapter{Theory}
 \label{chapter:theory}
 
-Theoretical concepts are fundamental to the study of computational chemistry, providing a framework for analyzing molecular structures and properties. This chapter focuses on four key areas of theory, beginning with an overview of molecular structures in Section \ref{section:molecular_structure}. Section \ref{section:partial_atomic_charges} explores partial atomic charges and their importance in computational chemistry. Section \ref{section:chemical_file_formats} examines chemical file formats utilized in this work. Lastly, Section \ref{section:color_interpolation} describes color interpolation, a critical technique for visualizing partial atomic charges in molecular structures.
+Theoretical concepts are fundamental to the study of computational chemistry, providing a framework for analyzing molecular structures and properties. This chapter focuses on four key areas of theory, beginning with an overview of molecular structures in Section \ref{section:molecular_structure}. Section \ref{section:partial_atomic_charges} explores partial atomic charges and their importance in computational chemistry. Lastly, Section \ref{section:chemical_file_formats} examines chemical file formats utilized in this work.
 
 % * ✅
 \section{Molecular structure}
@@ -363,15 +363,6 @@ Figure \ref{fig:mmcif} depicts the \texttt{\_atom\_site} category in the mmCIF f
   \caption{Tabular representation of the \texttt{\_atom\_site} data items in the mmCIF format for hemoglobin.}
   \label{fig:mmcif}
 \end{figure}
-
-\section {Color interpolation}
-\label{section:color_interpolation}
-
-% TODO: this is a bit too short, maybe add more details
-
-% TODO: plagiarism
-
-Color interpolation refers to the process of determining intermediate colors between two or more given colors. This is typically done by taking a weighted average of the red, green, and blue values of the interpolated colors. It is a common technique used in computer graphics to smoothly transition between colors or to generate new colors based on existing ones. \cite{zucconi2016secrets}
 
 \clearpage
 \newpage
@@ -638,7 +629,7 @@ This provider serves as the central component of the extension, with its primary
 
 For the purposes of this extension, it was necessary to color two structural elements - atoms and residues. For both of these structural elements the charges were retrieved from the provider described in the previous section \ref{subsection:charges_provider}, which provided charges for atoms and residues.
 
-To establish the color for a given charge, two color interpolations are employed: one for negative charges and another for positive charges. Atoms with positive charges receive a color from a white-to-blue color interpolation, while atoms with negative charges are assigned a color from a white-to-red color interpolation. These color interpolations are highlighted in Figure \ref{fig:color_gradients}. 
+To establish the color for a given charge, two color interpolations are employed: one for negative charges and another for positive charges. Atoms with positive charges receive a color from a white-to-blue color interpolation, while atoms with negative charges are assigned a color from a white-to-red color interpolation.
 
 \begin{figure}[htbp]
   \centering
