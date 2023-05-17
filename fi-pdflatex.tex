@@ -713,7 +713,7 @@ The plugin is designed as a Typescript class. The class structure is depicted in
 
 The methods provided by the \textit{Color} and \textit{Type} objects use the private methods \textit{updateColor} and \textit{updateType} for changing the color theme and visualization type of the loaded structure by iterating over the Mol* state tree and updating the representation nodes.
 
-The \textit{Behavior} object provides a method for focusing on a specific atom of the structure. The focus functionality is achieved by selecting the desired atom using the MolScript \cite{kraulis1991molscript} query language provided by Mol*. The query language is used to identify and select the atom by the following parameters:
+The \textit{Behavior} object provides a method for focusing on a specific atom of the structure. The focus functionality is achieved by selecting the desired atom using the MolScript \cite{kraulis1991molscript} query language supported in the Mol* library. The query language is used to identify and select the atom by the following parameters:
 
 \begin{itemize}
   \item \textit{labelCompId} - an identifier for the chain containing the residue with the atom.
