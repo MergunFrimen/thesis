@@ -135,8 +135,10 @@
 
 \begin{document}
 
-% * ✅
+\clearpage
 \newpage
+
+% * ✅
 \chapter*{Introduction}
 \markright{\textsc{Introduction}}
 \addcontentsline{toc}{chapter}{Introduction}
@@ -150,8 +152,10 @@ The absence of this functionality in the Mol* viewer presents a significant limi
 
 Chapter \ref{chapter:theory} introduces the theoretical concepts of molecular structures and partial atomic charges, along with the chemical file formats utilized in this work. Building on this foundation, Chapter \ref{chapter:visualizing_molecular_data} discusses the various visualization methods and software tools for visualizing molecular structures. Chapter \ref{chapter:molstar_partial_charges_extension} then describes the implementation of the Mol* viewer extension for visualizing partial atomic charges. Finally, the extended Mol* viewer is integrated into the Atomic Charge Calculator II and αCharges web applications, as detailed in Chapters \ref{chapter:atomic_charge_calculator_ii} and \ref{chapter:alphacharges}.
 
-% * ✅
+\clearpage
 \newpage
+
+% * ✅
 \chapter{Theory}
 \label{chapter:theory}
 
@@ -369,6 +373,7 @@ Figure \ref{fig:mmcif} depicts the \texttt{\_atom\_site} category in the mmCIF f
 
 Color interpolation refers to the process of determining intermediate colors between two or more given colors. This is typically done by taking a weighted average of the red, green, and blue values of the interpolated colors. It is a common technique used in computer graphics to smoothly transition between colors or to generate new colors based on existing ones. \cite{zucconi2016secrets}
 
+\clearpage
 \newpage
 
 % * ✅
@@ -487,6 +492,7 @@ To store information about the molecular structure and its visualization, the Mo
   \label{fig:state_tree}
 \end{figure}
 
+\clearpage
 \newpage
 
 % * ✅
@@ -637,14 +643,6 @@ For the purposes of this extension, it was necessary to color two structural ele
 To establish the color for a given charge, two color interpolations are employed: one for negative charges and another for positive charges. Atoms with positive charges receive a color from a white-to-blue color interpolation, while atoms with negative charges are assigned a color from a white-to-red color interpolation. These color interpolations are highlighted in Figure \ref{fig:color_gradients}. 
 
 \begin{figure}[htbp]
-  \begin{center}
-    \includegraphics[width=10cm]{figures/color_gradients.png}
-  \end{center}
-  \caption{Color gradients representing the possible colors for positive and negative charges.}
-  \label{fig:color_gradients}
-\end{figure}
-
-\begin{figure}[htbp]
   \centering
   \subfigure[Ball and stick]{\label{fig:partial_charges_color_theme-bas}\includegraphics[width=0.45\textwidth]{figures/1F16-bas.png}}
   \subfigure[Surface]{\label{fig:partial_charges_color_theme-surface}\includegraphics[width=0.45\textwidth]{figures/1F16-surface.png}}
@@ -681,26 +679,28 @@ The controls are depicted in Figure \ref{fig:controls-charge-set}.
   \label{fig:controls-charge-set}
 \end{figure}
 
+% * ✅
 \section{Mol* viewer plugin}
 \label{section:molstar_viewer_plugin}
 
-In addition to the partial charges extension, it was necessary to create a custom Mol* viewer plugin. By using a custom plugin, it is possible to create new behaviors which are not provided by the standard Mol* viewer. This section describes the development of the plugin and the new custom behavior which it provides.
+In addition to the partial charges extension, it was necessary to create a custom Mol* viewer plugin. By using a custom plugin, it is possible to create new behaviors which are not provided by the standard Mol* viewer. This section describes the development of the plugin and the new custom behaviors which it provides.
 
+% * ✅
 \subsection{Technologies used during development}
 
-The plugin was developed using Vite. Vite is a build tool that was created to address some of the problems faced by developers when building large applications with traditional build tools such as Webpack. One of the main advantages of Vite is that it provides a fast development server. The speed of the development server is achieved by pre-bundling the static project dependencies with esbuild, a modern bundler written in Go, and serving the project source code with native ES module imports. \cite{vite}
+The Mol* viewer plugin was developed using the Vite build tool \cite{vitejs}. This build tool was a crucial aspect of the development of the plugin since it allowed for a significantly faster development cycle compared to the Webpack bundler provided by the Mol* library.
 
-The plugin is written in Typescript and uses the Mol* library. The plugin is bundled using Rollup \cite{rollup}, a module bundler for Javascript, and published to NPM, a package manager for Javascript applications. \cite{npm}
+The plugin is written in Typescript and uses the Mol* library. It is bundled using Rollup \cite{rollup}, a module bundler for Javascript, and published to NPM \cite{npm}, a package manager for Javascript applications.
 
 \subsection{Structure of the plugin}
 
-The plugin is designed as a Typescript class. The structure of the class is depicted in Figure \ref{fig:plugin_structure}. It contains a method to create the plugin and another to load a structure file. Furthermore, it includes four attributes, each an object with methods that act as an interface for managing the plugin:
+The plugin is designed as a Typescript class. The class structure is depicted in Figure \ref{fig:plugin_structure}. It contains a method for creating the plugin and loading the structure file. Furthermore, it includes four attributes that are JavaScript objects with methods that provide the following functionality:
 
 \begin{itemize}
-  \item \textit{Charges} - provides functions for setting the charge set and retrieving information about the charge sets.
-  \item \textit{Color} - provides functions for setting the color theme.
-  \item \textit{Type} - provides functions for setting the visualization type.
-  \item \textit{Behavior} - provides a function for focusing on a specific atom.
+  \item \textit{Charges} - provides methods for setting the current charge set and retrieving information about the charge sets.
+  \item \textit{Color} - provides methods for setting the color theme.
+  \item \textit{Type} - provides methods for setting the visualization type.
+  \item \textit{Behavior} - provides a method for focusing on a specific atom.
 \end{itemize}
 
 \begin{figure}[htbp]
@@ -711,17 +711,17 @@ The plugin is designed as a Typescript class. The structure of the class is depi
   \label{fig:plugin_structure}
 \end{figure}
 
-The \textit{Color} and \textit{Type} attributes set the color theme and visualization type through the private methods \textit{updateColor} and \textit{updateType}. These methods change the color theme and visualization type by iterating over the Mol* state tree and updating the representation nodes.
+The methods provided by the \textit{Color} and \textit{Type} objects use the private methods \textit{updateColor} and \textit{updateType} for changing the color theme and visualization type of the loaded structure by iterating over the Mol* state tree and updating the representation nodes.
 
-The focus functionality, implemented by the \textit{Behavior} attribute, is achieved by first selecting the desired atom using a query language. Mol* supports multiple query languages: MolScript, PyMOL, VMD, and Jmol. The query language used in this plugin is MolScript. The query language is used to uniquely identify and select the atom by the following attributes of the mmCIF category \textit{atom\_site}:
+The \textit{Behavior} object provides a method for focusing on a specific atom of the structure. The focus functionality is achieved by selecting the desired atom using the MolScript \cite{kraulis1991molscript} query language provided by Mol*. The query language is used to identify and select the atom by the following parameters:
 
 \begin{itemize}
-  \item \textit{labelCompId} - identifier for the chain containing the residue with the atom.
+  \item \textit{labelCompId} - an identifier for the chain containing the residue with the atom.
   \item \textit{labelSeqId} - sequence number of the residue containing the atom.
-  \item \textit{labelAtomId} - identifier for the atom in the residue.
+  \item \textit{labelAtomId} - an identifier for the atom in the residue.
 \end{itemize}
 
-The MolScript query selection is depicted in Figure \ref{fig:focus}. Once the atom is selected, the selection is highlighted and focused on with methods provided by the Mol* library.
+The MolScript selection query is depicted in Figure \ref{fig:focus}. Once the atom is selected, the selection is highlighted and focused on with methods provided by the Mol* library.
 
 \begin{figure}[htbp]
   \definecolor{LightGray}{gray}{0.95}
@@ -752,7 +752,7 @@ The MolScript query selection is depicted in Figure \ref{fig:focus}. Once the at
 \label{fig:focus}
 \end{figure}
 
-\newpage
+\clearpage
 
 % * ✅
 \chapter{Atomic Charge Calculator II}
@@ -903,6 +903,7 @@ Finally, the user can download all the output files generated by the backend in 
 \label{fig:output_dir_structure}
 \end{figure}
 
+\clearpage
 \newpage
 
 % * ✅
@@ -996,6 +997,8 @@ All source code developed in this work is available in the attachments and on Gi
 \printbibliography[heading=bibintoc]
 
 \renewcommand\appendixname{Appendix}
+
+\clearpage
 \newpage
 
 % * ✅
