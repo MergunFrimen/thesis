@@ -326,10 +326,11 @@ The PDB format consists of rows of records. Each record begins with a keyword id
   \label{fig:pdb}
 \end{figure}
 
+% * ✅
 \subsection{PQR}
 \label{subsection:pqr}
 
-The PQR format is a non-standard variant of the PDB format that enables users to include partial atomic charges and radii parameters in the existing PDB data. It does this by replacing the Occupancy and B-factor fields (see Figure \ref{fig:pdb}) with fields for partial atomic charges and radii. \cite{pqrfile,apbs_pqrfile} The PQR format is non-standard; despite this, the PQR format is still used in some applications, such as the Atomic Charge Calculator II, for storing partial atomic charges. \cite{racek2020acc2}.
+The PQR format is a non-standard variant of the PDB format that enables users to include partial atomic charges and radii parameters in the existing PDB data. It replaces the Occupancy and B-factor fields (see Figure \ref{fig:pdb}) with fields for partial atomic charges and radii. \cite{pqrfile,apbs_pqrfile} Despite the PQR format being non-standard, it is still used in some applications, such as the Atomic Charge Calculator II, for storing partial atomic charges. \cite{racek2020acc2}.
 
 \subsection{mmCIF}
 \label{subsection:mmcif}
