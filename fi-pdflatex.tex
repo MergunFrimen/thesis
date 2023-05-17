@@ -454,6 +454,7 @@ Figure \ref{fig:litemol} shows an example of a LiteMol visualization of the 1CBS
 
 Mol* (/'molstar/) is another web-based visualization tool. It is built upon the foundations of LiteMol and NGL Viewer. Mol* offers a wide range of features for visualizing and analyzing molecular structures, ranging from the simple ball and stick representations of small structures to visualizations of tens of millions of atoms of cellPACK \cite{Johnson2015} assemblies. Mol* emphasizes interactivity and offers various tools for manipulating and analyzing the molecular structure, such as distance and angle measurements, selecting and displaying structure elements, and custom representation and coloring schemes. Additionally, Mol* provides integration with external databases and services, such as PubChem \cite{Berman2000}, RCSB PDB \cite{Berman2006}, and AlphaFoldDB \cite{varadi2021alphafold}, enabling users quick access to the related information and resources.\cite{sehnal2021molstar}
 
+% * ✅
 \subsubsection{Mol* state tree}
 
 For storing information about the molecular structure and its visualization, the Mol* library uses a state tree. The state tree is a tree data structure consisting of several layers, each containing information about a specific aspect of the structure. The state tree is a key component of the Mol* library, as it allows for easy access to the structure data and facilitates the implementation of various features. \cite{sehnal2021molstar}
@@ -549,6 +550,7 @@ Figure \ref{fig:mmcif_erd} provides a detailed illustration of the custom mmCIF 
 
 \clearpage
 
+% * ✅
 \section{Implementation}
 \label{section:implementation}
 
@@ -558,6 +560,7 @@ This section covers the implementation of the partial atomic charge extension fo
 
 The extension was created using TypeScript, a superset of JavaScript that adds static typing and other features to the language. The Mol* library is also written in TypeScript, so the extension was written in the same language to ensure compatibility.
 
+% * ✅
 \subsection{Property provider}
 \label{subsection:property_provider}
 
@@ -580,6 +583,7 @@ Lastly, the method name used to calculate the charges of a given charge set is s
   \label{fig:property_provider_interface}
 \end{figure}
 
+% * ✅
 \subsection{Color theme provider}
 \label{subsection:color_theme_provider}
 
@@ -596,6 +600,7 @@ For the purposes of this extension, it was necessary to color two structural ele
   \label{fig:partial_charges_color_theme}
 \end{figure}
 
+% * ✅
 \subsection{Label provider}
 \label{subsection:label_provider}
 
@@ -611,6 +616,7 @@ Once the user selects a structural element, the provider fetches the partial ato
   \label{fig:labels}
 \end{figure}
 
+% * ✅
 \subsection{Controls}
 \label{subsection:controls}
 
