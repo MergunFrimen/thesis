@@ -172,15 +172,15 @@ This thesis works with two main categories of molecules: micromolecules and macr
 % * ✅
 \subsection{Micromolecules}
 
-Micromolecules, also known as small molecules or monomers, are molecules of low molecular weight that are relatively compact in size, and typically composed of a low number of atoms. Their small size allows us to describe them simply by the composition of their atoms and bonds. Micromolecules play crucial roles in various biological processes and are involved in numerous chemical reactions in living organisms. \cite{clark2018biology,micromolecule_definition} Examples of micromolecules include water, glucose, or ethanol. Additionally, many drugs are small molecules. \cite{smallmoleculewiki}
+Micromolecules, also known as small molecules or monomers, are molecules of low molecular weight that are relatively compact in size, and typically composed of a low number of atoms. Their small size allows us to describe them simply by the composition of their atoms and bonds. Micromolecules play crucial roles in various biological processes and are involved in numerous chemical reactions in living organisms. \cite{clark2018biology,micromolecule_definition}
 
-Figure \ref{fig:aspirin} shows the structure of aspirin \cite{pubchem_aspirin}, a drug used to treat pain, fever, or inflammation.
+Examples of micromolecules include water, glucose, or ethanol. Additionally, many drugs are small molecules. \cite{smallmoleculewiki} Figure \ref{fig:aspirin} shows the structure of aspirin \cite{pubchem_aspirin}, a drug used to treat pain, fever, or inflammation.
 
 \begin{figure}[htbp]
   \begin{center}
     \includegraphics[width=7cm]{figures/aspirin.png}
   \end{center}
-  \caption[Aspirin.]{Aspirin, a drug used to treat pain, fever, or inflammation.}
+  \caption[Aspirin.]{Aspirin.}
   \label{fig:aspirin}
 \end{figure}
 
@@ -195,7 +195,7 @@ Macromolecules are large molecules composed of many atoms, often thousands or ev
   \begin{center}
     \includegraphics[width=7cm]{figures/hemoglobin.png}
   \end{center}
-  \caption[Hemoglobin protein.]{Hemoglobin, a protein for transporting oxygen throughout the body.}
+  \caption[Hemoglobin protein.]{Hemoglobin.}
   \label{fig:hemoglobin}
 \end{figure}
 
@@ -260,7 +260,7 @@ It is important to note that partial charges are a theoretical concept and canno
 \subsection{Calculation methods}
 \label{section:calculating_partial_atomic_charges}
 
-One approach to calculating partial atomic charges is by quantum mechanical methods \cite{gupta2015principles}. However, these methods are computationally expensive and require a lot of computational resources. Another approach is by empirical methods.
+One approach to calculating partial atomic charges is by quantum mechanical methods. \cite{gupta2015principles} However, these methods are computationally expensive and require a lot of computational resources. Another approach is by empirical methods.
 
 Empirical methods aim to produce charges comparable to those obtained through quantum mechanical methods while keeping the computational complexity manageable. Empirical methods can contain a variety of parameters. These parameters are typically derived from experimental data or quantum mechanical calculations. \cite{racek2022thesis}
 
@@ -284,9 +284,9 @@ This section explores the SDF and MOL2 file formats, commonly used for storing s
 \subsection{SDF}
 \label{subsection:sdf}
 
-The Structure-Data File (SDF) is a widely used text-based chemical file format used to describe the atoms, bonds, and atomic coordinates of small molecules. It acts as a container for the MOL V2000 and V3000 file formats, allowing the storage of multiple molecules in a single file. The MOL V2000 format is a fixed-width format that can store up to 999 atoms and bonds, while the MOL V3000 format removes this limitation, enabling the storage of larger molecules \cite{mdl_ctfile,wikipedia_ctfile}.
+The Structure-Data File (SDF) is a widely used text-based chemical file format used to describe the atoms, bonds, and atomic coordinates of small molecules. It acts as a container for the MOL V2000 and V3000 file formats, allowing the storage of multiple molecules in a single file. The MOL V2000 format is a fixed-width format that can store up to 999 atoms and bonds, while the MOL V3000 format removes this limitation, enabling the storage of larger molecules. \cite{mdl_ctfile,wikipedia_ctfile}
 
-Figure \ref{fig:sdf} depicts an SDF file containing the structure of ethanol in the MOL V2000 format. This format consists of a header section, an atom section, and a bond section. The header section contains the molecule's name, as well as the number of atoms and bonds. The atom and bond sections provide the corresponding atom and bond information, respectively \cite{belford2017anatomy}.
+Figure \ref{fig:sdf} depicts an SDF file containing the structure of ethanol in the MOL V2000 format. This format consists of a header section, an atom section, and a bond section. The header section contains the molecule's name, as well as the number of atoms and bonds. The atom and bond sections provide the corresponding atom and bond information, respectively. \cite{belford2017anatomy}
 
 \begin{figure}[htbp]
   \begin{center}
@@ -332,15 +332,17 @@ The PDB format consists of rows of records. Each record begins with a keyword id
 \subsection{PQR}
 \label{subsection:pqr}
 
-The PQR format is a non-standard variant of the PDB format that enables users to include partial atomic charges and radii parameters in the existing PDB data. It replaces the Occupancy and B-factor fields (see Figure \ref{fig:pdb}) with fields for partial atomic charges and radii. \cite{pqrfile,apbs_pqrfile} Despite the PQR format being non-standard, it is still used in some applications, such as the Atomic Charge Calculator II, for storing partial atomic charges. \cite{racek2020acc2}.
+The PQR format is a non-standard variant of the PDB format that enables users to include partial atomic charges and radii parameters in the existing PDB data. It replaces the Occupancy and B-factor fields (see Figure \ref{fig:pdb}) with fields for partial atomic charges and radii.\cite{pqrfile,apbs_pqrfile}
+
+Despite the PQR format being non-standard, it is still used in some applications, such as the Atomic Charge Calculator II, for storing partial atomic charges. \cite{racek2020acc2}
 
 % * ✅
 \subsection{mmCIF}
 \label{subsection:mmcif}
 
-The mmCIF format, also known as PDBx/mmCIF, offers an enhanced and flexible representation of macromolecular crystallography data compared to the PDB format. One of its most significant advantages is the utilization of data dictionaries, allowing users to define new data items and incorporate additional information into the file. Unlike other formats, mmCIF does not limit column width and entry count, making it more flexible and accommodating for storing large amounts of data \cite{qtpie}.
+The mmCIF format, also known as PDBx/mmCIF, offers an enhanced and flexible representation of macromolecular crystallography data compared to the PDB format. One of its most significant advantages is the utilization of data dictionaries, allowing users to define new data items and incorporate additional information into the file. Unlike other formats, mmCIF does not limit column width and entry count, making it more flexible and accommodating for storing large amounts of data. \cite{qtpie}
 
-The mmCIF file format stores all data items in a relational database format. Data items are stored in separate tables. The tables are linked together with unique identifiers (pointers). Furthermore, a unique token identifies and references each data item in the file. A token comprises a category name and an attribute name separated by a dot. For example, the token \texttt{\_atom\_site.id} refers to the \texttt{id} data item in the \texttt{\_atom\_site} category. Furthermore, the mmCIF format supports two forms of storing data items: key-value and tabular. Key-value data items contain a single value, while tabular data items contain multiple values. Multi-valued data items are represented as a list of values separated by a newline character. \cite{pdb101}
+The mmCIF file format stores all data items in a relational database format. Data items are stored in separate tables. The tables are linked together with unique identifiers (pointers). Furthermore, a unique token identifies and references each data item in the file. A token comprises a category name and an attribute name separated by a dot. For example, the token \texttt{\_atom\_site.id} refers to the \texttt{id} data item in the \texttt{\_atom\_site} category. Moreover, the mmCIF format supports two forms of storing data items: key-value and tabular. Key-value data items contain a single value, while tabular data items contain multiple values. Multi-valued data items are represented as a list of values separated by a newline character. \cite{pdb101}
 
 Figure \ref{fig:mmcif} depicts the \texttt{\_atom\_site} category in the mmCIF file containing hemoglobin. This category is represented in tabular form, indicated by the \texttt{\_loop} token on the first row. Each row of the table corresponds to an atom in the structure. The \texttt{\_atom\_site} category contains several data items, including the following \cite{mmcif_dictionary}:
 
@@ -383,7 +385,7 @@ There are several methods for representing molecular data, each serving a differ
 \subsection{Ball and stick}
 \label{subsection:ball_and_stick}
 
-The ball and stick representation displays atoms as spheres and bonds as cylindrical connections between these spheres. It provides a simple and intuitive visualization of a molecule's atomic structure. It highlights individual atoms and their bonds, including their bond types. \cite{tsai2003introduction} However, it is not suitable for visualizing larger macromolecules due to the enormous number of atoms and bonds that would need to be displayed.
+The ball and stick representation displays atoms as spheres and bonds as cylindrical connections between these spheres. It provides a simple and intuitive visualization of a molecule's atomic structure. It highlights individual atoms and their bonds, including their bond types.\cite{tsai2003introduction} However, it is not suitable for visualizing larger macromolecules due to the enormous number of atoms and bonds that would need to be displayed.
 
 Examples of ball and stick representations are shown in Figures \ref{fig:aspirin}, \ref{fig:element_symbol}, and \ref{fig:partial_charges_color_theme-bas}.
 
@@ -416,8 +418,15 @@ The coloring scheme used to represent the molecular structure is equally importa
 \end{itemize}
 
 \begin{figure}[htbp]
+  \begin{center}
+    \includegraphics[width=4.5cm]{figures/cartoon.png}
+  \end{center}
+  \caption{Example of α-helix and β-sheet representation.}
+  \label{fig:cartoon}
+\end{figure}
+
+\begin{figure}[htbp]
   \centering
-  \subfigure[Example of α-helix and β-sheet representation.]{\label{fig:cartoon}\includegraphics[height=4.5cm]{figures/cartoon.png}}
   \subfigure[Element symbol.]{\label{fig:element_symbol}\includegraphics[height=4.5cm]{figures/ball_and_stick.png}}
   \subfigure[Chain ID.]{\label{fig:chain_id_coloring}\includegraphics[height=4.5cm]{figures/chain_id_coloring.png}}
   \caption[Coloring of molecular structures.]{Coloring of molecular structures by various color schemes.}
