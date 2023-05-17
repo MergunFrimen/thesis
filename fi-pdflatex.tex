@@ -448,18 +448,17 @@ Figure \ref{fig:litemol} shows an example of a LiteMol visualization of the 1CBS
   \label{fig:litemol}
 \end{figure}
 
+% * ✅
 \subsection{Mol*}
 \label{subsection:molstar}
 
 Mol* (/'molstar/) is another web-based visualization tool. It is built upon the foundations of LiteMol and NGL Viewer. Mol* offers a wide range of features for visualizing and analyzing molecular structures, ranging from the simple ball and stick representations of small structures to visualizations of tens of millions of atoms of cellPACK \cite{Johnson2015} assemblies. Mol* emphasizes interactivity and offers various tools for manipulating and analyzing the molecular structure, such as distance and angle measurements, selecting and displaying structure elements, and custom representation and coloring schemes. Additionally, Mol* provides integration with external databases and services, such as PubChem \cite{Berman2000}, RCSB PDB \cite{Berman2006}, and AlphaFoldDB \cite{varadi2021alphafold}, enabling users quick access to the related information and resources.\cite{sehnal2021molstar}
 
-The Mol* library works modularly, where representations, color themes, and other visualization features are implemented as separate providers. Depending on the users ' needs, these providers can be registered or unregistered on demand, providing a flexible and extensible framework for visualizing molecular structures. This modular design allows for straightforward customization and extension to the library to support collaborative development.\cite{sehnal2021molstar}
-
 \subsubsection{Mol* state tree}
 
 For storing information about the molecular structure and its visualization, the Mol* library uses a state tree. The state tree is a tree data structure consisting of several layers, each containing information about a specific aspect of the structure. The state tree is a key component of the Mol* library, as it allows for easy access to the data and facilitates the implementation of various features. \cite{sehnal2021molstar}
 
-Figure \ref{fig:state_tree} highlights the blue nodes of the Mol* state tree, which correspond to representations of the individual structural elements of the 1CBS protein structure.
+Figure \ref{fig:state_tree} shows the Mol* state tree. The blue nodes of the tree correspond to representations of the underlying structural elements. The figure shows the correspondence between the state tree and the canvas on which the structure is rendered.
 
 \begin{figure}[htbp]
   \begin{center}
@@ -554,6 +553,8 @@ Figure \ref{fig:mmcif_erd} provides a detailed illustration of the custom mmCIF 
 \label{section:implementation}
 
 % TODO: rewrite plagiat
+
+The Mol* library works modularly, where representations, color themes, and other visualization features are implemented as separate providers. Depending on the users' needs, these providers can be registered or unregistered on demand, providing a flexible and extensible framework for visualizing molecular structures. This modular design allows for straightforward customization and extension to the library to support collaborative development.
 
 This section covers the implementation of the partial atomic charge extension for the Mol* viewer. The extension consists of multiple providers, each serving a specific functionality, such as supplying the partial charge data and coloring the structural elements based on their charges. 
 
