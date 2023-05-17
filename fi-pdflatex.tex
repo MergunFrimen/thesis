@@ -507,6 +507,7 @@ Secondly, it should describe the charge values of the atoms and residues.
 
 Thirdly, the extension should allow the user to provide multiple charge sets for a single structure and to select which one to display. Finally, the extension should be seamlessly integrated into the Mol* library, facilitating access to its features and functionality.
 
+% * ✅
 \section{Custom mmCIF categories}
 \label{section:custom_mmcif_categories}
 
@@ -569,7 +570,9 @@ Figure \ref{fig:mmcif_erd} provides a detailed illustration of the custom mmCIF 
 \section{Implementation}
 \label{section:implementation}
 
-This section will detail the implementation of the extension. The extension consists of multiple providers. Each provider serves a distinct functionality, such as supplying the partial charge data and coloring the structural elements based on their charges. The providers will be described in detail in the following subsections.
+% TODO: rewrite plagiat
+
+This section covers the implementation of the partial atomic charge extension for the Mol* viewer. The extension consists of multiple providers, each serving a specific functionality, such as supplying the partial charge data and coloring the structural elements based on their charges. 
 
 The extension was created using TypeScript, a superset of JavaScript that adds static typing and other features to the language. The Mol* library is also written in TypeScript, so the extension was written in the same language to ensure compatibility.
 
@@ -681,7 +684,7 @@ The controls are depicted in Figure \ref{fig:controls-charge-set}.
 \section{Mol* viewer plugin}
 \label{section:molstar_viewer_plugin}
 
-In addition to the partial charges extension for the Mol* library, it was necessary to create a custom Mol* viewer plugin. By using a plugin, it is possible to create custom behavior, which is not provided by the standard Mol* viewer.
+In addition to the partial charges extension, it was necessary to create a custom Mol* viewer plugin. By using a custom plugin, it is possible to create new behaviors which are not provided by the standard Mol* viewer. This section describes the development of the plugin and the new custom behavior which it provides.
 
 \subsection{Technologies used during development}
 
