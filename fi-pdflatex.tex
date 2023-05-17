@@ -252,8 +252,6 @@ Figure \ref{fig:psilocybin} demonstrates the unequal distribution of electron de
   \label{fig:psilocybin}
 \end{figure}
 
-% TODO: maybe remove the citations here?
-
 There are several applications for partial atomic charges in computational chemistry, such as molecular dynamics \cite{MIAO20191049}, molecular docking \cite{docking}, and pharmacophore design \cite{stalke2011meaningful}. \cite{racek2022thesis,schindler2021thesis}
 
 It is important to note that partial charges are a theoretical concept and cannot be directly measured or observed; they can only be calculated using computational methods. \cite{schindler2019thesis} 
@@ -375,13 +373,13 @@ The chemical file formats discussed in Section \ref{section:chemical_file_format
 
 This chapter explores the various types of visualizations and color schemes used to represent molecular data. It also discusses the different visualization tools available for visualizing molecular data.
 
+% * ✅
 \section{Types of visualizations}
 \label{section:types_of_visualizations}
 
-% TODO: plagiarism
-
 There are several methods for representing molecular data, each serving a different purpose and providing a different level of detail. The methods most relevant to this work are the following three types: ball and stick, surface, and cartoon. The following sections describe these methods in more detail.
 
+% * ✅
 \subsection{Ball and stick}
 \label{subsection:ball_and_stick}
 
@@ -389,6 +387,7 @@ The ball and stick representation displays atoms as spheres and bonds as cylindr
 
 Examples of ball and stick representations are shown in Figures \ref{fig:aspirin}, \ref{fig:element_symbol}, and \ref{fig:partial_charges_color_theme-bas}.
 
+% * ✅
 \subsection{Surface}
 \label{subsection:surface}
 
@@ -396,6 +395,7 @@ Surface representations depict the three-dimensional shape of a molecule by disp
 
 Figures \ref{fig:psilocybin} and \ref{fig:partial_charges_color_theme-surface} show examples of the surface representation.
 
+% * ✅
 \subsection{Cartoon}
 \label{subsection:cartoon}
 
@@ -403,6 +403,7 @@ Cartoon representations simplify the molecular structure by focusing on the seco
 
 Figure \ref{fig:cartoon} shows an example of an alpha helix and beta sheet of a protein. Examples of cartoon representations are shown in Figures \ref{fig:hemoglobin} and \ref{fig:partial_charges_color_theme-cartoon}.
 
+% * ✅
 \section{Coloring of molecular visualizations}
 \label{subsection:coloring_of_molecular_visualizations}
 
@@ -427,7 +428,7 @@ The coloring scheme used to represent the molecular structure is equally importa
 \section{Visualization software}
 \label{section:visualization_software}
 
-There are many software tools available for visualizing molecular data. Some of the most popular tools include MolScript \cite{kraulis1991molscript}, PyMOL \cite{delano2002pymol}, VMD \cite{humphrey1996vmd}, and ChimeraX \cite{goddard2018ucsf}. More recently, web-based visualization tools, such as NGL Viewer \cite{rose2015ngl}, LiteMol \cite{sehnal2017litemol}, and Mol* \cite{sehnal2021molstar}, have become popular thanks to their accessibility and ease of use.
+There are many software tools available for visualizing molecular data. Some of the most popular tools include MolScript \cite{kraulis1991molscript}, PyMOL \cite{delano2002pymol}, VMD \cite{humphrey1996vmd}, and ChimeraX \cite{goddard2018ucsf}. More recently, web-based visualization tools, such as NGL Viewer \cite{rose2015ngl}, LiteMol \cite{sehnal2017litemol}, and Mol* \cite{sehnal2021molstar}, have become popular thanks to their accessibility and ease of use. \cite{sehnal2017litemol}
 
 The following sections will discuss the two web-based molecular visualization tools used in this work, LiteMol and Mol*.
 
@@ -450,25 +451,15 @@ Figure \ref{fig:litemol} shows an example of a LiteMol visualization of the 1CBS
 \subsection{Mol*}
 \label{subsection:molstar}
 
-% TODO: explain screenshot
+Mol* (/'molstar/) is another web-based visualization tool. It is built upon the foundations of LiteMol and NGL Viewer. Mol* offers a wide range of features for visualizing and analyzing molecular structures, ranging from the simple ball and stick representations of small structures to visualizations of tens of millions of atoms of cellPACK \cite{Johnson2015} assemblies. Mol* emphasizes interactivity and offers various tools for manipulating and analyzing the molecular structure, such as distance and angle measurements, selecting and displaying structure elements, and custom representation and coloring schemes. Additionally, Mol* provides integration with external databases and services, such as PubChem \cite{Berman2000}, RCSB PDB \cite{Berman2006}, and AlphaFoldDB \cite{varadi2021alphafold}, enabling users quick access to the related information and resources.\cite{sehnal2021molstar}
 
-Mol* (/'molstar/) is another web-native molecular visualization tool, developed as part of the wwPDB OneDep system for macromolecular structure deposition and validation. Mol* offers a wide range of visualization options, including advanced features such as electron density maps and validation reports. Mol* supports many file formats, including PDB, mmCIF, and PDBx/mmJSON. Like LiteMol, Mol* is platform-independent and can be accessed from any web browser. \cite{sehnal2021molstar}
-
-Mol* emphasizes interactivity and offers various tools for manipulating and analyzing the molecular structure, such as distance and angle measurements, selection and display of specific residues, and custom coloring schemes. Additionally, Mol* provides integration with external databases and services, such as UniProt, PDBe, and RCSB PDB, enabling users to quickly access related information and resources.
-
-The Mol* library works in a modular fashion, where each representation, color theme, and other feature is implemented as a separate provider. This modular design allows for easy customization and extension of the library. \cite{sehnal2021molstar}
-
-\begin{figure}[htbp]
-  \begin{center}
-    \includegraphics[width=\textwidth]{figures/molstar.png}
-  \end{center}
-  \caption{Mol* visualization of the 1CBS protein structure.}
-  \label{fig:molstar}
-\end{figure}
+The Mol* library works modularly, where representations, color themes, and other visualization features are implemented as separate providers. Depending on the users ' needs, these providers can be registered or unregistered on demand, providing a flexible and extensible framework for visualizing molecular structures. This modular design allows for straightforward customization and extension to the library to support collaborative development.\cite{sehnal2021molstar}
 
 \subsubsection{Mol* state tree}
 
-To store information about the molecular structure and its visualization, the Mol* library uses a state tree. The state tree is a tree data structure consisting of several layers, each of which contains information about a specific aspect of the structure. The layers are organized in a hierarchical manner, with each layer containing information about the layer below it. The state tree is a key component of the Mol* library, as it allows for easy access to the data and facilitates the implementation of various features. \cite{sehnal2021molstar}
+For storing information about the molecular structure and its visualization, the Mol* library uses a state tree. The state tree is a tree data structure consisting of several layers, each containing information about a specific aspect of the structure. The state tree is a key component of the Mol* library, as it allows for easy access to the data and facilitates the implementation of various features. \cite{sehnal2021molstar}
+
+Figure \ref{fig:state_tree} highlights the blue nodes of the Mol* state tree, which correspond to representations of the individual structural elements of the 1CBS protein structure.
 
 \begin{figure}[htbp]
   \begin{center}
@@ -571,6 +562,8 @@ The extension was created using TypeScript, a superset of JavaScript that adds s
 \subsection{Property provider}
 \label{subsection:property_provider}
 
+% TODO: wrong references
+
 In order to retrieve the charges from the mmCIF file, it is necessary to parse the file. This is done by the Mol* library, which parses the mmCIF file and provides the parsed mmCIF file data in the form of a \texttt{MmcifFormat} object. The purpose of this provider is to process the charge data from this object and supply the charge data to the rest of the extension providers through a custom property. The interface of this property is depicted in Figure \ref{figure:charge_data_structure}.
 
 The atom charges are stored in the \texttt{typeIdToAtomIdToCharge} map. The map is indexed by the charge set (typeId) and the atom id. The atom id is a pointer to the atom\_site.id. item in the mmCIF file. The atom charges are retrieved from the mmCIF file by iterating over the atom\_site.id category and retrieving the charge values for each atom. The charge values are then stored in the \texttt{typeIdToAtomIdToCharge} map.
@@ -641,6 +634,7 @@ To establish the color for a given charge, two color interpolations are employed
 \label{subsection:label_provider}
 
 % TODO: cite the Mol* documentation where the Loci object is described \\
+% TODO: empty reference
 
 Having colored the structural elements, it was also necessary to create a label provider, which would assign labels that describe the charge of the structural element. In order to determine which element is highlighted, Mol* uses the object Loci. A Loci object is utilized for general selections and highlights. Consequently, it is essential to first extract the location from the Loci object in order to obtain the atom ID. The charge is acquired from the property provider, and the label is an HTML string that conveys the charge of the atom or residue. An example of the label can be seen in in the right-hand corner in figure \ref{}.
 
@@ -678,6 +672,7 @@ The Mol* viewer plugin was developed using the Vite build tool \cite{vitejs}. Th
 
 The plugin is written in Typescript and uses the Mol* library. It is bundled using Rollup \cite{rollup}, a module bundler for Javascript, and published to NPM \cite{npm}, a package manager for Javascript applications.
 
+% * ✅
 \subsection{Structure of the plugin}
 
 The plugin is designed as a Typescript class. The class structure is depicted in Figure \ref{fig:plugin_structure}. It contains a method for creating the plugin and loading the structure file. Furthermore, it includes four attributes that are JavaScript objects with methods that provide the following functionality:
